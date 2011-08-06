@@ -82,6 +82,12 @@ gamecake.ticks=0;
 				var ph=p.height();
 				var z=(pw/game.opts.width);
 				if( (z*game.opts.height) > ph ) { z=(ph/game.opts.height); }
+
+				game.$this.css("-webkit-transform:translateZ(0)"); // force hardware acc?
+				game.$this.css("position","absolute");
+				z=1;
+				game.$this.css("left",Math.floor((pw-(game.opts.width*z))/(2*z))+"px");
+				game.$this.css("top",Math.floor((ph-(game.opts.height*z))/(2*z))+"px");
 /*
 				if( game.lastzoom!=z )
 				{

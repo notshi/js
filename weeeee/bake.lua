@@ -13,6 +13,17 @@ tab.cache_files={
 "art/by.png",
 "art/icon.png",
 "art/splash.png",
+"art/plax/p10.png",
+"art/plax/p11.png",
+"art/plax/p12.png",
+"art/plax/p13.png",
+
+"jslib/jquery.min.js",
+
+{"out/weeeee.html","weeeee.html",},
+{"out/weeeee.css","weeeee.css",},
+{"out/weeeee.min.js","weeeee.min.js",},
+{"out/gamecake.min.js","gamecake.min.js",},
 
 }
 
