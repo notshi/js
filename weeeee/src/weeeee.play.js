@@ -34,11 +34,13 @@
 		
 		us.p[8]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy}).draw();
 				
-		game.tiles.setup(us);
+		game.sled.setup(us,us.p[8]);
+		game.tiles.setup(us,us.p[8]);
 	};
 
 	us.clean=function()
 	{
+		game.sled.clean();
 		game.tiles.clean();
 		
 		for(i=0;i<=9;i++)
@@ -51,6 +53,7 @@
 
 	us.draw=function()
 	{
+		game.sled.draw();
 		us.sheet.draw();
 		for(i=0;i<=8;i++)
 		{
@@ -63,7 +66,7 @@
 	{
 		us.sheet.update();
 
-		var speed=3;
+		var speed=19;
 		
 		us.dx+=speed; // position through level for score or whatever
 		
@@ -96,7 +99,8 @@
 			v.update();
 		}
 		
-		game.tiles.update();
+		game.tiles.update(speed);
+		game.sled.update(speed);
 
 	};
 	

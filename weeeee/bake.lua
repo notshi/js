@@ -18,6 +18,10 @@ tab.cache_files={
 "art/plax/p12.png",
 "art/plax/p13.png",
 
+"art/tiles/lft.png",
+"art/tiles/mid.png",
+"art/tiles/rgt.png",
+
 "jslib/jquery.min.js",
 
 {"out/weeeee.html","weeeee.html",},

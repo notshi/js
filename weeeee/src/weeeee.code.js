@@ -19,6 +19,11 @@ weeeee={}; // a global place to keep our cake
 		p11:"art/plax/p11.png",
 		p12:"art/plax/p12.png",
 		p13:"art/plax/p13.png",
+		tmid:"art/tiles/mid.png",
+		tlft:"art/tiles/lft.png",
+		trgt:"art/tiles/rgt.png",
+		sled:"art/sled.png",
+		sled_e:"art/e.png",
 		splash:"art/splash.png"
 	};
 	
