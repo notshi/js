@@ -62,7 +62,7 @@ gamecake.ticks=0;
 					  window.oRequestAnimationFrame      || 
 					  window.msRequestAnimationFrame     || 
 					  function(callback,element){
-						  window.setTimeout(callback, 1000 / 60);
+						  window.setTimeout(callback, 1000 / 10);
 					  };
 			})();
     
@@ -81,21 +81,24 @@ gamecake.ticks=0;
 				var pw=p.width();
 				var ph=p.height();
 				var z=(pw/game.opts.width);
-				if( (z*game.opts.height) > ph ) { z=(ph/game.opts.height); }	
+				if( (z*game.opts.height) > ph ) { z=(ph/game.opts.height); }
+/*
 				if( game.lastzoom!=z )
 				{
 					game.lastzoom=z;
+					game.$this.css("-webkit-transform:translateZ(0)"); // force hardware acc?
 					game.$this.css("zoom",z);
 					game.$this.css("position","relative");
 					game.$this.css("left",Math.floor((pw-(game.opts.width*z))/(2*z))+"px");
 					game.$this.css("top",Math.floor((ph-(game.opts.height*z))/(2*z))+"px");
 				}
+*/
 				
 				gamecake.code.input.update();
 				game.update(gamecake,opts);
-				game.draw(gamecake,opts);				
+				game.draw(gamecake,opts);
+				
 			};
-			
    			update(); // and must start the upadates
 		});
 	};
