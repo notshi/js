@@ -9,8 +9,13 @@ weeeee={}; // a global place to keep our cake
 	
 	game.p={};
 	
+	game.state=null;
+
+	game.state_next="splash";
+	game.state_prev=null;
+	
 	game.preloadimgs={
-		test:"art/by.png"
+		splash:"art/splash.png"
 	};
 	
 /*
@@ -42,21 +47,32 @@ weeeee={}; // a global place to keep our cake
 	};
 	
 	game.clean=function(cake){
-//		game.dice.clean();
-//		game.menu.clean();
-		cake.clean();		
+		
+		if(game.state) { game[game.state].clean(); }
+		cake.clean();
+		
 	};
 	
 	game.draw=function(cake){
 		cake.draw();
-//		game.menu.draw();
-//		game.dice.draw();
+		
+		if(game.state) { game[game.state].draw(); }
 	};
 	
 	game.update=function(cake){
 		cake.update();
-//		game.menu.update();
-//		game.dice.update();
+
+		if(game.state_next)
+		{
+			if(game.state) { game[game.state].clean(); }
+			game.state_prev=game.state;
+			game.state=game.state_next;
+			game.state_next=null;
+			if(game.state) { game[game.state].setup(); }	
+		}
+		
+		if(game.state) { game[game.state].update(); }
+		
 	};
 	
 })(weeeee);
