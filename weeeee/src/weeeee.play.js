@@ -14,6 +14,8 @@
 		us.data=[];
 		us.state="none";
 		us.score=0;
+		us.score_dist=0;
+		us.score_item=0;
 		
 		us.sheet=gamecake.gfx.sheet({parent:game.sheet,px:0,py:0,sx:us.hx,sy:us.hy});
 
@@ -54,6 +56,7 @@
 				
 		game.sled.setup(us,us.p[8]);
 		game.tiles.setup(us,us.p[8]);
+		game.items.setup(us,us.p[8]);
 		
 		
 		us.$tune = $('<audio loop ><source src="art/mp3/tune.mp3" /><source src="art/mp3/tune.ogg" /></audio>');
@@ -69,6 +72,7 @@
 	{
 		us.$tune[0].pause();
 		
+		game.items.clean();
 		game.sled.clean();
 		game.tiles.clean();
 		
@@ -82,6 +86,7 @@
 
 	us.draw=function()
 	{
+		game.items.draw();
 		game.sled.draw();
 		us.sheet.draw();
 		for(i=0;i<us.p.length;i++)
@@ -99,7 +104,10 @@
 		
 		if(game.sled.state!="dead")
 		{
-			us.score=Math.floor(us.dx/10);
+			us.score_dist=Math.floor(us.dx/10);
+			
+			us.score=us.score_dist+us.score_item;
+			
 			us.$score.text(us.score);
 			
 			if(speed<4)  { speed=4; }
@@ -146,6 +154,7 @@
 			v.update();
 		}
 		
+		game.items.update(speed);
 		game.tiles.update(speed);
 		game.sled.update(speed);
 		

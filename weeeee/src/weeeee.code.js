@@ -15,6 +15,19 @@ weeeee={}; // a global place to keep our cake
 	game.state_prev=null;
 	
 	game.preloadimgs={
+		pp0:"art/pp0.png",
+		pp1:"art/pp1.png",
+		pp2:"art/pp2.png",
+		pp3:"art/pp3.png",
+		pp4:"art/pp4.png",
+		pp5:"art/pp5.png",
+		pp6:"art/pp6.png",
+		pp7:"art/pp7.png",
+		pp8:"art/pp8.png",
+		pp9:"art/pp9.png",
+		box1:"art/box1.png",
+		box2:"art/box2.png",
+		box3:"art/box3.png",
 		p10:"art/plax/p10.png",
 		p11:"art/plax/p11.png",
 		p12:"art/plax/p12.png",

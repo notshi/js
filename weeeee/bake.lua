@@ -10,6 +10,19 @@ tab.name="weeeee"
 
 tab.cache_files={
 
+"art/pp0.png",
+"art/pp1.png",
+"art/pp2.png",
+"art/pp3.png",
+"art/pp4.png",
+"art/pp5.png",
+"art/pp6.png",
+"art/pp7.png",
+"art/pp8.png",
+"art/pp9.png",
+"art/box1.png",
+"art/box2.png",
+"art/box3.png",
 "art/score.png",
 "art/over.png",
 "art/e.png",

@@ -6,3 +6,4 @@
 #include "src/weeeee.play.js"
 #include "src/weeeee.sled.js"
 #include "src/weeeee.tiles.js"
+#include "src/weeeee.items.js"
