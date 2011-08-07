@@ -88,6 +88,8 @@
 						{
 							us.state="dead";
 							us.vy=0;
+							game.play.$splode[0].currentTime = 0;
+							game.play.$splode[0].play();
 						}
 					}
 				}
@@ -127,6 +129,9 @@
 			{
 				us.state="jump";
 				us.vy=-us.jump;
+				game.play.$jump[0].currentTime = 0;
+				game.play.$jump[0].play();
+				
 			}
 		}
 
@@ -150,6 +155,8 @@
 				us.state="floor";
 				us.py=t.tile.y
 				us.vy=0;
+				game.play.$pick[0].currentTime = 0;
+				game.play.$pick[0].play();
 			}
 		}
 		else

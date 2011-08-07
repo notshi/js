@@ -66,6 +66,16 @@
 		}, false);
 		us.$tune[0].play();
 
+
+		us.$bonus = $('<audio ><source src="art/mp3/bonus.wav" /></audio>');
+		us.$jump = $('<audio ><source src="art/mp3/jump.wav" /></audio>');
+		us.$pick = $('<audio ><source src="art/mp3/pick.wav" /></audio>');
+		us.$splode = $('<audio ><source src="art/mp3/splode.wav" /></audio>');
+		us.$start = $('<audio ><source src="art/mp3/start.wav" /></audio>');
+
+		us.$start[0].currentTime = 0;
+		us.$start[0].play();
+
 	};
 
 	us.clean=function()

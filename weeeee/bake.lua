@@ -42,6 +42,13 @@ tab.cache_files={
 "art/mp3/tune.mp3",
 "art/mp3/tune.ogg",
 
+"art/mp3/bonus.wav",
+"art/mp3/jump.wav",
+"art/mp3/pick.wav",
+"art/mp3/splode.wav",
+"art/mp3/start.wav",
+
+
 "jslib/jquery.min.js",
 
 {"out/weeeee.html","weeeee.html",},

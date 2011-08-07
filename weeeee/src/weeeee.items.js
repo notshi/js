@@ -54,6 +54,7 @@
 				{
 					us.peek_state="peek";
 					us.pickitem();
+					game.play.$bonus[0].play();
 				}
 			}
 		}
@@ -95,15 +96,15 @@
 		us.peek.update();
 	};
 	
-	us.checkadd=function( char )
+	us.checkadd=function( ch )
 	{
 		if(us.box.px<-100) // could we respawn?
 		{
 			if( (Math.random()*10 < 1) ) // 1 in 10 chance of spawn
 			{
 				us.box.bonus=true;
-				us.box.px=char.px+20;
-				us.box.py=50+((char.py-50)*Math.random());
+				us.box.px=ch.px+20;
+				us.box.py=50+((ch.py-50)*Math.random());
 				us.box.vy=0;
 			}
 		}
