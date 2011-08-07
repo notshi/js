@@ -17,14 +17,14 @@
 		
 		us.peek_state="hide";
 
-		us.peek=gamecake.gfx.sheet({parent:us.sheet,url:gamecake.images.box1.url,sx:100,sy:100,px:0,py:480}).draw();
+		us.peek=gamecake.gfx.sheet({parent:us.sheet,url:gamecake.images.box1.url,sx:136,sy:152,px:0,py:480}).draw();
 		us.pickitem();
 	};
 	
-	us.pickitem()
+	us.pickitem=function()
 	{
 		var r=Math.floor(Math.random()*10);
-		us.peek.url=gamecake.images[(pp+r)].url;
+		us.peek.url=gamecake.images[("pp"+r)].url;
 	}
 
 	us.clean=function()
@@ -71,11 +71,11 @@
 			break;
 			case "peek":
 				us.peek.py-=4;
-				if(us.peek.py<380)
+				if(us.peek.py<(480-152))
 				{
-					us.peek.py=380;
+					us.peek.py=(480-152);
 					us.peek_state="wait";
-					us.peek.wait=20;
+					us.peek.wait=50;
 				}
 			break;
 			case "wait":
