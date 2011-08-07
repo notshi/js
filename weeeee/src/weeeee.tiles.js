@@ -137,6 +137,8 @@
 				us.t[i].tile=us.tile;
 				us.t[i].url=us.tile.s.url;
 				us.t[i].py=us.tile.y-us.tile.s.floor;
+				
+				game.items.checkadd( us.t[i] ); // check and maybe add a new item
 
 			}
 			us.t[i].update();
