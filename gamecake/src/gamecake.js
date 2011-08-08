@@ -9,4 +9,5 @@
 #include "../gamecake/src/gfx.minion.js"
 
 #include "../gamecake/src/sfx.js"
+#include "../gamecake/src/sfx.audio.js"
 
