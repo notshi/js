@@ -88,8 +88,7 @@
 						{
 							us.state="dead";
 							us.vy=0;
-							game.play.$splode[0].currentTime = 0;
-							game.play.$splode[0].play();
+							gamecake.sfx.audio({name:"splode"});
 						}
 					}
 				}
@@ -129,8 +128,7 @@
 			{
 				us.state="jump";
 				us.vy=-us.jump;
-				game.play.$jump[0].currentTime = 0;
-				game.play.$jump[0].play();
+				gamecake.sfx.audio({name:"jump"});
 				
 			}
 		}
@@ -155,8 +153,7 @@
 				us.state="floor";
 				us.py=t.tile.y
 				us.vy=0;
-				game.play.$pick[0].currentTime = 0;
-				game.play.$pick[0].play();
+				gamecake.sfx.audio({name:"pick"});
 			}
 		}
 		else

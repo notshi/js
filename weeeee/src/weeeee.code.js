@@ -41,6 +41,14 @@ weeeee={}; // a global place to keep our cake
 		over:"art/over.png",
 		splash:"art/splash.png"
 	};
+	game.preloadaudios={
+		tune:"art/mp3/tune.ogg",
+		bonus:"art/mp3/bonus.wav",
+		jump:"art/mp3/jump.wav",
+		pick:"art/mp3/pick.wav",
+		splode:"art/mp3/splode.wav",
+		start:"art/mp3/start.wav"
+	};
 	
 
 	game.opts.name="rollup";

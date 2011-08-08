@@ -39,7 +39,6 @@ tab.cache_files={
 "art/tiles/mid.png",
 "art/tiles/rgt.png",
 
-"art/mp3/tune.mp3",
 "art/mp3/tune.ogg",
 
 "art/mp3/bonus.wav",

@@ -5,34 +5,66 @@ var self={}
 	
 gamecake.code.preload=self;
 
+self.progress_ready=0;
+self.progress_total=0;
+self.progress_percent=100;
+
 self.check=function(game){
 	if(game.preloadimages_ready && game.preloadaudios_ready) { return true; }
-	
-	var ready;
-	
-	ready=true;
+
+	self.progress_ready=0;
+	self.progress_total=0;
+		
+	game.preloadimages_ready=true;
 	for(i in game.preloadimages)
 	{
+		self.progress_total++;
+		
 		if(!gamecake.images[i]) // create new
 		{
 			gamecake.images[i]=self.img(game.preloadimages[i]); // lookup by id
 			gamecake.images[ gamecake.images[i].url ]=gamecake.images[i]; // or lookup by url
 		}
-		ready=ready && gamecake.images[i].ready();
+		
+		if( gamecake.images[i].ready() )
+		{
+			self.progress_ready++;
+		}
+		else
+		{
+			game.preloadimages_ready=false;
+		}
 	}
-	if(ready) { game.preloadimages_ready=true; }
 	
-	ready=true;
+	game.preloadaudios_ready=true;
 	for(i in game.preloadaudios)
 	{
+		self.progress_total++;
+		
 		if(!gamecake.audios[i]) // create new
 		{
 			gamecake.audios[i]=self.audio(game.preloadaudios[i]); // lookup by id
 			gamecake.audios[ gamecake.audios[i].url ]=gamecake.audios[i]; // or lookup by url
 		}
-		ready=ready && gamecake.audios[i].ready();
+		
+		if( gamecake.audios[i].ready() )
+		{
+			self.progress_ready++;
+		}
+		else
+		{
+			game.preloadaudios_ready=false;
+		}
 	}
-	if(ready) { game.preloadaudios_ready=true; }
+
+	if( self.progress_total > 0)
+	{
+		self.progress_percent=Math.floor(100*self.progress_ready/self.progress_total);
+	}
+	else
+	{
+		self.progress_percent=100;
+	}
 
 	return game.preloadaudios_ready && game.preloadimages_ready;
 };
@@ -48,7 +80,11 @@ self.img=function(name){
 	self.img.src = self.url;
 	
 	self.ready=function(){
-		if( (self.img.width>0) && (self.img.height>0) ) { return true; } // if we have a size then it loaded ok
+		if( (self.img.width>0) && (self.img.height>0) ) // if we have a size then it loaded ok
+		{
+//			if(!self.said) { self.said=true; console.log("Loaded: "+self.url); }
+			return true;
+		}
 		return false;
 	}
 	
@@ -63,11 +99,11 @@ self.audio=function(name){
 	self.url=gamecake.opts.art+name+gamecake.opts.cachebreak;
 	
 	self.audio = new Audio();
+	self.audio.preload = true;
 	self.audio.src = self.url;
 	
-	self.ready=function(){
-		if( (self.audio.networkState==1) ) { return true; } // loaded ok, the network is idle
-		return false;
+	self.ready=function(){ // this shit is so fucked we just always return true...
+		return true;
 	}
 	
 	return self;

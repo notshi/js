@@ -10,6 +10,7 @@ gamecake.draw=function(){};
 
 gamecake.opts={};
 gamecake.images={};
+gamecake.audios={};
 
 gamecake.ticks=0;
 
@@ -39,7 +40,7 @@ gamecake.ticks=0;
 //			$this.append( game.dbg.div ); // and display it
 
 // this forces the browser to scroll to this area which is a tad annoying.
-//			$this.attr("tabindex","0").focus(); //grab initial display focus so that keys work
+			$this.attr("tabindex","0").focus(); //grab initial display focus so that keys work
 			
 			
 			$this.keydown(gamecake.code.input.keydown);
@@ -56,6 +57,7 @@ gamecake.ticks=0;
 			$("body").bind("touchcancel",  function(e){return gamecake.code.input.touchup(e,game);});
 
 			var requestAnimationFrame = (function(){
+// it may be nice to use these, but they seem to degrade performance...
 /*			  return  window.requestAnimationFrame       || 
 					  window.webkitRequestAnimationFrame || 
 					  window.mozRequestAnimationFrame    || 
@@ -68,15 +70,13 @@ gamecake.ticks=0;
     
 			var update;
 			
+
 			update=function() {
 	   			requestAnimationFrame(update); // we need to always ask to be called again
 				
 				gamecake.ticks++;
 				
-				if( ! gamecake.code.preload.check(game) ) { return; } // wait to preload
-				if( gamecake.state!=game ) { gamecake.state=game.setup(gamecake,opts); } // setup after preload
-				
-// magic scale
+// magic scale, this seems to cause slowdown sometimes?
 				var p=game.$this.parent();
 				var pw=p.width();
 				var ph=p.height();
@@ -88,7 +88,7 @@ gamecake.ticks=0;
 				z=1;
 				game.$this.css("left",Math.floor((pw-(game.opts.width*z))/(2*z))+"px");
 				game.$this.css("top",Math.floor((ph-(game.opts.height*z))/(2*z))+"px");
-/*
+/* this zoom is bad, also things screwup when reading input positions with any form of translation...
 				if( game.lastzoom!=z )
 				{
 					game.lastzoom=z;
@@ -98,8 +98,18 @@ gamecake.ticks=0;
 					game.$this.css("left",Math.floor((pw-(game.opts.width*z))/(2*z))+"px");
 					game.$this.css("top",Math.floor((ph-(game.opts.height*z))/(2*z))+"px");
 				}
-*/
-				
+*/				
+				if( ! gamecake.code.preload.check(game) ) {
+					if(game.preload) { game.preload(gamecake,opts); } // optional preload update
+					else { game.sheet.div.html("<h1>Loading "+gamecake.code.preload.progress_percent+"%</h1>"); }
+					return;
+				} // wait to preload
+				if( gamecake.state!=game ) {
+					if(game.preload) { game.preload(gamecake,opts); } // optional preload update
+					else { game.sheet.div.html(""); }
+					gamecake.state=game.setup(gamecake,opts);
+				} // setup after preload
+								
 				gamecake.code.input.update();
 				game.update(gamecake,opts);
 				game.draw(gamecake,opts);
@@ -108,4 +118,5 @@ gamecake.ticks=0;
    			update(); // and must start the upadates
 		});
 	};
+	
 })(jQuery);

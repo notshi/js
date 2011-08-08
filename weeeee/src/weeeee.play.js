@@ -58,7 +58,8 @@
 		game.tiles.setup(us,us.p[8]);
 		game.items.setup(us,us.p[8]);
 		
-		
+		us.tune=gamecake.sfx.audio({name:"tune",loop:true});
+/*		
 		us.$tune = $('<audio loop ><source src="art/mp3/tune.mp3" /><source src="art/mp3/tune.ogg" /></audio>');
 		us.$tune[0].addEventListener('ended', function() {
 			this.currentTime = 0;
@@ -72,15 +73,14 @@
 		us.$pick = $('<audio ><source src="art/mp3/pick.wav" /></audio>');
 		us.$splode = $('<audio ><source src="art/mp3/splode.wav" /></audio>');
 		us.$start = $('<audio ><source src="art/mp3/start.wav" /></audio>');
-
-		us.$start[0].currentTime = 0;
-		us.$start[0].play();
+*/
+		gamecake.sfx.audio({name:"start"});
 
 	};
 
 	us.clean=function()
 	{
-		us.$tune[0].pause();
+		us.tune.stop();
 		
 		game.items.clean();
 		game.sled.clean();

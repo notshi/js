@@ -53,8 +53,7 @@
 				if(us.peek_state=="hide")
 				{
 					us.peek_state="peek";
-					us.pickitem();
-					game.play.$bonus[0].play();
+					gamecake.sfx.audio({name:"bonus"});
 				}
 			}
 		}
