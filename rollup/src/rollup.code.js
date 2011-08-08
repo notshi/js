@@ -11,7 +11,7 @@ rollup={}; // a global place to keep our cake
 	
 	game.p={};
 	
-	game.preloadimgs={
+	game.preloadimages={
 		readme:"art/readme.png",
 		menu:"art/menu.png"
 	};
@@ -19,7 +19,7 @@ rollup={}; // a global place to keep our cake
 	for(var t in game.ds )
 	{
 		var d=game.ds[t];
-		game.preloadimgs["d"+d]="art/die/d"+d+".png";
+		game.preloadimages["d"+d]="art/die/d"+d+".png";
 	}
 
 

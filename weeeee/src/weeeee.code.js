@@ -14,7 +14,7 @@ weeeee={}; // a global place to keep our cake
 	game.state_next="splash";
 	game.state_prev=null;
 	
-	game.preloadimgs={
+	game.preloadimages={
 		pp0:"art/pp0.png",
 		pp1:"art/pp1.png",
 		pp2:"art/pp2.png",
@@ -42,13 +42,6 @@ weeeee={}; // a global place to keep our cake
 		splash:"art/splash.png"
 	};
 	
-/*
- * 	for(var t in game.ds )
-	{
-		var d=game.ds[t];
-		game.preloadimgs["d"+d]="art/die/d"+d+".png";
-	}
-*/
 
 	game.opts.name="rollup";
 	game.opts.width=640;

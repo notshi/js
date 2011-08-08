@@ -9,7 +9,7 @@ rgbtd1={};
 	
 	game.p={};
 	
-	game.preloadimgs={
+	game.preloadimages={
 		back:"art/test/layout.png",
 		plots:"art/plots4.png",
 		blocks:"art/blocks.png"

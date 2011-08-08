@@ -7,7 +7,7 @@ hatebees=function(){
 	
 	game.p={};
 	
-	game.preloadimgs={
+	game.preloadimages={
 		paralax1:"art/levels/level_00.p10.png",
 		paralax2:"art/levels/level_00.p11.png",
 		paralax3:"art/levels/level_00.p12.png",
