@@ -78,22 +78,21 @@ gamecake.ticks=0;
 				var z=(pw/game.opts.width);
 				if( (z*game.opts.height) > ph ) { z=(ph/game.opts.height); }
 
-				game.$this.css("-webkit-transform:translateZ(0)"); // force hardware acc?
+				var bx=Math.floor((pw-(game.opts.width*z)));
+				var by=Math.floor((ph-(game.opts.height*z)));
+
+				var ox=Math.floor((pw-(game.opts.width*z))/(2*z));
+				var oy=Math.floor((ph-(game.opts.height*z))/(2*z));
 				game.$this.css("position","absolute");
-				z=1;
-				game.$this.css("left",Math.floor((pw-(game.opts.width*z))/(2*z))+"px");
-				game.$this.css("top",Math.floor((ph-(game.opts.height*z))/(2*z))+"px");
-/* this zoom is bad, also things screwup when reading input positions with any form of translation...
-				if( game.lastzoom!=z )
+				
+				if('zoom' in document.body.style)
 				{
-					game.lastzoom=z;
-					game.$this.css("-webkit-transform:translateZ(0)"); // force hardware acc?
+					game.$this.css("left",ox+"px"); // this works for most browsers
+					game.$this.css("top",oy+"px");
 					game.$this.css("zoom",z);
-					game.$this.css("position","relative");
-					game.$this.css("left",Math.floor((pw-(game.opts.width*z))/(2*z))+"px");
-					game.$this.css("top",Math.floor((ph-(game.opts.height*z))/(2*z))+"px");
 				}
-*/				
+//				game.$this.css("MozTransform","position("+bx+"px,"+by+"px) scale("+z+")"); //except firefoz which needs this?
+				
 				if( ! gamecake.code.preload.check(game) ) {
 					if(game.preload) { game.preload(gamecake,opts); } // optional preload update
 					else { $this.html("<h1>Loading "+gamecake.code.preload.progress_percent+"%</h1>"); }
