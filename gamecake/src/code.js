@@ -107,25 +107,25 @@ gamecake.ticks=0;
 					
 					$this.empty(); // clean out anything the preload may have added
 						
-					if(gamecake.opts.canvas)
+					switch(gamecake.opts.render)
 					{
-						gamecake.$canvas=$("<canvas></canvas>");
-						gamecake.$canvas.attr("width",game.opts.width);
-						gamecake.$canvas.attr("height",game.opts.height);
-						gamecake.$canvas.css("width",game.opts.width+"px");
-						gamecake.$canvas.css("height",game.opts.height+"px");
-						$this.append( gamecake.$canvas ); // create canvas
-						
-						gamecake.ctx=gamecake.$canvas.get(0).getContext("2d"); // this is what we draw on
+						case "canvas":
+							gamecake.$canvas=$("<canvas></canvas>");
+							gamecake.$canvas.attr("width",game.opts.width);
+							gamecake.$canvas.attr("height",game.opts.height);
+							gamecake.$canvas.css("width",game.opts.width+"px");
+							gamecake.$canvas.css("height",game.opts.height+"px");
+							$this.append( gamecake.$canvas ); // create canvas
+							
+							gamecake.ctx=gamecake.$canvas.get(0).getContext("2d"); // this is what we draw on
 
-gamecake.ctx.setTransform( 1,0  , 0,1 , 0,0 ); // reset
-gamecake.ctx.fillStyle   = '#f00';
-gamecake.ctx.fillRect( 0 , 0 , 100 , 100 );
-		
-							}
-					else
-					{
-						$this.append( game.sheet.div ); // and display it
+						break;
+						default:
+						case "dhtml":
+						
+							$this.append( game.sheet.div ); // and display it
+							
+						break;
 					}
 
 					gamecake.state=game.setup(gamecake,opts);
