@@ -32,20 +32,20 @@ gamecake.gfx.sheet=function(opts){
 		
 		self.auto=false;
 		
-		self.ox=0; // handle position of origin
+		self.ox=0; // handle position of origin (this is added to px,py before drawing and is center of rotation)
 		self.oy=0;
 		
-		self.px=0; // display position
+		self.px=0; // display position (where to draw)
 		self.py=0;
 		self.pz=0;
-		self.sx=100; // display size
-		self.sy=100;
+		self.sx=0; // display size (this will default to the size of your image)
+		self.sy=0;
 		self.sz=1;
 		self.rz=0; // rotation
 		
-		self.fx=0; // background offset
+		self.fx=0; // background offset (this is the part ofyour image to draw, for sprite sheets)
 		self.fy=0;
-		self.hx=0; // size of background
+		self.hx=0; // size of background (this will be the size of your image)
 		self.hy=0;
 		
 		self.opacity=1; // the opacity
@@ -71,7 +71,13 @@ gamecake.gfx.sheet=function(opts){
 		if("opacity" in opts) { self.opacity=opts.opacity; }
 		if("url" in opts) { self.url=opts.url; }
 	
-		if("name" in opts) { self.name=opts.name; } // simple url
+		if("name" in opts) {
+			self.name=opts.name;  // simple url
+			if(self.sx<=0) { self.sx=gamecake.images[ self.name ].img.width; }
+			if(self.sy<=0) { self.sy=gamecake.images[ self.name ].img.height; }
+			if(self.hx<=0) { self.hx=gamecake.images[ self.name ].img.width; }
+			if(self.hy<=0) { self.hy=gamecake.images[ self.name ].img.height; }
+		}
 		
 		return self;
 	};
@@ -136,7 +142,12 @@ gamecake.gfx.sheet=function(opts){
 				{
 					gamecake.ctx.setTransform( 1,0  , 0,1 , self.px,self.py );
 //					gamecake.ctx.drawImage(img , self.ox,self.oy , self.sx,self.sy , self.px,self.py , self.sx,self.sy);
-					gamecake.ctx.drawImage(img , 0,0 , self.sx,self.sy , -self.ox,-self.oy , self.sx,self.sy);
+					var sx=self.sx-self.fx;
+					var sy=self.sy-self.fy;
+					if( (sx>0) && (sy>0) )
+					{
+						gamecake.ctx.drawImage(img , self.fx,self.fy , sx,sy , -self.ox,-self.oy , sx,sy);
+					}
 				}
 // Nine arguments: the element, source (x,y) coordinates, source width and 
 // height (for cropping), destination (x,y) coordinates, and destination width 

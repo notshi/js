@@ -23,23 +23,27 @@
 
 		us.p=[];
 
-		us.p[0]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p13"}).draw();
-		us.p[1]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p13",px:us.hx}).draw();
+		us.p[0]=gamecake.gfx.sheet({parent:us.sheet,name:"p13"}).draw();
+		us.p[1]=gamecake.gfx.sheet({parent:us.sheet,name:"p13"}).draw();
+		us.p[1].px+=us.p[1].hx;
+
+		us.p[2]=gamecake.gfx.sheet({parent:us.sheet,name:"p12"}).draw();
+		us.p[3]=gamecake.gfx.sheet({parent:us.sheet,name:"p12"}).draw();
+		us.p[3].px+=us.p[3].hx;
 		
-		us.p[2]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p12"}).draw();
-		us.p[3]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p12",px:us.hx}).draw();
+		us.p[4]=gamecake.gfx.sheet({parent:us.sheet,name:"p11"}).draw();
+		us.p[5]=gamecake.gfx.sheet({parent:us.sheet,name:"p11"}).draw();
+		us.p[5].px+=us.p[5].hx;
 		
-		us.p[4]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p11"}).draw();
-		us.p[5]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p11",px:us.hx}).draw();
-		
-		us.p[6]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p10"}).draw();
-		us.p[7]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p10",px:us.hx}).draw();
+		us.p[6]=gamecake.gfx.sheet({parent:us.sheet,name:"p10"}).draw();
+		us.p[7]=gamecake.gfx.sheet({parent:us.sheet,name:"p10"}).draw();
+		us.p[7].px+=us.p[7].hx;
 		
 		us.p[8]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy}).draw();
 
-		us.p[9]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"over",px:640,py:0}).draw();
+		us.p[9]=gamecake.gfx.sheet({parent:us.sheet,name:"over",px:640,py:0}).draw();
 
-		us.p[10]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"score"}).draw();
+		us.p[10]=gamecake.gfx.sheet({parent:us.sheet,name:"score"}).draw();
 		
 
 		us.$score=$("<div>0</div>");
@@ -140,31 +144,29 @@
 
 		us.dx+=speed; // position through level for score or whatever
 		
+		var dx=0;
 		for(i=0;i<us.p.length;i++)
 		{
 			var v=us.p[i];
-			var dx=0;
 			
 			switch(i)
 			{
 				case 2:
 					dx=(1/8)*speed;
-					if(v.fx+dx >= v.hx) { dx=dx-v.hx; } // wrap
 				break;
 				case 4:
 					dx=(1/4)*speed;
-					if(v.fx+dx >= v.hx) { dx=dx-v.hx; } // wrap
 				break;
 				case 6:
 					dx=(1/2)*speed;
-					if(v.fx+dx >= v.hx) { dx=dx-v.hx; } // wrap
 				break;
 				case 8:
 					dx=0;
 				break;
 			}
 			
-			v.fx+=dx;
+			v.px-=dx;
+			if(v.px<-v.hx) { v.px+=(v.hx*2); console.log("wrap "+v.px); }
 			
 			v.update();
 		}
