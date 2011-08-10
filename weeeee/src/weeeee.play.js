@@ -166,7 +166,7 @@
 			}
 			
 			v.px-=dx;
-			if(v.px<-v.hx) { v.px+=(v.hx*2); console.log("wrap "+v.px); }
+			if(v.px<-v.hx) { v.px+=(v.hx*2); }
 			
 			v.update();
 		}
