@@ -33,11 +33,6 @@ gamecake.ticks=0;
 			$this.css("position","relative");
 			$this.css("overflow","hidden");
 			
-			game.sheet=gamecake.gfx.sheet({sx:game.opts.width,sy:game.opts.height}).draw(); // create master sheet
-			$this.append( game.sheet.div ); // and display it
-
-//			game.dbg=gamecake.gfx.sheet({sx:game.opts.width,sy:game.opts.height}).draw(); // create master sheet
-//			$this.append( game.dbg.div ); // and display it
 
 // this forces the browser to scroll to this area which is a tad annoying.
 			$this.attr("tabindex","0").focus(); //grab initial display focus so that keys work
@@ -101,12 +96,38 @@ gamecake.ticks=0;
 */				
 				if( ! gamecake.code.preload.check(game) ) {
 					if(game.preload) { game.preload(gamecake,opts); } // optional preload update
-					else { game.sheet.div.html("<h1>Loading "+gamecake.code.preload.progress_percent+"%</h1>"); }
+					else { $this.html("<h1>Loading "+gamecake.code.preload.progress_percent+"%</h1>"); }
 					return;
 				} // wait to preload
 				if( gamecake.state!=game ) {
 					if(game.preload) { game.preload(gamecake,opts); } // optional preload update
-					else { game.sheet.div.html(""); }
+					else { $this.html(""); }
+					
+					game.sheet=gamecake.gfx.sheet({sx:game.opts.width,sy:game.opts.height}).draw(); // create master sheet
+					
+					$this.empty(); // clean out anything the preload may have added
+						
+					if(gamecake.opts.canvas)
+					{
+						gamecake.$canvas=$("<canvas></canvas>");
+						gamecake.$canvas.attr("width",game.opts.width);
+						gamecake.$canvas.attr("height",game.opts.height);
+						gamecake.$canvas.css("width",game.opts.width+"px");
+						gamecake.$canvas.css("height",game.opts.height+"px");
+						$this.append( gamecake.$canvas ); // create canvas
+						
+						gamecake.ctx=gamecake.$canvas.get(0).getContext("2d"); // this is what we draw on
+
+gamecake.ctx.setTransform( 1,0  , 0,1 , 0,0 ); // reset
+gamecake.ctx.fillStyle   = '#f00';
+gamecake.ctx.fillRect( 0 , 0 , 100 , 100 );
+		
+							}
+					else
+					{
+						$this.append( game.sheet.div ); // and display it
+					}
+
 					gamecake.state=game.setup(gamecake,opts);
 				} // setup after preload
 								

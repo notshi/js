@@ -11,7 +11,7 @@
 		
 		us.sheet=gamecake.gfx.sheet({parent:game.sheet,px:0,py:0,sx:game.opts.width,sy:game.opts.height});
 
-		us.sheet_menu=gamecake.gfx.sheet({auto:true,parent:us.sheet,px:0,py:0,sx:game.opts.width,sy:game.opts.height,url:gamecake.images["splash"].url});
+		us.sheet_menu=gamecake.gfx.sheet({auto:true,parent:us.sheet,px:0,py:0,sx:game.opts.width,sy:game.opts.height,name:"splash"});
 				
 	};
 

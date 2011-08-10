@@ -15,20 +15,20 @@
 			flat_lft:{
 				floor:100,
 				side:50,
-				url:gamecake.images.tlft.url
+				name:"tlft"
 			},
 			flat_mid:{
 				floor:100,
 				side:0,
-				url:gamecake.images.tmid.url
+				name:"tmid"
 			},
 			flat_rgt:{
 				floor:100,
 				side:-50,
-				url:gamecake.images.trgt.url
+				name:"trgt"
 			},
 			space:{
-				url:null
+				name:null
 			}
 		};
 		
@@ -100,7 +100,7 @@
 		{
 			us.get_next_tile();
 			
-			us.t[i]=gamecake.gfx.sheet({parent:us.sheet,sx:100,sy:480,url:us.tile.s.url,px:i*100,py:us.tile.y-us.tile.s.floor}).draw();
+			us.t[i]=gamecake.gfx.sheet({parent:us.sheet,sx:100,sy:480,name:us.tile.s.name,px:i*100,py:us.tile.y-us.tile.s.floor}).draw();
 			us.t[i].tile=us.tile;
 		}
 	};

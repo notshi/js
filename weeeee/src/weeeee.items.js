@@ -11,13 +11,13 @@
 		us.play=play;
 		us.sheet=sheet;
 		
-		us.box=gamecake.gfx.sheet({parent:us.sheet,url:gamecake.images.box1.url,sx:57,sy:35,ox:25,oy:12,px:800,py:100}).draw();
+		us.box=gamecake.gfx.sheet({parent:us.sheet,name:"box1",sx:57,sy:35,ox:25,oy:12,px:800,py:100});//.draw();
 		us.box.bonus=true;
 		us.box.vy=0;
 		
 		us.peek_state="hide";
 
-		us.peek=gamecake.gfx.sheet({parent:us.sheet,url:gamecake.images.box1.url,sx:136,sy:152,px:0,py:480}).draw();
+		us.peek=gamecake.gfx.sheet({parent:us.sheet,name:"box1",sx:136,sy:152,px:0,py:480});//.draw();
 		us.pickitem();
 	};
 	
@@ -35,64 +35,72 @@
 
 	us.draw=function()
 	{
-		us.box.draw();
-		us.peek.draw();
+		if(us.box){
+		us.box.draw();}
+//		if(us.peek){
+//		us.peek.draw();}
 	};
 
 	us.update=function(speed)
 	{	
-		if(us.box.bonus)
+		if(us.box)
 		{
-			var dx= us.box.px - game.sled.px;
-			var dy= us.box.py - (game.sled.py-40);
-			if( ( (dx*dx) + (dy*dy) )<(60*60) )
+			if(us.box.bonus)
 			{
-				us.box.bonus=false; //die
-				game.play.score_item+=100;
-				
-				if(us.peek_state=="hide")
+				var dx= us.box.px - game.sled.px;
+				var dy= us.box.py - (game.sled.py-40);
+				if( ( (dx*dx) + (dy*dy) )<(60*60) )
 				{
-					us.peek_state="peek";
-					gamecake.sfx.audio({name:"bonus"});
+					us.box.bonus=false; //die
+					game.play.score_item+=100;
+					
+					if(us.peek_state=="hide")
+					{
+						us.peek_state="peek";
+						gamecake.sfx.audio({name:"bonus"});
+					}
 				}
 			}
+			else // dead
+			{
+				us.box.vy+=1;
+				us.box.py+=us.box.vy;
+			}
+			us.box.px-=speed;
+			us.box.update();
 		}
-		else // dead
-		{
-			us.box.vy+=1;
-			us.box.py+=us.box.vy;
-		}
-		us.box.px-=speed;
-		us.box.update();
 		
-		switch(us.peek_state)
+		if(us.peek)
 		{
-			case "hide":
-			break;
-			case "peek":
-				us.peek.py-=4;
-				if(us.peek.py<(480-152))
-				{
-					us.peek.py=(480-152);
-					us.peek_state="wait";
-					us.peek.wait=50;
-				}
-			break;
-			case "wait":
-				us.peek.wait--;
-				if(us.peek.wait<=0)
-				{ us.peek_state="slide"; }
-			break;
-			case "slide":
-				us.peek.py+=4;
-				if(us.peek.py>480)
-				{
-					us.peek.py=480;
-					us.peek_state="hide";
-				}
-			break;
+			switch(us.peek_state)
+			{
+				case "hide":
+				break;
+				case "peek":
+					us.peek.py-=4;
+					if(us.peek.py<(480-152))
+					{
+						us.peek.py=(480-152);
+						us.peek_state="wait";
+						us.peek.wait=50;
+					}
+				break;
+				case "wait":
+					us.peek.wait--;
+					if(us.peek.wait<=0)
+					{ us.peek_state="slide"; }
+				break;
+				case "slide":
+					us.peek.py+=4;
+					if(us.peek.py>480)
+					{
+						us.peek.py=480;
+						us.peek_state="hide";
+					}
+				break;
+			}
+			us.peek.update();
 		}
-		us.peek.update();
 	};
 	
 	us.checkadd=function( ch )

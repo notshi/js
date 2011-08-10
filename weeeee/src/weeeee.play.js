@@ -23,23 +23,23 @@
 
 		us.p=[];
 
-		us.p[0]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,url:gamecake.images.p13.url}).draw();
-		us.p[1]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,url:gamecake.images.p13.url,px:us.hx}).draw();
+		us.p[0]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p13"}).draw();
+		us.p[1]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p13",px:us.hx}).draw();
 		
-		us.p[2]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,url:gamecake.images.p12.url}).draw();
-		us.p[3]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,url:gamecake.images.p12.url,px:us.hx}).draw();
+		us.p[2]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p12"}).draw();
+		us.p[3]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p12",px:us.hx}).draw();
 		
-		us.p[4]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,url:gamecake.images.p11.url}).draw();
-		us.p[5]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,url:gamecake.images.p11.url,px:us.hx}).draw();
+		us.p[4]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p11"}).draw();
+		us.p[5]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p11",px:us.hx}).draw();
 		
-		us.p[6]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,url:gamecake.images.p10.url}).draw();
-		us.p[7]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,url:gamecake.images.p10.url,px:us.hx}).draw();
+		us.p[6]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p10"}).draw();
+		us.p[7]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"p10",px:us.hx}).draw();
 		
 		us.p[8]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy}).draw();
 
-		us.p[9]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,url:gamecake.images.over.url,px:640,py:0}).draw();
+		us.p[9]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"over",px:640,py:0}).draw();
 
-		us.p[10]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,url:gamecake.images.score.url}).draw();
+		us.p[10]=gamecake.gfx.sheet({parent:us.sheet,sx:us.hx,sy:us.hy,name:"score"}).draw();
 		
 
 		us.$score=$("<div>0</div>");
@@ -52,7 +52,9 @@
 			fontSize:"40px",
 			fontFamily:"Arial",
 			position:"absolute"});
-		us.p[10].div.append(us.$score);
+			
+//DBG			
+//		us.p[10].div.append(us.$score);
 				
 		game.sled.setup(us,us.p[8]);
 		game.tiles.setup(us,us.p[8]);
@@ -96,14 +98,17 @@
 
 	us.draw=function()
 	{
-		game.items.draw();
-		game.sled.draw();
-		us.sheet.draw();
-		for(i=0;i<us.p.length;i++)
+		for(i=0;i<us.p.length-2;i++)
 		{
 			us.p[i].draw();
 		}
 		game.tiles.draw();
+		game.items.draw();
+		game.sled.draw();
+		us.sheet.draw();
+
+		us.p[us.p.length-2].draw();
+		us.p[us.p.length-1].draw();
 	};
 
 	us.update=function()

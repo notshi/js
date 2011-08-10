@@ -31,8 +31,8 @@
 		us.speed=4;
 		us.speed_base=4;
 		
-		us.t[0]=gamecake.gfx.sheet({parent:us.sheet,sx:100,sy:100,url:gamecake.images.sled_e.url,px:us.px,py:us.py,ox:50,oy:100}).draw();
-		us.t[1]=gamecake.gfx.sheet({parent:us.sheet,sx:100,sy:100,url:gamecake.images.sled.url  ,px:us.px,py:us.py,ox:50,oy:100}).draw();
+		us.t[0]=gamecake.gfx.sheet({parent:us.sheet,sx:100,sy:100,name:"sled_e",px:us.px,py:us.py,ox:50,oy:100});//.draw();
+		us.t[1]=gamecake.gfx.sheet({parent:us.sheet,sx:100,sy:100,name:"sled"  ,px:us.px,py:us.py,ox:50,oy:100});//.draw();
 	};
 
 	us.clean=function()
