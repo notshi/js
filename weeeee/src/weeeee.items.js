@@ -52,7 +52,7 @@
 				if( ( (dx*dx) + (dy*dy) )<(60*60) )
 				{
 					us.box.bonus=false; //die
-					game.play.score_item+=100;
+					game.play.score_item+=100+Math.floor(Math.random()*400);
 					
 					if(us.peek_state=="hide")
 					{

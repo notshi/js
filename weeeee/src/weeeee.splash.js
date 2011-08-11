@@ -29,7 +29,7 @@
 	{
 		us.sheet.update();
 
-		if(gamecake.input.down.button)
+		if(gamecake.input.down.any)
 		{
 			game.state_next="play";
 		}

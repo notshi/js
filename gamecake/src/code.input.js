@@ -39,6 +39,7 @@
 		if (key) { 
 			input.set_down[key]=true;
 		}
+		input.set_down["any"]=true;
 		return false;
 	};
 	self.keyup=function(event)
@@ -47,30 +48,33 @@
 		if (key) { 
 			input.set_up[key]=true;
 		}
+		input.set_up["any"]=true;
 		return false;
 	};
 
 	self.touchdown=function(event,game)
 	{
-		event.originalEvent.preventDefault();
-		var tevent =  event.originalEvent.touches.item(0);
-		if(tevent) { self.mousemove(tevent,game); }
+		self.touchmove(event,game);
 		input.set_down["button"]=true;
+		input.set_down["any"]=true;
 		return false;
 	};
 	self.touchup=function(event,game)
 	{
-		event.originalEvent.preventDefault();
-		var tevent =  event.originalEvent.touches.item(0);
-		if(tevent) { self.mousemove(tevent,game); }
+		self.touchmove(event,game);
 		input.set_up["button"]=true;
+		input.set_up["any"]=true;
 		return false;
 	};
 	self.touchmove=function(event,game)
 	{
 		event.originalEvent.preventDefault();
 		var tevent =  event.originalEvent.touches.item(0);
-		if(tevent) { self.mousemove(tevent,game); }
+		if(tevent) { 
+	  		var pos=game.$this.offset();
+			input.x=(tevent.pageX-(pos.left)); // getting local coords is a problem
+			input.y=(tevent.pageY-(pos.top));
+		}
 		return false;
 	};
 	
@@ -89,6 +93,7 @@
 		if(event.button==0)
 		{
 			input.set_down["button"]=true;
+			input.set_down["any"]=true;
 		}
 		return false;
 	};
@@ -98,6 +103,7 @@
 		if(event.button==0)
 		{
 			input.set_up["button"]=true;
+			input.set_up["any"]=true;
 		}
 		return false;
 	};

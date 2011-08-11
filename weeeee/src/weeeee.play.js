@@ -44,9 +44,12 @@
 		us.p[9]=gamecake.gfx.sheet({parent:us.sheet,name:"over",px:640,py:0}).draw();
 
 		us.p[10]=gamecake.gfx.sheet({parent:us.sheet,name:"score"}).draw();
-		
+		us.p[11]=gamecake.gfx.text({parent:us.sheet,px:195,py:12,sx:200,sy:50,align:"right",size:32}).draw();
+//		us.p[11].align("right");
+//		us.p[11].size(32);
 
-		us.$score=$("<div>0</div>");
+/*
+ * 		us.$score=$("<div>0</div>");
 		us.$score.css({
 			top:12,
 			right:235,
@@ -56,7 +59,7 @@
 			fontSize:"40px",
 			fontFamily:"Arial",
 			position:"absolute"});
-			
+*/			
 //DBG			
 //		us.p[10].div.append(us.$score);
 				
@@ -64,7 +67,7 @@
 		game.tiles.setup(us,us.p[8]);
 		game.items.setup(us,us.p[8]);
 		
-		us.tune=gamecake.sfx.audio({name:"tune",loop:true});
+		us.tune=gamecake.sfx.audio({name:"tune",loop:true,channel:1});
 /*		
 		us.$tune = $('<audio loop ><source src="art/mp3/tune.mp3" /><source src="art/mp3/tune.ogg" /></audio>');
 		us.$tune[0].addEventListener('ended', function() {
@@ -127,7 +130,7 @@
 			
 			us.score=us.score_dist+us.score_item;
 			
-			us.$score.text(us.score);
+			us.p[11].set(us.score);
 			
 			if(speed<4)  { speed=4; }
 		}
@@ -180,17 +183,21 @@
 		{
 			if(gamecake.input.down.button)
 			{
-				if(gamecake.input.y>300)
-				{
-					game.state_next="splash";
-				}
-				else // submit score
+				if(gamecake.input.y<300)// submit score
 				{
 					var t=Math.floor(((new Date()).getTime())/(1000*60*60*24)); // number of days since the epoch
 					var url="http://leeds-hack.appspot.com/score/submit?game=weeeee&score="+us.score+"&dumb="+(us.score*t);
 					window.location.href=url;
+					
+					return; // skip the restart
 				}
 			}
+			
+			if(gamecake.input.down.any)
+			{
+				game.state_next="splash";
+			}
+			
 		}
 
 	};

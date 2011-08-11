@@ -9,6 +9,9 @@
 	us.tile=null;
 	us.block=null;
 	
+	us.tile_width=95;
+	us.tile_count=10;
+	
 	us.get_next_tile=function()
 	{
 		var ts={
@@ -77,7 +80,7 @@
 			b.wide=10;
 			b.state="flat";
 		}
-		else
+		else // first block
 		{
 			b.idx=0;
 			b.top=200;
@@ -96,18 +99,18 @@
 		us.tile=null;
 		us.block=null;
 	
-		for(i=0;i<8;i++)
+		for(i=0;i<us.tile_count;i++)
 		{
 			us.get_next_tile();
 			
-			us.t[i]=gamecake.gfx.sheet({parent:us.sheet,sx:100,sy:480,name:us.tile.s.name,px:i*100,py:us.tile.y-us.tile.s.floor}).draw();
+			us.t[i]=gamecake.gfx.sheet({parent:us.sheet,sx:100,sy:480,name:us.tile.s.name,px:i*us.tile_width,py:us.tile.y-us.tile.s.floor}).draw();
 			us.t[i].tile=us.tile;
 		}
 	};
 
 	us.clean=function()
 	{
-		for(i=0;i<8;i++)
+		for(i=0;i<us.tile_count;i++)
 		{
 			us.t[i].clean();
 		}
@@ -115,27 +118,29 @@
 
 	us.draw=function()
 	{
-		for(i=0;i<8;i++)
+		for(i=0;i<us.tile_count;i++)
 		{
+//print(us.t[i].name);
 			us.t[i].draw();
 		}
 	};
 
 	us.update=function(speed)
 	{		
-		for(i=0;i<8;i++)
+		for(i=0;i<us.tile_count;i++)
 		{
 			us.t[i].px-=speed;
-			if(us.t[i].px<-100)
+			if(us.t[i].px<-us.tile_width)
 			{
-				us.t[i].px+=800;
+				us.t[i].px+=us.tile_count*us.tile_width;
 				
+//console.log("newtile");
 // we expect speed to be < 100 so only one tile a frame ever jumps like this
 			
 				us.get_next_tile();
 				
 				us.t[i].tile=us.tile;
-				us.t[i].url=us.tile.s.url;
+				us.t[i].name=us.tile.s.name;
 				us.t[i].py=us.tile.y-us.tile.s.floor;
 				
 				game.items.checkadd( us.t[i] ); // check and maybe add a new item
@@ -148,10 +153,10 @@
 // given a y, find a tile
 	us.find_tile=function(x)
 	{
-		for(i=0;i<8;i++)
+		for(i=0;i<us.tile_count;i++)
 		{
 			var v=us.t[i];
-			if( (v.px<=x) && (v.px+100>=x) )
+			if( (v.px<=x) && (v.px+v.sx>=x) )
 			{
 				return v;
 			}

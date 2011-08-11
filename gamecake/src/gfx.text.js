@@ -35,10 +35,6 @@ gamecake.gfx.text=function(opts){
 	var self=gamecake.gfx.sheet(opts); // extend the sheet class
 	var old={};
 	
-	self.div.css(gamecake.gfx.fonts.sans); // default
-	
-	if(opts.style) { self.div.css(opts.style); } // override
-	
 	old.setup=self.setup;
 	self.setup=function(){
 		old.setup();
@@ -68,6 +64,40 @@ gamecake.gfx.text=function(opts){
 		return self;
 	};
 
+	self.align=function(s){
+		if(s=="center")
+		{
+			self.div.css({textAlign:"center"});
+		}
+		else 
+		if(s=="right")
+		{
+			self.div.css({textAlign:"right"});
+		}
+		else 
+		{
+			self.div.css({textAlign:"left"});
+		}
+		
+		return self;
+	};
+
+	self.size=function(n){
+		self.div.css({fontSize:n+"px"});
+		return self;
+	};
+
+	self.color=function(s){
+		self.div.css({color:s});
+		return self;
+	};
+
+	self.div.css(gamecake.gfx.fonts.sans); // default
+	if(opts.style) { self.div.css(opts.style); } // override
+	if(opts.color) { self.color(opts.color); } // override
+	if(opts.size) { self.size(opts.size); } // override
+	if(opts.align) { self.align(opts.align); } // override
+		
 	return self;
 };
 

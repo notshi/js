@@ -95,7 +95,7 @@
 			}
 			
 			
-			if(gamecake.input.state.button)
+			if(gamecake.input.state.any)
 			{
 				us.by=8;
 				us.leap+=1/5;
@@ -122,7 +122,7 @@
 		if(us.speed<0) { us.speed=0; }
 		
 
-		if(gamecake.input.up.button)
+		if(gamecake.input.up.any)
 		{
 			if(us.state=="floor")
 			{
@@ -142,7 +142,7 @@
 		if(us.state=="jump")
 		{
 			us.vy+=1/2;
-			if(gamecake.input.state.button) // doublegravy
+			if(gamecake.input.state.any) // doublegravy
 			{
 				us.vy+=1/2;
 			}
