@@ -7,6 +7,7 @@
 #include "../gamecake/src/gfx.sheet.js"
 #include "../gamecake/src/gfx.parallax.js"
 #include "../gamecake/src/gfx.minion.js"
+#include "../gamecake/src/gfx.text.js"
 
 #include "../gamecake/src/sfx.js"
 #include "../gamecake/src/sfx.audio.js"

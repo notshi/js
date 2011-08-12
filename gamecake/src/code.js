@@ -64,8 +64,17 @@ gamecake.ticks=0;
 			})();
     
 			var update;
-			
 
+			window.soundManager = new SoundManager("art/"); // Flash expects window.soundManager.
+
+//setup sound			
+			window.soundManager.onready(function() {
+				gamecake.sfx.sound_ready=true;
+			});
+
+			window.soundManager.beginDelayedInit(); // start SM2 init.
+    
+    
 			update=function() {
 	   			requestAnimationFrame(update); // we need to always ask to be called again
 				
@@ -87,11 +96,15 @@ gamecake.ticks=0;
 				
 				if('zoom' in document.body.style)
 				{
+					
+//					game.$this.css("width",(game.opts.width*z)+"px"); //ie seems to need this....
+//					game.$this.css("height",(game.opts.height*z)+"px");
+					
 					game.$this.css("left",ox+"px"); // this works for most browsers
 					game.$this.css("top",oy+"px");
 					game.$this.css("zoom",z);
 				}
-//				game.$this.css("MozTransform","position("+bx+"px,"+by+"px) scale("+z+")"); //except firefoz which needs this?
+//				game.$this.css("MozTransform","position("+bx+"px,"+by+"px) scale("+z+")"); //except firefoz which maybe needs this?
 				
 				if( ! gamecake.code.preload.check(game) ) {
 					if(game.preload) { game.preload(gamecake,opts); } // optional preload update

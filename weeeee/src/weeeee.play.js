@@ -83,7 +83,7 @@
 		us.$splode = $('<audio ><source src="art/mp3/splode.wav" /></audio>');
 		us.$start = $('<audio ><source src="art/mp3/start.wav" /></audio>');
 */
-		gamecake.sfx.audio({name:"start"});
+//		gamecake.sfx.audio({name:"start"});
 
 	};
 

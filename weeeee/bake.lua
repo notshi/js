@@ -39,16 +39,18 @@ tab.cache_files={
 "art/tiles/mid.png",
 "art/tiles/rgt.png",
 
-"art/mp3/tune.ogg",
+"art/mp3/tune.mp3",
 
-"art/mp3/bonus.wav",
-"art/mp3/jump.wav",
-"art/mp3/pick.wav",
-"art/mp3/splode.wav",
-"art/mp3/start.wav",
+"art/mp3/bonus.mp3",
+"art/mp3/jump.mp3",
+"art/mp3/pick.mp3",
+"art/mp3/splode.mp3",
+"art/mp3/start.mp3",
 
+{"out/art/soundmanager2.swf","art/soundmanager2.swf"},
 
-"jslib/jquery.min.js",
+{"out/jslib/jquery.min.js","jslib/jquery.min.js"},
+{"out/jslib/soundmanager2-nodebug-jsmin.js","jslib/soundmanager2-nodebug-jsmin.js"},
 
 {"out/weeeee.html","weeeee.html",},
 {"out/weeeee.css","weeeee.css",},

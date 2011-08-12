@@ -88,7 +88,7 @@
 						{
 							us.state="dead";
 							us.vy=0;
-							gamecake.sfx.audio({name:"splode"});
+							gamecake.sfx.audio({name:"splode",channel:0});
 						}
 					}
 				}
@@ -128,7 +128,7 @@
 			{
 				us.state="jump";
 				us.vy=-us.jump;
-				gamecake.sfx.audio({name:"jump"});
+				gamecake.sfx.audio({name:"jump",channel:2});
 				
 			}
 		}
@@ -153,7 +153,7 @@
 				us.state="floor";
 				us.py=t.tile.y
 				us.vy=0;
-				gamecake.sfx.audio({name:"pick"});
+				gamecake.sfx.audio({name:"pick",channel:3});
 			}
 		}
 		else

@@ -66,7 +66,7 @@ self.check=function(game){
 		self.progress_percent=100;
 	}
 
-	return game.preloadaudios_ready && game.preloadimages_ready;
+	return game.preloadaudios_ready && game.preloadimages_ready && gamecake.sfx.sound_ready; // and wait for sound lib to load
 };
 
 self.img=function(name){
@@ -98,8 +98,15 @@ self.audio=function(name){
 	
 	self.url=gamecake.opts.art+name+gamecake.opts.cachebreak;
 	
-	self.audio = new Audio();
-	self.audio.preload = true;
+	if(window.Audio)
+	{
+		self.audio = new Audio();
+	}
+	else
+	{
+		self.audio = {};
+	}
+	self.audio.preload = "auto";
 	self.audio.src = self.url;
 	
 	self.ready=function(){ // this shit is so fucked we just always return true...

@@ -15,8 +15,7 @@ gamecake.sfx.audio=function(opts){
 		if(!us.stop)
 		{
 			us.stop=function(){
-				us.audio.pause();
-				us.audio.currentTime = 0;
+				if(us.sound){us.sound.stop();}
 			};
 		}
 
@@ -25,46 +24,32 @@ gamecake.sfx.audio=function(opts){
 			opts.url=gamecake.audios[opts.name].url;
 		}
 		
-		if(!us.audio)
+		if(!us.sound)
 		{
 			
 //console.log("new channel "+channel);
 
-			us.audio=new Audio(opts.url);
-		}
-		else
-		{
-			if(!us.audio.ended) // force end
+			var so={
+				id: opts.name,
+				url: opts.url,
+				stream:false,
+				autoLoad:true
+			};
+			
+			if(opts.loop)
 			{
-				try{
-				us.stop();
-				}catch(err){
-					//ignore
-				}
-			}
-			us.audio.src=opts.url;
-		}
-		
-		if(opts.loop)
-		{
-			if(!us.func_loop)
-			{
-				us.func_ended=function() {
-					this.currentTime = 0;
-					this.play();
-				};
+				so.loops=9999;
+				so.onload=function() { this.play({loops:9999}); };
 			}
 			
-			us.audio.addEventListener('ended', us.func_loop, false);
-		}
-		else
-		{
-			us.audio.removeEventListener('ended', us.func_loop, false);
+			us.sound=soundManager.createSound(so);
+
 		}
 		
-//		us.audio.currentTime = 0;
-		us.audio.play();
-				
+		if(!opts.loop)
+		{
+			if(us.sound){us.sound.play();}
+		}	
 		return us;
 	};
 

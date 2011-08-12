@@ -57,7 +57,7 @@
 					if(us.peek_state=="hide")
 					{
 						us.peek_state="peek";
-						gamecake.sfx.audio({name:"bonus"});
+						gamecake.sfx.audio({name:"bonus",channel:4});
 					}
 				}
 			}

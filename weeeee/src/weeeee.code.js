@@ -42,12 +42,12 @@ weeeee={}; // a global place to keep our cake
 		splash:"art/splash.png"
 	};
 	game.preloadaudios={
-		tune:"art/mp3/tune.ogg",
-		bonus:"art/mp3/bonus.wav",
-		jump:"art/mp3/jump.wav",
-		pick:"art/mp3/pick.wav",
-		splode:"art/mp3/splode.wav",
-		start:"art/mp3/start.wav"
+		tune:"art/mp3/tune.mp3",
+		bonus:"art/mp3/bonus.mp3",
+		jump:"art/mp3/jump.mp3",
+		pick:"art/mp3/pick.mp3",
+		splode:"art/mp3/splode.mp3",
+		start:"art/mp3/start.mp3"
 	};
 	
 

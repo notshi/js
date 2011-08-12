@@ -200,7 +200,7 @@ gamecake.gfx.sheet=function(opts){
 				c.webkitTransform="translateZ(0) "+t;
 				c.MozTransform=t;
 				c.oTransform=t;
-				c.msTransform=t;
+				c.msTransform=t; // this doesnt work except in IE9... 
 				c.transform=t;
 		/*
 		 * 		if(t=="")
