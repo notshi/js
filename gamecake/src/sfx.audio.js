@@ -5,6 +5,8 @@
 gamecake.sfx.channels=[];
 
 gamecake.sfx.audio=function(opts){
+
+	if(opts.disable) { return; } // dont play, probably an idiot device
 	
 	var channel=opts.channel || 0;
 	var us=gamecake.sfx.channels[channel] || {};
@@ -38,18 +40,15 @@ gamecake.sfx.audio=function(opts){
 			
 			if(opts.loop)
 			{
-				so.loops=9999;
-				so.onload=function() { this.play({loops:9999}); };
+				so.loops=65535;
 			}
 			
 			us.sound=soundManager.createSound(so);
 
 		}
 		
-		if(!opts.loop)
-		{
-			if(us.sound){us.sound.play();}
-		}	
+		if(us.sound){us.sound.play();}
+		
 		return us;
 	};
 

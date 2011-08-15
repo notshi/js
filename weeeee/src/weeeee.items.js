@@ -24,7 +24,7 @@
 	us.pickitem=function()
 	{
 		var r=Math.floor(Math.random()*10);
-		us.peek.url=gamecake.images[("pp"+r)].url;
+		us.peek.name="pp"+r;
 	}
 
 	us.clean=function()
@@ -37,8 +37,8 @@
 	{
 		if(us.box){
 		us.box.draw();}
-//		if(us.peek){
-//		us.peek.draw();}
+		if(us.peek){
+		us.peek.draw();}
 	};
 
 	us.update=function(speed)
@@ -57,7 +57,7 @@
 					if(us.peek_state=="hide")
 					{
 						us.peek_state="peek";
-						gamecake.sfx.audio({name:"bonus",channel:4});
+						gamecake.sfx.audio({name:"bonus",channel:4,disable:gamecake.sniff.idiot_device});
 					}
 				}
 			}

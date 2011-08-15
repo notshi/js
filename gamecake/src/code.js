@@ -14,6 +14,29 @@ gamecake.audios={};
 
 gamecake.ticks=0;
 
+gamecake.sniff={};
+
+if( navigator.appVersion.search(/webkit/i) >= 0 )
+{
+	gamecake.sniff.webkit=true;
+}
+
+if( navigator.userAgent.search(/iphone/i) >= 0 )
+{
+	gamecake.sniff.idiot_phone=true;
+}
+if( navigator.userAgent.search(/ipad/i) >= 0 )
+{
+	gamecake.sniff.idiot_pad=true;
+}
+if( navigator.userAgent.search(/ipod/i) >= 0 )
+{
+	gamecake.sniff.idiot_pod=true;
+}
+if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idiot_pod )
+{
+	gamecake.sniff.idiot_device=true;
+}
 
 (function($) {
 	$.fn.gamecake = function(opts) {
@@ -25,7 +48,7 @@ gamecake.ticks=0;
 			var game=opts.game;
 			var $this = $(this);
 			game.$this=$this;
-			game.lastzoom=1;
+			game.zoom=1;
 			
 			$this.css("width",game.opts.width+"px");
 			$this.css("height",game.opts.height+"px");
@@ -66,6 +89,8 @@ gamecake.ticks=0;
 			var update;
 
 			window.soundManager = new SoundManager("art/"); // Flash expects window.soundManager.
+			window.soundManager.useHighPerformance = true;
+			window.soundManager.flashVersion = 9;
 
 //setup sound			
 			window.soundManager.onready(function() {
@@ -87,24 +112,31 @@ gamecake.ticks=0;
 				var z=(pw/game.opts.width);
 				if( (z*game.opts.height) > ph ) { z=(ph/game.opts.height); }
 
-				var bx=Math.floor((pw-(game.opts.width*z)));
-				var by=Math.floor((ph-(game.opts.height*z)));
+				var bx=Math.floor((pw-(game.opts.width))/2);
+				var by=Math.floor((ph-(game.opts.height))/2);
 
 				var ox=Math.floor((pw-(game.opts.width*z))/(2*z));
 				var oy=Math.floor((ph-(game.opts.height*z))/(2*z));
 				game.$this.css("position","absolute");
 				
-				if('zoom' in document.body.style)
+				var donezoom=false;
+				if(gamecake.sniff.webkit) // only seems safe in webkit, 
 				{
-					
-//					game.$this.css("width",(game.opts.width*z)+"px"); //ie seems to need this....
-//					game.$this.css("height",(game.opts.height*z)+"px");
-					
-					game.$this.css("left",ox+"px"); // this works for most browsers
-					game.$this.css("top",oy+"px");
-					game.$this.css("zoom",z);
+					if('zoom' in document.body.style)
+					{
+						game.$this.css("left",ox+"px"); // this works for most browsers
+						game.$this.css("top",oy+"px");
+						game.$this.css("zoom",z);
+						game.zoom=z;
+						donezoom=true;
+					}
 				}
-//				game.$this.css("MozTransform","position("+bx+"px,"+by+"px) scale("+z+")"); //except firefoz which maybe needs this?
+				
+				if(!donezoom) // no zoom
+				{
+						game.$this.css("left",bx+"px"); // just try and position it
+						game.$this.css("top",by+"px");
+				}
 				
 				if( ! gamecake.code.preload.check(game) ) {
 					if(game.preload) { game.preload(gamecake,opts); } // optional preload update

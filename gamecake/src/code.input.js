@@ -72,8 +72,8 @@
 		var tevent =  event.originalEvent.touches.item(0);
 		if(tevent) { 
 	  		var pos=game.$this.offset();
-			input.x=(tevent.pageX-(pos.left)); // getting local coords is a problem
-			input.y=(tevent.pageY-(pos.top));
+			input.x=(tevent.pageX-(pos.left*game.zoom))/game.zoom; // getting local coords is a problem
+			input.y=(tevent.pageY-(pos.top*game.zoom))/game.zoom;
 		}
 		return false;
 	};
@@ -81,8 +81,9 @@
 	self.mousemove=function(event,game)
 	{
   		var pos=game.$this.offset();
-		input.x=(event.pageX-(pos.left*game.lastzoom))/game.lastzoom; // getting local coords is a problem
-		input.y=(event.pageY-(pos.top*game.lastzoom))/game.lastzoom;
+		input.x=(event.pageX-(pos.left*game.zoom))/game.zoom; // getting local coords is a problem
+		input.y=(event.pageY-(pos.top*game.zoom))/game.zoom;
+
 //		rollup.dbg.div.html(input.x + " : " + input.y );
 //		console.log( input.x + " : " + input.y );
 		return false;

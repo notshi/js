@@ -47,15 +47,16 @@ tab.cache_files={
 "art/mp3/splode.mp3",
 "art/mp3/start.mp3",
 
-{"out/art/soundmanager2.swf","art/soundmanager2.swf"},
+"art/soundmanager2.swf",
+"art/soundmanager2_flash9.swf",
 
-{"out/jslib/jquery.min.js","jslib/jquery.min.js"},
-{"out/jslib/soundmanager2-nodebug-jsmin.js","jslib/soundmanager2-nodebug-jsmin.js"},
+"jslib/jquery.min.js",
+"jslib/soundmanager2-nodebug-jsmin.js",
 
-{"out/weeeee.html","weeeee.html",},
-{"out/weeeee.css","weeeee.css",},
-{"out/weeeee.min.js","weeeee.min.js",},
-{"out/gamecake.min.js","gamecake.min.js",},
+"weeeee.html",
+"weeeee.css",
+"weeeee.min.js",
+"gamecake.min.js",
 
 }
 
