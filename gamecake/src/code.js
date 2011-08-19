@@ -100,10 +100,15 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 			window.soundManager.beginDelayedInit(); // start SM2 init.
     
     
+			gamecake.time_todo=0;
+			gamecake.time_last=0;
+					
 			update=function() {
 	   			requestAnimationFrame(update); // we need to always ask to be called again
 				
 				gamecake.ticks++;
+				var now=(new Date()).getTime();
+
 								
 //				game.opts.width=160;
 //				game.opts.height=120;
@@ -179,12 +184,22 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 					}
 
 					gamecake.state=game.setup(gamecake,opts);
+					gamecake.time_todo=0;
+					gamecake.time_last=now;
 				} // setup after preload
-								
-				gamecake.code.input.update();
-				game.update(gamecake,opts);
+				
+				gamecake.time_todo+=(now-gamecake.time_last);
+				if(gamecake.time_todo > 200) { gamecake.time_todo=200; }
+				
+				while(gamecake.time_todo>=0)
+				{
+					gamecake.time_todo-=20;
+					gamecake.code.input.update();
+					game.update(gamecake,opts);
+				}
 				game.draw(gamecake,opts);
 				
+				gamecake.time_last=now;
 			};
    			update(); // and must start the upadates
 		});
