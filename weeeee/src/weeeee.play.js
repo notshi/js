@@ -105,7 +105,7 @@
 
 	us.draw=function()
 	{
-		for(i=0;i<us.p.length-2;i++)
+		for(i=0;i<us.p.length-3;i++)
 		{
 			us.p[i].draw();
 		}
@@ -114,6 +114,7 @@
 		game.sled.draw();
 		us.sheet.draw();
 
+		us.p[us.p.length-3].draw();
 		us.p[us.p.length-2].draw();
 		us.p[us.p.length-1].draw();
 	};

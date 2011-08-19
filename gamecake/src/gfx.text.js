@@ -8,10 +8,11 @@ gamecake.gfx.fonts.sans={
 	lineHeight:"112.5%"
 };
 
-	var $span=$("<span/>");
-	$span.css({display:"none"}); // must be hidden
-	$span.css({whiteSpace:"pre"}); // stop auto wrapping?
-	$("body").append($span); // must be in dom
+
+var $span=$("<span/>");
+$span.css({display:"none"}); // must be hidden
+$span.css({whiteSpace:"pre"}); // stop auto wrapping?
+$("body").append($span); // must be in dom
 
 // how big is this text? when printed on one line?
 // this is possibly a hideously expensive question and may even get it wrong for long text
@@ -30,6 +31,8 @@ gamecake.gfx.text_size=function(s,style)
 	
 	return ret;
 };
+
+
 	
 gamecake.gfx.text=function(opts){
 	var self=gamecake.gfx.sheet(opts); // extend the sheet class
@@ -59,44 +62,118 @@ gamecake.gfx.text=function(opts){
 		return self;
 	};
 
-	self.set=function(s){
-		self.div.text(s);
-		return self;
-	};
-
-	self.align=function(s){
-		if(s=="center")
-		{
-			self.div.css({textAlign:"center"});
-		}
-		else 
-		if(s=="right")
-		{
-			self.div.css({textAlign:"right"});
-		}
-		else 
-		{
-			self.div.css({textAlign:"left"});
-		}
+	switch(gamecake.opts.render)
+	{
+		case "canvas":
 		
-		return self;
-	};
+			self.text="";
+			self.text_color="#000";
+			self.text_size=16;
+			
+			self.draw=function(){
+				old.draw();
 
-	self.size=function(n){
-		self.div.css({fontSize:n+"px"});
-		return self;
-	};
+				gamecake.ctx.font = self.text_size+"px verdana";
+				gamecake.ctx.fillStyle = self.text_color;
+				gamecake.ctx.textBaseline="top";
+				gamecake.ctx.textAlign="left";
 
-	self.color=function(s){
-		self.div.css({color:s});
-		return self;
-	};
+				var w=gamecake.ctx.measureText(self.text).width;
+				
+				gamecake.ctx.setTransform( 1,0  , 0,1 , self.px,self.py );
+				gamecake.ctx.fillText(self.text ,  (self.sx-w)-self.ox , -self.oy );
+//console.log(self.text);				
+				
+				return self;
+			};
 
-	self.div.css(gamecake.gfx.fonts.sans); // default
-	if(opts.style) { self.div.css(opts.style); } // override
-	if(opts.color) { self.color(opts.color); } // override
-	if(opts.size) { self.size(opts.size); } // override
-	if(opts.align) { self.align(opts.align); } // override
+			self.set=function(s){
+				self.text=s+"";
+//				self.div.text(s);
+				return self;
+			};
+
+			self.align=function(s){
+				self.text_align=s;
+				if(s=="center")
+				{
+//					self.div.css({textAlign:"center"});
+				}
+				else 
+				if(s=="right")
+				{
+//					self.div.css({textAlign:"right"});
+				}
+				else 
+				{
+//					self.div.css({textAlign:"left"});
+				}
+				
+				return self;
+			};
+
+			self.size=function(n){
+				self.text_size=n;
+//				self.div.css({fontSize:n+"px"});
+				return self;
+			};
+
+			self.color=function(s){
+				self.text_color=s;
+//				self.div.css({color:s});
+				return self;
+			};
+
+//			self.div.css(gamecake.gfx.fonts.sans); // default
+//			if(opts.style) { self.div.css(opts.style); } // override
+			if(opts.color) { self.color(opts.color); } // override
+			if(opts.size) { self.size(opts.size); } // override
+			if(opts.align) { self.align(opts.align); } // override
+		break;
+		default:
+		case "dhtml":
+			self.set=function(s){
+				self.div.text(s);
+				return self;
+			};
+
+			self.align=function(s){
+				if(s=="center")
+				{
+					self.div.css({textAlign:"center"});
+				}
+				else 
+				if(s=="right")
+				{
+					self.div.css({textAlign:"right"});
+				}
+				else 
+				{
+					self.div.css({textAlign:"left"});
+				}
+				
+				return self;
+			};
+
+			self.size=function(n){
+				self.div.css({fontSize:n+"px"});
+				return self;
+			};
+
+			self.color=function(s){
+				self.div.css({color:s});
+				return self;
+			};
+
+			self.div.css(gamecake.gfx.fonts.sans); // default
+			if(opts.style) { self.div.css(opts.style); } // override
+			if(opts.color) { self.color(opts.color); } // override
+			if(opts.size) { self.size(opts.size); } // override
+			if(opts.align) { self.align(opts.align); } // override
+		break;
+	}
+
+
 		
 	return self;
 };
