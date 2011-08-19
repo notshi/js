@@ -52,9 +52,11 @@ weeeee={}; // a global place to keep our cake
 	};
 	
 
-	game.opts.name="rollup";
+	game.opts.name="weeeee";
 	game.opts.width=640;
 	game.opts.height=480;
+//	game.opts.width=320;
+//	game.opts.height=240;
 	game.opts.backcolor="#ffffff";
 	
 	game.setup=function(cake,opts){

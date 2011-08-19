@@ -147,12 +147,36 @@ gamecake.gfx.sheet=function(opts){
 					var img=gamecake.images[ self.name ].img;
 					if(img)
 					{
-						gamecake.ctx.setTransform( 1,0  , 0,1 , self.px,self.py );
-						var sx=self.sx-self.fx;
-						var sy=self.sy-self.fy;
-						if( (sx>0) && (sy>0) )
+						var w=gamecake.game.opts.width;
+						var h=gamecake.game.opts.height;
+						
+						var px=self.px;
+						var py=self.py;
+						
+						var dx=0;
+						var dy=0;
+						
+						var fx=self.fx;
+						var fy=self.fy;
+						
+						var sx=self.sx;
+						var sy=self.sy;
+						
+						var ox=self.ox;						
+						var oy=self.oy;
+						
+//						if(px+sx-ox<0) { dx=-(px+sx-ox); px=px+dx; fx=fx+dx; sx=sx-dx; } 
+//						if(py+sy-oy<0) { dy=-(py+sy-oy); py=py+dy; fy=fy+dy; sy=sy-dy; } 
+
+//						if(px+sx-ox>w) { sx=sx+(w-(px+sx-ox)); } 
+//						if(py+sy-oy>h) { sy=sy+(h-(py+sy-oy)); } 
+						
+//						if( (sx-fx>0) && (sy-fy>0) )
 						{
-							gamecake.ctx.drawImage(img , self.fx,self.fy , sx,sy , -self.ox,-self.oy , sx,sy);
+//console.log(px+","+py+" : "+fx+","+fy+" : "+sx+","+sy);
+							
+							gamecake.ctx.setTransform( 1,0  , 0,1 , px,py );
+							gamecake.ctx.drawImage(img , fx,fy , sx,sy , -ox,-oy , sx,sy);
 						}
 					}
 				}

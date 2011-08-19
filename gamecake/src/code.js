@@ -104,40 +104,46 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 	   			requestAnimationFrame(update); // we need to always ask to be called again
 				
 				gamecake.ticks++;
-				
+								
+//				game.opts.width=160;
+//				game.opts.height=120;
+
 // magic scale, this seems to cause slowdown sometimes?
 				var p=game.$this.parent();
 				var pw=p.width();
 				var ph=p.height();
 				var z=(pw/game.opts.width);
 				if( (z*game.opts.height) > ph ) { z=(ph/game.opts.height); }
+//				if(gamecake.sniff.idiot_device) { z=1; }
+//z=1;
+				var dx=Math.floor(game.opts.width*z);
+				var dy=Math.floor(game.opts.height*z);
 
-				var bx=Math.floor((pw-(game.opts.width))/2);
-				var by=Math.floor((ph-(game.opts.height))/2);
-
-				var ox=Math.floor((pw-(game.opts.width*z))/(2*z));
-				var oy=Math.floor((ph-(game.opts.height*z))/(2*z));
+				var ox=Math.floor((pw-(dx))/(2));
+				var oy=Math.floor((ph-(dy))/(2));
 				game.$this.css("position","absolute");
 				
-				var donezoom=false;
-				if(gamecake.sniff.webkit) // only seems safe in webkit, 
+				switch(gamecake.opts.render)
 				{
-					if('zoom' in document.body.style)
-					{
-						game.$this.css("left",ox+"px"); // this works for most browsers
-						game.$this.css("top",oy+"px");
-						game.$this.css("zoom",z);
-						game.zoom=z;
-						donezoom=true;
-					}
+					case "canvas":
+						if(gamecake.$canvas)
+						{
+//							gamecake.$canvas.attr("width",game.opts.width);
+//							gamecake.$canvas.attr("height",game.opts.height); // the render size
+							
+							gamecake.$canvas.css("width",dx+"px");
+							gamecake.$canvas.css("height",dy+"px");
+							
+							game.$this.css("left",ox+"px"); // just try and position it
+							game.$this.css("top",oy+"px");
+							game.$this.css("width",dx+"px");
+							game.$this.css("height",dy+"px");
+							
+							game.zoom=z;
+						}
+					break
 				}
-				
-				if(!donezoom) // no zoom
-				{
-						game.$this.css("left",bx+"px"); // just try and position it
-						game.$this.css("top",by+"px");
-				}
-				
+
 				if( ! gamecake.code.preload.check(game) ) {
 					if(game.preload) { game.preload(gamecake,opts); } // optional preload update
 					else { $this.html("<h1>Loading "+gamecake.code.preload.progress_percent+"%</h1>"); }

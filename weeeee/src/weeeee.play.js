@@ -67,7 +67,7 @@
 		game.tiles.setup(us,us.p[8]);
 		game.items.setup(us,us.p[8]);
 		
-		us.tune=gamecake.sfx.audio({name:"tune",loop:true,channel:1});
+		us.tune=gamecake.sfx.audio({name:"tune",loop:true,channel:1,disable:gamecake.sniff.idiot_device});
 /*		
 		us.$tune = $('<audio loop ><source src="art/mp3/tune.mp3" /><source src="art/mp3/tune.ogg" /></audio>');
 		us.$tune[0].addEventListener('ended', function() {
@@ -105,7 +105,8 @@
 
 	us.draw=function()
 	{
-		for(i=0;i<us.p.length-3;i++)
+
+ 		for(i=0;i<us.p.length-3;i++)
 		{
 			us.p[i].draw();
 		}
@@ -117,6 +118,7 @@
 		us.p[us.p.length-3].draw();
 		us.p[us.p.length-2].draw();
 		us.p[us.p.length-1].draw();
+
 	};
 
 	us.update=function()
