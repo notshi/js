@@ -144,7 +144,8 @@ gamecake.gfx.sheet=function(opts){
 			case "canvas":
 				if(self.name)
 				{
-					var img=gamecake.images[ self.name ].img;
+					var gs=gamecake.scale;
+					var img=gamecake.images[ self.name ].get(gs);
 					if(img)
 					{
 						var w=gamecake.game.opts.width;
@@ -175,8 +176,18 @@ gamecake.gfx.sheet=function(opts){
 						{
 //console.log(px+","+py+" : "+fx+","+fy+" : "+sx+","+sy);
 							
+							px=Math.floor(px/gs);
+							py=Math.floor(py/gs);
+							
+							fx=Math.floor(fx/gs);
+							fy=Math.floor(fy/gs);
+							sx=Math.floor(sx/gs);
+							sy=Math.floor(sy/gs);
+							ox=Math.floor(ox/gs);
+							oy=Math.floor(oy/gs);
+//console.log(px+","+py+" : "+fx+","+fy+" : "+sx+","+sy);
 							gamecake.ctx.setTransform( 1,0  , 0,1 , px,py );
-							gamecake.ctx.drawImage(img , fx,fy , sx,sy , -ox,-oy , sx,sy);
+							gamecake.ctx.drawImage(img , 0,0 , sx,sy , -ox,-oy , sx,sy);
 						}
 					}
 				}

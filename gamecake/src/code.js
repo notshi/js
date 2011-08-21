@@ -43,12 +43,15 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 		
 		gamecake.opts=opts;
 		gamecake.game=opts.game;
+		gamecake.scale=1;
+		if(gamecake.sniff.idiot_device) { gamecake.scale=2; } // rescale it and it will go faster
 		
 		return this.each(function() {
 			var game=opts.game;
 			var $this = $(this);
 			game.$this=$this;
 			game.zoom=1;
+
 			
 			$this.css("width",game.opts.width+"px");
 			$this.css("height",game.opts.height+"px");
@@ -166,8 +169,8 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 					{
 						case "canvas":
 							gamecake.$canvas=$("<canvas></canvas>");
-							gamecake.$canvas.attr("width",game.opts.width);
-							gamecake.$canvas.attr("height",game.opts.height);
+							gamecake.$canvas.attr("width",game.opts.width/gamecake.scale);
+							gamecake.$canvas.attr("height",game.opts.height/gamecake.scale);
 							gamecake.$canvas.css("width",game.opts.width+"px");
 							gamecake.$canvas.css("height",game.opts.height+"px");
 							$this.append( gamecake.$canvas ); // create canvas

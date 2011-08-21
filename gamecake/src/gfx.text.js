@@ -73,15 +73,17 @@ gamecake.gfx.text=function(opts){
 			self.draw=function(){
 				old.draw();
 
-				gamecake.ctx.font = self.text_size+"px verdana";
+				var gs=gamecake.scale;
+
+				gamecake.ctx.font = Math.floor(self.text_size/gs)+"px verdana";
 				gamecake.ctx.fillStyle = self.text_color;
 				gamecake.ctx.textBaseline="top";
 				gamecake.ctx.textAlign="left";
 
 				var w=gamecake.ctx.measureText(self.text).width;
 				
-				gamecake.ctx.setTransform( 1,0  , 0,1 , self.px,self.py );
-				gamecake.ctx.fillText(self.text ,  (self.sx-w)-self.ox , -self.oy );
+				gamecake.ctx.setTransform( 1,0  , 0,1 , Math.floor(self.px/gs),Math.floor(self.py/gs) );
+				gamecake.ctx.fillText(self.text ,  Math.floor((((self.sx/gs)-w)-(self.ox/gs))) , Math.floor((-self.oy)/gs) );
 //console.log(self.text);				
 				
 				return self;
