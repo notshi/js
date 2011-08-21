@@ -65,10 +65,13 @@ weeeee={}; // a global place to keep our cake
 //		game.dice.setup();
 //		game.menu.setup();
 
-    var bubble = new google.bookmarkbubble.Bubble();
-    bubble.hasHashParameter = function() { return false; }; // we will nag until we are fullscreen
-    bubble.setHashParameter = function() {};
-    bubble.showIfAllowed();
+	if("google" in global)
+	{
+		var bubble = new google.bookmarkbubble.Bubble();
+		bubble.hasHashParameter = function() { return false; }; // we will nag until we are fullscreen
+		bubble.setHashParameter = function() {};
+		bubble.showIfAllowed();
+	}
 
 
 		return game;

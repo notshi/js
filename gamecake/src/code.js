@@ -1,4 +1,7 @@
 //code
+
+var global = global || window; // in case we move outside of the browser
+
 gamecake={}; // a global place to keep our cake
 
 gamecake.code={};
@@ -131,43 +134,38 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 				var oy=Math.floor((ph-(dy))/(2));
 				game.$this.css("position","absolute");
 				
-				switch(gamecake.opts.render)
+				if(gamecake.$canvas) // can only adjust if it exists
 				{
-					case "canvas":
-						if(gamecake.$canvas)
-						{
 //							gamecake.$canvas.attr("width",game.opts.width);
 //							gamecake.$canvas.attr("height",game.opts.height); // the render size
-							
-							gamecake.$canvas.css("width",dx+"px");
-							gamecake.$canvas.css("height",dy+"px");
-							
-							game.$this.css("left",ox+"px"); // just try and position it
-							game.$this.css("top",oy+"px");
-							game.$this.css("width",dx+"px");
-							game.$this.css("height",dy+"px");
-							
-							var newscale=1;
-							if(z<=0.5)
-							{
-								newscale=2;
-							}
-							
-							if(gamecake.sniff.idiot_device)
-							{
-								newscale=2;
-							}
-							
-							if(gamecake.scale!=newscale)
-							{
-								gamecake.scale=newscale;
-								gamecake.$canvas.attr("width",Math.floor(game.opts.width/gamecake.scale));
-								gamecake.$canvas.attr("height",Math.floor(game.opts.height/gamecake.scale));
-							}
 					
-							game.zoom=z;
-						}
-					break
+					gamecake.$canvas.css("width",dx+"px");
+					gamecake.$canvas.css("height",dy+"px");
+					
+					game.$this.css("left",ox+"px"); // just try and position it
+					game.$this.css("top",oy+"px");
+					game.$this.css("width",dx+"px");
+					game.$this.css("height",dy+"px");
+					
+					var newscale=1;
+					if(z<=0.5)
+					{
+						newscale=2;
+					}
+					
+					if(gamecake.sniff.idiot_device)
+					{
+						newscale=2;
+					}
+					
+					if(gamecake.scale!=newscale)
+					{
+						gamecake.scale=newscale;
+						gamecake.$canvas.attr("width",Math.floor(game.opts.width/gamecake.scale));
+						gamecake.$canvas.attr("height",Math.floor(game.opts.height/gamecake.scale));
+					}
+			
+					game.zoom=z;
 				}
 
 				if( ! gamecake.code.preload.check(game) ) {
