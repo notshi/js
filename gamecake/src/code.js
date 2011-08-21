@@ -165,26 +165,14 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 					
 					$this.empty(); // clean out anything the preload may have added
 						
-					switch(gamecake.opts.render)
-					{
-						case "canvas":
-							gamecake.$canvas=$("<canvas></canvas>");
-							gamecake.$canvas.attr("width",game.opts.width/gamecake.scale);
-							gamecake.$canvas.attr("height",game.opts.height/gamecake.scale);
-							gamecake.$canvas.css("width",game.opts.width+"px");
-							gamecake.$canvas.css("height",game.opts.height+"px");
-							$this.append( gamecake.$canvas ); // create canvas
-							
-							gamecake.ctx=gamecake.$canvas.get(0).getContext("2d"); // this is what we draw on
-
-						break;
-						default:
-						case "dhtml":
-						
-							$this.append( game.sheet.div ); // and display it
-							
-						break;
-					}
+					gamecake.$canvas=$("<canvas></canvas>");
+					gamecake.$canvas.attr("width",game.opts.width/gamecake.scale);
+					gamecake.$canvas.attr("height",game.opts.height/gamecake.scale);
+					gamecake.$canvas.css("width",game.opts.width+"px");
+					gamecake.$canvas.css("height",game.opts.height+"px");
+					$this.append( gamecake.$canvas ); // create canvas
+					
+					gamecake.ctx=gamecake.$canvas.get(0).getContext("2d"); // this is what we draw on
 
 					gamecake.state=game.setup(gamecake,opts);
 					gamecake.time_todo=0;

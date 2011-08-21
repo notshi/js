@@ -5,22 +5,6 @@ gamecake.gfx.sheet=function(opts){
 	var self={};
 			
 	self.setup=function(opts){
-		switch(gamecake.opts.render)
-		{
-			case "canvas":
-			break;
-			default:
-			case "dhtml":
-				if(!self.div) // need a div
-				{
-					self.div=$("<div/>");
-					self.div.css({
-								position:"absolute",
-								overflow:"hidden"
-							});
-				}
-			break;
-		}
 		
 		self.znext=0; // the next z depth to insert a new sheet at
 		
@@ -90,15 +74,6 @@ gamecake.gfx.sheet=function(opts){
 		kid.parent=self;
 		self.kids[kid.pz]=kid;
 		if(kid.auto) { self.autos[kid.pz]=kid; }
-		switch(gamecake.opts.render)
-		{
-			case "canvas":
-			break;
-			default:
-			case "dhtml":
-				self.div.append(kid.div);
-			break;
-		}
 		return self;
 	};
 	
@@ -115,16 +90,6 @@ gamecake.gfx.sheet=function(opts){
 
 //console.log(self.pz);
 		
-		switch(gamecake.opts.render)
-		{
-			case "canvas":
-			break;
-			default:
-			case "dhtml":
-				self.div.empty().remove();
-				self.div=null;
-			break;
-		}
 		self.drawn=null;
 		self.kids=null;
 		self.autos=null;		
@@ -139,158 +104,54 @@ gamecake.gfx.sheet=function(opts){
 			v.draw();
 		}
 		
-		switch(gamecake.opts.render)
+		if(self.name)
 		{
-			case "canvas":
-				if(self.name)
-				{
-					var gs=gamecake.scale;
-					var img=gamecake.images[ self.name ].get(gs);
-					if(img)
-					{
-						var w=gamecake.game.opts.width;
-						var h=gamecake.game.opts.height;
-						
-						var px=self.px;
-						var py=self.py;
-						
-						var dx=0;
-						var dy=0;
-						
-						var fx=self.fx;
-						var fy=self.fy;
-						
-						var sx=self.sx;
-						var sy=self.sy;
-						
-						var ox=self.ox;						
-						var oy=self.oy;
-						
+			var gs=gamecake.scale;
+			var img=gamecake.images[ self.name ].get(gs);
+			if(img)
+			{
+				var w=gamecake.game.opts.width;
+				var h=gamecake.game.opts.height;
+				
+				var px=self.px;
+				var py=self.py;
+				
+				var dx=0;
+				var dy=0;
+				
+				var fx=self.fx;
+				var fy=self.fy;
+				
+				var sx=self.sx;
+				var sy=self.sy;
+				
+				var ox=self.ox;						
+				var oy=self.oy;
+				
 //						if(px+sx-ox<0) { dx=-(px+sx-ox); px=px+dx; fx=fx+dx; sx=sx-dx; } 
 //						if(py+sy-oy<0) { dy=-(py+sy-oy); py=py+dy; fy=fy+dy; sy=sy-dy; } 
 
 //						if(px+sx-ox>w) { sx=sx+(w-(px+sx-ox)); } 
 //						if(py+sy-oy>h) { sy=sy+(h-(py+sy-oy)); } 
-						
+				
 //						if( (sx-fx>0) && (sy-fy>0) )
-						{
+				{
 //console.log(px+","+py+" : "+fx+","+fy+" : "+sx+","+sy);
-							
-							px=Math.floor(px/gs);
-							py=Math.floor(py/gs);
-							
-							fx=Math.floor(fx/gs);
-							fy=Math.floor(fy/gs);
-							sx=Math.floor(sx/gs);
-							sy=Math.floor(sy/gs);
-							ox=Math.floor(ox/gs);
-							oy=Math.floor(oy/gs);
+					
+					px=Math.floor(px/gs);
+					py=Math.floor(py/gs);
+					
+					fx=Math.floor(fx/gs);
+					fy=Math.floor(fy/gs);
+					sx=Math.floor(sx/gs);
+					sy=Math.floor(sy/gs);
+					ox=Math.floor(ox/gs);
+					oy=Math.floor(oy/gs);
 //console.log(px+","+py+" : "+fx+","+fy+" : "+sx+","+sy);
-							gamecake.ctx.setTransform( 1,0  , 0,1 , px,py );
-							gamecake.ctx.drawImage(img , 0,0 , sx,sy , -ox,-oy , sx,sy);
-						}
-					}
+					gamecake.ctx.setTransform( 1,0  , 0,1 , px,py );
+					gamecake.ctx.drawImage(img , 0,0 , sx,sy , -ox,-oy , sx,sy);
 				}
-			break;
-			default:
-			case "dhtml":
-				var c={}
-				var changed=false;
-				var drawn=self.drawn;
-				
-				var t="";
-				
-				if( ((drawn.sz)!=(self.sz)))
-					{ changed=true; drawn.sz=self.sz; }
-					 t="scale("+drawn.sz+") "+t;
-					 
-				if( ((drawn.rz)!=(self.rz)) )
-					{ changed=true; drawn.rz=self.rz; t="rotate("+drawn.rz+"deg) "+t; }
-					
-				if( ((drawn.ox)!=(self.ox)) || ((drawn.oy)!=(self.oy)) )
-					{ changed=true; drawn.ox=self.ox; drawn.oy=self.oy;
-						var ot=drawn.ox+" "+drawn.oy;
-		// one of these will probably work				
-						c.webkitTransformOrigin=ot;
-						c.MozTransformOrigin=ot;
-						c.oTransformOrigin=ot;
-						c.msTransformOrigin=ot;
-						c.transformOrigin=ot;
-					 }
-						
-
-				if( ((drawn.px|0)!=((self.px-self.ox)|0)) || ((drawn.py|0)!=((self.py-self.oy)|0)) )
-					{
-						changed=true;
-						drawn.px=(self.px-self.ox)|0;
-						drawn.py=(self.py-self.oy)|0;
-					}
-					
-		//		if( (drawn.sz!=1) || (drawn.rz!=0) )
-		//		{
-					t="translate("+drawn.px+"px, "+drawn.py+"px) " + t;
-		//		}
-
-		// one of these will probably work				
-				c.webkitTransform="translateZ(0) "+t;
-				c.MozTransform=t;
-				c.oTransform=t;
-				c.msTransform=t; // this doesnt work except in IE9... 
-				c.transform=t;
-		/*
-		 * 		if(t=="")
-				{
-					if( ((drawn.px|0)!=((self.px-self.ox)|0)) )
-						{ changed=true; drawn.px=(self.px-self.ox)|0; c.left=drawn.px+"px"; }
-						
-					if( ((drawn.py|0)!=((self.py-self.oy)|0)) )
-						{ changed=true; drawn.py=(self.py-self.oy)|0; c.top=drawn.py+"px"; }
-				}
-				else
-		*/
-		//		{
-		//		}
-		/*
-		 * 		{
-					if( ((drawn.px|0)!=((self.px-self.ox)|0)) )
-						{ changed=true; drawn.px=(self.px-self.ox)|0; c.left=drawn.px+"px"; }
-						
-					if( ((drawn.py|0)!=((self.py-self.oy)|0)) )
-						{ changed=true; drawn.py=(self.py-self.oy)|0; c.top=drawn.py+"px"; }
-				}
-		*/
-				
-				if( ((drawn.pz|0)!=(self.pz|0)) )
-					{ changed=true; drawn.pz=self.pz|0; c.zIndex=drawn.pz; }
-					
-				if( ((drawn.sx|0)!=(self.sx|0)) )
-					{ changed=true; drawn.sx=self.sx|0; c.width=drawn.sx+"px"; }
-					
-				if( ((drawn.sy|0)!=(self.sy|0)) )
-					{ changed=true; drawn.sy=self.sy|0; c.height=drawn.sy+"px"; }
-				
-				if( (drawn.name!=self.name) )
-				{
-					drawn.name=self.name
-					self.url=gamecake.images[self.name].url;
-				}
-				if( (drawn.url!=self.url) )
-					{ changed=true; drawn.url=self.url;	c.backgroundImage="url("+drawn.url+")";
-						self.hx=gamecake.images[ drawn.url ].img.width;
-						self.hy=gamecake.images[ drawn.url ].img.height;
-					}
-
-				if( (drawn.opacity!=self.opacity) )
-					{ changed=true; drawn.opacity=self.opacity;	c.opacity=drawn.opacity; }
-
-				if( ((drawn.fx|0)!=(self.fx|0)) || ((drawn.fy|0)!=(self.fy|0)) )
-					{ changed=true; drawn.fx=self.fx|0; drawn.fy=self.fy|0; c.backgroundPosition=(-drawn.fx)+"px "+(-drawn.fy)+"px"; }
-
-				if(changed)
-				{
-					self.div.css(c);
-				}
-			break;
+			}
 		}
 		return self;
 	};
