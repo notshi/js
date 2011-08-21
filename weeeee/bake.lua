@@ -50,6 +50,8 @@ tab.cache_files={
 "art/soundmanager2.swf",
 "art/soundmanager2_flash9.swf",
 
+"jslib/bookmark_bubble.js",
+"jslib/excanvas.compiled.js",
 "jslib/jquery.min.js",
 "jslib/soundmanager2-nodebug-jsmin.js",
 

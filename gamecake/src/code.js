@@ -79,13 +79,13 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 
 			var requestAnimationFrame = (function(){
 // it may be nice to use these, but they seem to degrade performance...
-/*			  return  window.requestAnimationFrame       || 
+			  return  window.requestAnimationFrame       || 
 					  window.webkitRequestAnimationFrame || 
 					  window.mozRequestAnimationFrame    || 
 					  window.oRequestAnimationFrame      || 
-					  window.msRequestAnimationFrame     || */
-					  return function(callback,element){
-						  window.setTimeout(callback, 1000 / 50);
+					  window.msRequestAnimationFrame     ||
+					  function(callback,element){
+						  window.setTimeout(callback, 1000 / 60);
 					  };
 			})();
     
@@ -147,6 +147,24 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 							game.$this.css("width",dx+"px");
 							game.$this.css("height",dy+"px");
 							
+							var newscale=1;
+							if(z<=0.5)
+							{
+								newscale=2;
+							}
+							
+							if(gamecake.sniff.idiot_device)
+							{
+								newscale=2;
+							}
+							
+							if(gamecake.scale!=newscale)
+							{
+								gamecake.scale=newscale;
+								gamecake.$canvas.attr("width",Math.floor(game.opts.width/gamecake.scale));
+								gamecake.$canvas.attr("height",Math.floor(game.opts.height/gamecake.scale));
+							}
+					
 							game.zoom=z;
 						}
 					break
@@ -184,7 +202,7 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 				
 				while(gamecake.time_todo>=0)
 				{
-					gamecake.time_todo-=20;
+					gamecake.time_todo-=(1000/60);
 					gamecake.code.input.update();
 					game.update(gamecake,opts);
 				}

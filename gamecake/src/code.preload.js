@@ -91,7 +91,7 @@ self.img=function(name){
 	
 	self.get=function(scale){
 		if(scale==1) { return self.img; }
-//		if(scale==self.scale) { return self.$canvas.get(0); }
+		if(scale==self.scale) { return self.$canvas.get(0); }
 		
 		var gs=gamecake.scale;
 		var hx=self.img.width;
