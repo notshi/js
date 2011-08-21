@@ -89,7 +89,7 @@
 
 	us.clean=function()
 	{
-		us.tune.stop();
+		if(us.tune) { us.tune.stop(); }
 		
 		game.items.clean();
 		game.sled.clean();

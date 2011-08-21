@@ -148,8 +148,11 @@ gamecake.gfx.sheet=function(opts){
 					ox=Math.floor(ox/gs);
 					oy=Math.floor(oy/gs);
 //console.log(px+","+py+" : "+fx+","+fy+" : "+sx+","+sy);
-					gamecake.ctx.setTransform( 1,0  , 0,1 , px,py );
-					gamecake.ctx.drawImage(img , 0,0 , sx,sy , -ox,-oy , sx,sy);
+
+					var sn=Math.sin(Math.PI*self.rz/180);
+					var cs=Math.cos(Math.PI*self.rz/180);
+					gamecake.ctx.setTransform( cs,sn  , -sn,cs , px,py );
+					gamecake.ctx.drawImage(img , fx,fy , sx,sy , -ox,-oy , sx,sy);
 				}
 			}
 		}

@@ -9,7 +9,7 @@
 		us.data=[];
 		us.state="none";
 		
-		us.sheet_readme=gamecake.gfx.sheet({parent:game.sheet,px:0,py:0,sx:game.opts.width,sy:game.opts.height,url:gamecake.images["readme"].url});
+		us.sheet_readme=gamecake.gfx.sheet({parent:game.sheet,px:0,py:0,sx:game.opts.width,sy:game.opts.height,name:"readme"});
 		us.sheet=gamecake.gfx.sheet({parent:game.sheet,px:0,py:0,sx:game.opts.width,sy:game.opts.height});
 		
 		for(var t in game.ds )
@@ -19,12 +19,12 @@
 			var w=(game.opts.width/game.ds.length);
 			var px=t*w;
 			px=px+((w-40)/2);
-			var it=gamecake.gfx.sheet({auto:true,parent:us.sheet,px:px,py:py,sx:100,sy:100,sz:0.40,opacity:1,url:gamecake.images["d"+d].url});
+			var it=gamecake.gfx.sheet({auto:true,parent:us.sheet,px:px,py:py,sx:100,sy:100,sz:0.40,opacity:1,name:"d"+d});
 			it.fx=100*(d-1);
 			us["sheet_but"+d]=it;
 		}
 		
-		us.sheet_menu=gamecake.gfx.sheet({auto:true,parent:us.sheet,px:0,py:0,sx:game.opts.width,sy:game.opts.height,url:gamecake.images["menu"].url});
+		us.sheet_menu=gamecake.gfx.sheet({auto:true,parent:us.sheet,px:0,py:0,sx:game.opts.width,sy:game.opts.height,name:"menu"});
 				
 	};
 
@@ -45,7 +45,6 @@
 	{
 		idx=idx+1;
 		if(idx>65536) { idx=1; }
-//		us.sheet_but.url=gamecake.images["d10."+(1+(idx%10))].url;
 
 		if(game.dice.grab_menu)
 		{

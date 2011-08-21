@@ -155,7 +155,7 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 					
 					if(gamecake.sniff.idiot_device)
 					{
-						newscale=2;
+						newscale=4;
 					}
 					
 					if(gamecake.scale!=newscale)
@@ -181,7 +181,7 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 					
 					$this.empty(); // clean out anything the preload may have added
 						
-					gamecake.$canvas=$("<canvas></canvas>");
+					gamecake.$canvas=$("<canvas style='-webkit-transform: translateZ(0);' ></canvas>");
 					gamecake.$canvas.attr("width",game.opts.width/gamecake.scale);
 					gamecake.$canvas.attr("height",game.opts.height/gamecake.scale);
 					gamecake.$canvas.css("width",game.opts.width+"px");

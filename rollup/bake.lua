@@ -27,10 +27,10 @@ tab.cache_files={
 
 "jslib/jquery.min.js",
 
-{"out/rollup.html","rollup.html",},
-{"out/rollup.css","rollup.css",},
-{"out/rollup.min.js","rollup.min.js",},
-{"out/gamecake.min.js","gamecake.min.js",},
+"rollup.html",
+"rollup.css",
+"rollup.min.js",
+"gamecake.min.js",
 
 }
 
