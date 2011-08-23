@@ -151,6 +151,8 @@ gamecake.gfx.sheet=function(opts){
 
 					var sn=Math.sin(Math.PI*self.rz/180);
 					var cs=Math.cos(Math.PI*self.rz/180);
+					
+					gamecake.ctx.globalAlpha = self.opacity;
 					gamecake.ctx.setTransform( cs,sn  , -sn,cs , px,py );
 					gamecake.ctx.drawImage(img , fx,fy , sx,sy , -ox,-oy , sx,sy);
 				}
