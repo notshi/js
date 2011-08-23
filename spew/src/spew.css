@@ -1,0 +1,187 @@
+.wetspew * {
+border: 0 none;
+outline: 0;
+padding: 0;
+margin: 0;
+}
+.wetspew {
+  font-family: 'Bitstream Vera Sans', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  text-shadow: none;
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0em;
+  word-spacing: 0em;
+  line-height: 1.2;
+  word-wrap: break-word;
+}
+.wetspew a , .wetspew a:link , .wetspew a:visited	{text-decoration: none;}
+.wetspew a:hover , .wetspew a:focus		{text-decoration: underline;}
+
+.wetspew{
+	width: 960px;
+	height: 480px;
+	min-height: 480px;
+	position: relative;
+	margin: auto;
+	background-color: black;
+	color: white;
+	z-index:1;
+}
+
+.wetspew_login{
+	font-size:32px;
+	text-align:center;
+}
+.wetspew_login_name{
+	font-weight: bold;
+	display:block;
+	margin:8px;
+}
+.wetspew_login_buttons{
+	display:block;
+	margin:16px;
+}
+.wetspew_login_buttons a{
+	padding:4px;
+	border:4px solid #fff;
+	margin:32px;
+	cursor:pointer;
+}
+
+.wetspew_opts a{
+	display:block;
+	margin:4px;
+	cursor:pointer;
+	font-size:200%;
+}
+
+.wetspew_wetv , #wetspew_wetv_api{
+	width:640px;
+	height:480px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	bottom:0px;
+	overflow: hidden;
+}
+.wetspew_spew{
+	width:320px;
+ 	height:480px;
+	position:absolute;
+	right:0px;
+	top:0px;
+	bottom:0px;
+	overflow: hidden;
+}
+
+.wetspew a , .wetspew a:link , .wetspew a:visited , .wetspew a:hover , .wetspew a:focus {
+	color:inherit;
+}
+
+.wetspew_main {
+	width:100%;
+	overflow:hidden;
+	background-color:#000;
+	color:#fff;
+	border-top:1px solid #000;
+	border-bottom:1px solid #000;
+	position: absolute;
+	bottom:20px;
+	top: 10px;
+}
+.wetspew_help , .wetspew_chat , .wetspew_users , .wetspew_rooms , .wetspew_opts {
+	width:100%;
+	height:100%;
+	overflow-x:hidden;
+	overflow-y:scroll;
+	background-color:#000;
+	color:#fff;
+}
+
+.wetspew_help{
+	overflow-x:hidden;
+	overflow-y:hidden;
+}
+
+.wetspew_type {
+	width:100%;
+	height:20px;
+	position: absolute;
+	bottom:0px;
+}
+
+.wetspew_type form input {
+	background-color:#000;
+	color:#0f0;
+	border: 1px solid #0f0;
+	width: 99%;
+	left: 1px;
+	right: 1px;
+	top: 1px;
+	bottom: 1px;
+	position: absolute;
+	overflow:hidden;
+}
+.wetspew_tabs {
+	width: 100%;
+	height: 9px;
+	background-color: black;
+	color: white;
+	font-size: 8px;
+	font-weight: bold;
+	overflow: hidden;
+	min-height: 10px;
+	position: absolute;
+	top:0px;
+}
+
+.wetspew_tabs a {
+	background-color: #444;
+	color: black;
+	padding: 10px;
+	margin: 0 10px 0 0;
+	cursor: pointer;
+	line-height: 13px;
+}
+
+.wetspew_line {
+	position:relative;
+	clear:both;
+	margin-bottom:5px;
+}
+.wetspew_icon {
+	width:40px;
+	height:40px;
+	float:left;
+	margin-right:5px;
+}
+.wetspew_autoimg {
+	display:block;
+}
+.wetspew_name {
+	font-weight:bold;
+}
+.wetspew_gamename {
+	font-weight:bold;
+	display:block;
+}
+.wetspew_count {
+	float:right;
+	margin-left:10px;
+	margin-right:10px;
+	font-size:200%;
+}
+.wetspew_form {
+	float:right;
+	margin-left:10px;
+	margin-right:10px;
+	font-size:200%;
+}
+
+
+.hover{
+color:#fff;
+}
