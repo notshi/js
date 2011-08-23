@@ -78,16 +78,50 @@ self.img=function(name){
 	
 	self.img = new Image();
 	self.img.src = self.url;
-	
+	self.scale=-1;
+	self.time=0;
+
 	self.ready=function(){
 		if( (self.img.width>0) && (self.img.height>0) ) // if we have a size then it loaded ok
 		{
+			var now=(new Date()).getTime();
+			if(self.time==0) { self.time=now; }
+			if(self.time+500<(now))  // the browser lies, so wait awhile
+			{
+				return true;
+			}
 //			if(!self.said) { self.said=true; console.log("Loaded: "+self.url); }
-			return true;
+			return false;
 		}
 		return false;
 	}
 	
+	self.get=function(scale){
+//console.log("scaled "+name+" "+scale);
+		if(scale==1) { return self.img; }
+		if(scale==self.scale) { return self.$canvas.get(0); }
+		
+		var gs=gamecake.scale;
+		var hx=self.img.width;
+		var hy=self.img.height;
+
+		if(!self.$canvas) {
+			self.$canvas=$("<canvas></canvas>");
+		}
+		
+		
+		self.$canvas.attr("width",hx/gs);
+		self.$canvas.attr("height",hy/gs);
+		
+		self.ctx=self.$canvas.get(0).getContext("2d");
+		self.ctx.setTransform( 1/gs,0  , 0,1/gs , 0,0 );
+		self.ctx.drawImage(self.img , 0,0 , hx,hy , 0,0 , hx,hy);
+		
+		self.scale=scale;
+//console.log("scaled "+name+" "+scale);
+		return self.$canvas.get(0);
+	}
+
 	return self;
 };
 

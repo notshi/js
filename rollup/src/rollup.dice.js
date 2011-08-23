@@ -192,7 +192,7 @@
 		it.fval=0;
 		it.val=1+(Math.floor(it.fval)%it.numsides);
 
-		it.sheet=gamecake.gfx.sheet({auto:true,parent:us.sheet,px:it.px,py:it.py,ox:50,oy:50,sx:100,sy:100,sz:1.0,url:gamecake.images["d"+it.numsides].url});
+		it.sheet=gamecake.gfx.sheet({auto:true,parent:us.sheet,px:it.px,py:it.py,ox:50,oy:50,sx:100,sy:100,sz:1.0,name:"d"+it.numsides});
 		it.sheet.fx=100*(it.numsides-1);
 		it.sheet.fy=0;
 		
@@ -304,7 +304,7 @@
 			
 			it.val=1+(Math.floor(it.fval)%it.numsides);
 			
-			it.sheet.url=gamecake.images["d"+it.numsides].url;
+			it.sheet.name="d"+it.numsides;
 			it.sheet.fx=(it.val-1)*100;
 			it.sheet.fy=0;
 			

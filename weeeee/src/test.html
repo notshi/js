@@ -45,9 +45,9 @@ background:#000;
 window.SM2_DEFER = true;
 
 head.js(
+//"jslib/excanvas.js",
 "jslib/jquery.js",
-"jslib/soundmanager2.js",
-
+"jslib/soundmanager2-nodebug.js",
 "js/gamecake/code.js",
 "js/gamecake/code.input.js",
 "js/gamecake/code.preload.js",
@@ -61,8 +61,6 @@ head.js(
 "js/gamecake/sfx.js",
 "js/gamecake/sfx.audio.js",
 
-"bookmark_bubble.js",
-
 "weeeee.code.js",
 "weeeee.splash.js",
 "weeeee.play.js",
@@ -75,7 +73,7 @@ head.ready(function(){
 
 	$(function(){
 		
-		$(".weeeee").gamecake({game:weeeee,art:"",cachebreak:"?v1",render:"dhtml"});
+		$(".weeeee").gamecake({game:weeeee,art:"",cachebreak:"?v1",render:"canvas"});
 	});
 
 

@@ -1,4 +1,7 @@
 //code
+
+var global = global || window; // in case we move outside of the browser
+
 gamecake={}; // a global place to keep our cake
 
 gamecake.code={};
@@ -43,12 +46,15 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 		
 		gamecake.opts=opts;
 		gamecake.game=opts.game;
+		gamecake.scale=1;
+		if(gamecake.sniff.idiot_device) { gamecake.scale=2; } // rescale it and it will go faster
 		
 		return this.each(function() {
 			var game=opts.game;
 			var $this = $(this);
 			game.$this=$this;
 			game.zoom=1;
+
 			
 			$this.css("width",game.opts.width+"px");
 			$this.css("height",game.opts.height+"px");
@@ -76,13 +82,13 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 
 			var requestAnimationFrame = (function(){
 // it may be nice to use these, but they seem to degrade performance...
-/*			  return  window.requestAnimationFrame       || 
+			  return  window.requestAnimationFrame       || 
 					  window.webkitRequestAnimationFrame || 
 					  window.mozRequestAnimationFrame    || 
 					  window.oRequestAnimationFrame      || 
-					  window.msRequestAnimationFrame     || */
-					  return function(callback,element){
-						  window.setTimeout(callback, 1000 / 50);
+					  window.msRequestAnimationFrame     ||
+					  function(callback,element){
+						  window.setTimeout(callback, 1000 / 60);
 					  };
 			})();
     
@@ -100,44 +106,68 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 			window.soundManager.beginDelayedInit(); // start SM2 init.
     
     
+			gamecake.time_todo=0;
+			gamecake.time_last=0;
+					
 			update=function() {
 	   			requestAnimationFrame(update); // we need to always ask to be called again
 				
 				gamecake.ticks++;
-				
+				var now=(new Date()).getTime();
+
+								
+//				game.opts.width=160;
+//				game.opts.height=120;
+
 // magic scale, this seems to cause slowdown sometimes?
 				var p=game.$this.parent();
 				var pw=p.width();
 				var ph=p.height();
 				var z=(pw/game.opts.width);
 				if( (z*game.opts.height) > ph ) { z=(ph/game.opts.height); }
+//				if(gamecake.sniff.idiot_device) { z=1; }
+//z=1;
+				var dx=Math.floor(game.opts.width*z);
+				var dy=Math.floor(game.opts.height*z);
 
-				var bx=Math.floor((pw-(game.opts.width))/2);
-				var by=Math.floor((ph-(game.opts.height))/2);
-
-				var ox=Math.floor((pw-(game.opts.width*z))/(2*z));
-				var oy=Math.floor((ph-(game.opts.height*z))/(2*z));
+				var ox=Math.floor((pw-(dx))/(2));
+				var oy=Math.floor((ph-(dy))/(2));
 				game.$this.css("position","absolute");
 				
-				var donezoom=false;
-				if(gamecake.sniff.webkit) // only seems safe in webkit, 
+				if(gamecake.$canvas) // can only adjust if it exists
 				{
-					if('zoom' in document.body.style)
+//							gamecake.$canvas.attr("width",game.opts.width);
+//							gamecake.$canvas.attr("height",game.opts.height); // the render size
+					
+					gamecake.$canvas.css("width",dx+"px");
+					gamecake.$canvas.css("height",dy+"px");
+					
+					game.$this.css("left",ox+"px"); // just try and position it
+					game.$this.css("top",oy+"px");
+					game.$this.css("width",dx+"px");
+					game.$this.css("height",dy+"px");
+					
+					var newscale=1;
+					if(z<=0.5)
 					{
-						game.$this.css("left",ox+"px"); // this works for most browsers
-						game.$this.css("top",oy+"px");
-						game.$this.css("zoom",z);
-						game.zoom=z;
-						donezoom=true;
+						newscale=2;
 					}
+					
+					if(gamecake.sniff.idiot_device)
+					{
+						newscale=4;
+					}
+					
+					if(gamecake.scale!=newscale)
+					{
+						gamecake.scale=newscale;
+						gamecake.$canvas.attr("width",Math.floor(game.opts.width/gamecake.scale));
+						gamecake.$canvas.attr("height",Math.floor(game.opts.height/gamecake.scale));
+					}
+			
+					game.zoom=z;
 				}
-				
-				if(!donezoom) // no zoom
-				{
-						game.$this.css("left",bx+"px"); // just try and position it
-						game.$this.css("top",by+"px");
-				}
-				
+
 				if( ! gamecake.code.preload.check(game) ) {
 					if(game.preload) { game.preload(gamecake,opts); } // optional preload update
 					else { $this.html("<h1>Loading "+gamecake.code.preload.progress_percent+"%</h1>"); }
@@ -151,34 +181,32 @@ if( gamecake.sniff.idiot_phone || gamecake.sniff.idiot_pad || gamecake.sniff.idi
 					
 					$this.empty(); // clean out anything the preload may have added
 						
-					switch(gamecake.opts.render)
-					{
-						case "canvas":
-							gamecake.$canvas=$("<canvas></canvas>");
-							gamecake.$canvas.attr("width",game.opts.width);
-							gamecake.$canvas.attr("height",game.opts.height);
-							gamecake.$canvas.css("width",game.opts.width+"px");
-							gamecake.$canvas.css("height",game.opts.height+"px");
-							$this.append( gamecake.$canvas ); // create canvas
-							
-							gamecake.ctx=gamecake.$canvas.get(0).getContext("2d"); // this is what we draw on
-
-						break;
-						default:
-						case "dhtml":
-						
-							$this.append( game.sheet.div ); // and display it
-							
-						break;
-					}
+					gamecake.$canvas=$("<canvas style='-webkit-transform: translateZ(0);' ></canvas>");
+					gamecake.$canvas.attr("width",game.opts.width/gamecake.scale);
+					gamecake.$canvas.attr("height",game.opts.height/gamecake.scale);
+					gamecake.$canvas.css("width",game.opts.width+"px");
+					gamecake.$canvas.css("height",game.opts.height+"px");
+					$this.append( gamecake.$canvas ); // create canvas
+					
+					gamecake.ctx=gamecake.$canvas.get(0).getContext("2d"); // this is what we draw on
 
 					gamecake.state=game.setup(gamecake,opts);
+					gamecake.time_todo=0;
+					gamecake.time_last=now;
 				} // setup after preload
-								
-				gamecake.code.input.update();
-				game.update(gamecake,opts);
+				
+				gamecake.time_todo+=(now-gamecake.time_last);
+				if(gamecake.time_todo > 200) { gamecake.time_todo=200; }
+				
+				while(gamecake.time_todo>=0)
+				{
+					gamecake.time_todo-=(1000/60);
+					gamecake.code.input.update();
+					game.update(gamecake,opts);
+				}
 				game.draw(gamecake,opts);
 				
+				gamecake.time_last=now;
 			};
    			update(); // and must start the upadates
 		});
