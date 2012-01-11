@@ -13,6 +13,7 @@
 		spew.opts["full_size"]=false;
 		spew.opts["chat_only"]=false;
 		spew.opts["cmdlog"]=[];
+		spew.opts["tv"]=true;
 	}
 	spew.reset_opts();
 	for(i in opts) { spew.opts[i]=opts[i]; } // override opts
@@ -100,8 +101,10 @@
 			s+=" .wetspew_wetv , #wetspew_wetv { width:67%; height:100%; } ";
 			s+=" .wetspew_spew { width:33%; height:100%; } ";
 		}
+		spew.opts.tv=true;
 		if(spew.opts.chat_only || spew.opts.ipod_chat)
 		{
+			spew.opts.tv=false;
 			s+=" .wetspew_wetv , #wetspew_wetv { display:none; } ";
 			s+=" .wetspew_spew { width:100%; height:100%; } ";
 		}

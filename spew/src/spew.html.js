@@ -34,6 +34,7 @@
 		if(tab=="fix")
 		{
 			spew.ytapi=undefined;
+			spew.ytapi_count=9999;
 			$("#wetspew_wetv").empty();
 			
 			return false;
@@ -425,52 +426,57 @@ spew.div_wetv.append($('<video style="width:100%;height:100%;" '+
 	
 
 	spew.update=function(){
-		if(!spew.ytapi) // reload youtube if it fails
+		spew.ytapi_count++;
+//console.log(spew.ytapi_count);
+		if( spew.opts.tv ) // tv must be enabled
 		{
-/*
-			var params = { allowScriptAccess: "always" , allowFullScreen:"true" , wmode:"transparent" };
-			var atts = { id: "wetspew_wetv_api" };
-			swfobject.embedSWF("http://www.youtube.com/v/ILN7jTJdn5U?rel=0&fs=1&autoplay=0&autohide=1&controls=1&enablejsapi=1&playerapiid=wetspew_wetv_api",
-							   "wetspew_wetv", "640", "480", "8", null, null, params, atts);
-							   
-			spew.ytapi=$("#wetspew_wetv_api")[0];
-*/
-//		spew.ytapi = undefined;
-		new YT.Player('wetspew_wetv', {
-			width: '640',
-			height: '480',
-			videoId: 'ILN7jTJdn5U',
-			events: {
-			'onReady': function(event) {
-					spew.ytapi=event.target;
-					spew.send_msg({cmd:"game",gcmd:"wetv",wetv:"ready"}); // get current vid
-				},
-			'onStateChange': function(event) {
-					if (event.data == YT.PlayerState.ENDED )
-					{
-						spew.send_msg({cmd:"game",gcmd:"wetv",wetv:"info"}); // this tells the server to play next vid
-					}
-				}
-			}
-		});
-        
-        
-		}
-		else
-		{
-			if(spew.ytapi.setSize && !spew.ytapi_ready )
+			if(!spew.ytapi) // reload youtube if it fails
 			{
-				spew.ytapi_ready=true;
-//				spew.ytapi.setSize(640,480);
-//				spew.ytapi.loadVideoById("ylLzyHk54Z0");
-				if(spew.nextqvid)
+				if( spew.ytapi_count>5 ) // wait a while between retrys
 				{
-					spew.ytapi.loadVideoById(spew.nextqvid.vid,spew.nextqvid.num);
+					spew.ytapi_count=0;
+
+					new YT.Player('wetspew_wetv', {
+						width: '640',
+						height: '480',
+						videoId: 'ILN7jTJdn5U',
+						events: {
+						'onReady': function(event) {
+								spew.ytapi=event.target;
+								spew.send_msg({cmd:"game",gcmd:"wetv",wetv:"ready"}); // get current vid
+							},
+						'onStateChange': function(event) {
+								if (event.data == YT.PlayerState.ENDED )
+								{
+									spew.send_msg({cmd:"game",gcmd:"wetv",wetv:"info"}); // this tells the server to play next vid
+								}
+							}
+						}
+					});
 				}
-				spew.nextqvid=undefined;
+			}
+			else
+			{
+				if(spew.ytapi.setSize && !spew.ytapi_ready )
+				{
+					spew.ytapi_ready=true;
+	//				spew.ytapi.setSize(640,480);
+	//				spew.ytapi.loadVideoById("ylLzyHk54Z0");
+					if(spew.nextqvid)
+					{
+						spew.ytapi.loadVideoById(spew.nextqvid.vid,spew.nextqvid.num);
+					}
+					spew.nextqvid=undefined;
+				}
 			}
 		}
-						
+		else // unload tv
+		{
+			spew.ytapi=undefined;
+			spew.ytapi_count=9999;
+			$("#wetspew_wetv").empty();
+		}
+		
 		if(spew.sticky_bottom)
 		{
 			spew.div_chat[0].scrollTop = spew.div_chat[0].scrollHeight; // scroll to bottom
