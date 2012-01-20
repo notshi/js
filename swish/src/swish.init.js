@@ -14,10 +14,16 @@ Swish=function(){
 	
 	self.setup=function(opts)
 	{
+		self.x=0;
+		self.destx=0;
 		
 		self.back=$("<div class=\"swish_back\"></div>");
 		self.front=$("<div class=\"swish_front\"></div>");
+		self.over=$("<div class=\"swish_over\"></div>");
 		
+		self.div=opts.div;
+		
+		opts.div.prepend(self.over);
 		opts.div.prepend(self.front);
 		opts.div.prepend(self.back);
 		
@@ -41,15 +47,16 @@ Swish=function(){
 					{
 						
 						self.back.css("backgroundImage",self.front.css("backgroundImage"));
-//						self.front.css("opacity",0);
-						self.front.hide();
+						
+						self.front.hide(0,function(){
+							self.front.css("backgroundImage","url("+self.show_next+")");
+							self.front.fadeIn(3000);
+//							self.front.slideDown(3000);
+//							self.front.show(3000);
+//							self.front.animate({opacity:1}, 4000 );
+						});
 
-						self.front.css("backgroundImage","url("+self.show_next+")");
 					
-//						self.front.show("slow");
-//						self.front.slideDown("slow");
-						self.front.fadeIn("slow");
-//						self.front.animate({opacity:1}, 4000 );
 
 
 //console.log("animate in");
@@ -70,12 +77,21 @@ Swish=function(){
 				
 				if(v)
 				{
-					self.show(v.full);
+					self.show(v.full,self.index);
 				}
 				
 				self.index++;
 				self.next_time=t+10; // every 10 secs
 			}		
+
+			if(self.x!=self.destx)
+			{
+				self.x=self.destx;
+				self.strip_icons.stop(true,true);
+//console.log("animate:"+self.x)
+				self.strip_icons.animate({"left":self.x},500);
+			}
+
 
 		};
 		
@@ -89,22 +105,79 @@ Swish=function(){
 		self.start_time=self.time();
 		self.next_time=self.start_time;
 		self.index=0;
+				
+		self.setup_strip();
 		
 		self.update();
 
 		return self;
 	};
 	
-	self.show=function(url){
+	self.show=function(url,idx){
+		
+		idx=Math.floor(idx); // must be number
+			
 //console.log("show "+url);
 		self.show_next=url;
 		self.preload.add_image(url);
+		
+		if(idx!=undefined)
+		{
+			self.destx=(self.back.width()/2)-75-((idx)*130);
+		}
 	};
 	
 	self.time=function(){
 		return (new Date).getTime()/1000;
 	};
 	
+	self.setup_strip=function()
+	{
+		self.over.empty();
+		self.strip=$("<div class=\"swish_strip\"></div>");
+		self.strip_icons=$("<div class=\"swish_icons\"></div>");
+		self.over.append(self.strip);
+		self.strip.append(self.strip_icons);
+		
+		self.icons=[];		
+		var x=10
+		for(i in self.testdata.list)
+		{
+			var v=self.testdata.list[i];
+			if(v)
+			{
+				var it={};
+				self.icons[i]=it;
+				
+				it.dat=v;
+				it.div=$("<div class=\"swish_icon\"></div>");
+				it.idx=i;
+				
+				self.strip_icons.append(it.div);
+				
+				it.div.css("backgroundImage","url("+it.dat.icon+")");
+				
+				it.div.css("left",x+"px");
+				it.x=x;
+				
+				x+=130;
+				
+				it.div.click(it,function(e){
+					var it=e.data;
+	//console.log(it.idx);
+					self.index=it.idx;
+					self.next_time=self.start_time;
+				});
+			}
+			
+			self.strip_icons.css({"left":self.back.width()});
+
+		}
+
+		
+		
+	};
+
 	return self;
 };
 

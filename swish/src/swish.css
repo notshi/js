@@ -5,7 +5,7 @@ padding: 0;
 margin: 0;
 }
 
-.swish_front , .swish_back{
+.swish_front , .swish_back , .swish_over {
 	position:absolute;
 	top:0px;
 	left:0px;
@@ -14,8 +14,40 @@ margin: 0;
 	background-size: cover;
 	background-position: center;
 	background-color:#000;
+	overflow:hidden;
 }
 .swish_back {
 }
 .swish_front {
 }
+.swish_over {
+	background-color:transparent;
+}
+
+.swish_strip {
+	position:absolute;
+	height:110px;
+	width:100%;
+	bottom:0px;
+	left:0px;
+	background-color:#000;
+}
+
+.swish_icons{
+
+	position:absolute;
+	height:110px;
+}
+
+.swish_icon{
+
+	position:absolute;
+	height:90px;
+	width:120px;
+	top:10px;
+
+	background-size: cover;
+	background-position: center;
+	cursor:pointer;
+}
+
