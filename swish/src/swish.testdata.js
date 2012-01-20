@@ -6,7 +6,6 @@ var modules=modules || {};
 	if(modules["swish.testdata"]) { return modules["swish.testdata"]; }
 	var self={};
 	modules["swish.testdata"]=self;	
-	Swish().testdata=self;
 
 self["list"]=[
         {

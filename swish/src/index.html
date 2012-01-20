@@ -36,14 +36,16 @@ background:#000;
 
 head.js(
 "jslib/jquery.js",
+"swish.testdata.js",
 "swish.js");
+
 
 
 head.ready(function(){
 	
 	$(function(){
 //		Swish().setup({div:$(".swish_this")});
-		Swish().setup({div:$("html")});
+		Swish().setup({div:$("html"),list:modules["swish.testdata"].list});
 	});
 
 });

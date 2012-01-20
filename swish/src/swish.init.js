@@ -14,6 +14,8 @@ Swish=function(){
 	
 	self.setup=function(opts)
 	{
+		self.list=opts.list;
+		
 		self.x=0;
 		self.destx=0;
 		
@@ -69,11 +71,12 @@ Swish=function(){
 //if(!r){console.log("check "+self.preload.progress_percent);}
 
 			var t=self.time();
+			
 			if( t >= self.next_time )
 			{
-				var v=self.testdata.list[self.index];
+				var v=self.list[self.index];
 				if(!v) {self.index=0;} // try and wrap
-				v=self.testdata.list[self.index];
+				v=self.list[self.index];
 				
 				if(v)
 				{
@@ -93,14 +96,29 @@ Swish=function(){
 			}
 
 
+			var d=t-self.touched;
+			
+//console.log(t+" "+self.touched+" "+d);
+			if(d<13)
+			{
+				if(!self.strip_visible)
+				{
+					self.strip.animate({bottom:0},500);
+					self.strip_visible=true;
+				}
+			}
+			else
+			{
+				if(self.strip_visible)
+				{
+					self.strip.animate({bottom:-110},1000);
+					self.strip_visible=false;
+				}
+			}
+
 		};
 		
-/*		for(i in self.testdata.list)
-		{
-			var v=self.testdata.list[i];
-			self.preload.add_image(v.full);
-		}
-*/
+		self.strip_visible=false;
 		
 		self.start_time=self.time();
 		self.next_time=self.start_time;
@@ -108,11 +126,19 @@ Swish=function(){
 				
 		self.setup_strip();
 		
+		$("html").mousemove(self.touch);
+		$("body").bind("touchmove", self.touch);
+		self.touch();
+
 		self.update();
 
 		return self;
 	};
 	
+	self.touch=function(){
+		self.touched=self.time();
+	};
+
 	self.show=function(url,idx){
 		
 		idx=Math.floor(idx); // must be number
@@ -141,9 +167,9 @@ Swish=function(){
 		
 		self.icons=[];		
 		var x=10
-		for(i in self.testdata.list)
+		for(i in self.list)
 		{
-			var v=self.testdata.list[i];
+			var v=self.list[i];
 			if(v)
 			{
 				var it={};
