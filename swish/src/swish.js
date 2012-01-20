@@ -1,19 +1,21 @@
 
 Swish=function(opts){
 
-	var storage_available=typeof window.localStorage!=='undefined';
-	var json_available=typeof window.JSON!=='undefined';
-	
 	var swish={};
-	
 	
 	swish.setup=function(opts)
 	{
 		
-//		opts.div.css("height","200px");
+		var v=swish.testdata.list[10];
+
+console.log(v.full);
+		
+		opts.div.css({"backgroundImage":"url("+v.full+")","backgroundSize":"cover","backgroundPosition":"center"});
 		
 	};
 
-		
+swish.testdata=
+#include "src/swish.testdata.js"
+;
 	return swish;
 };
