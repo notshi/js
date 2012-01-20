@@ -28,7 +28,7 @@ background:#000;
  </head> 
 <body >
 
-<div class="swishthis" style="width:640px;height:480px;"></div>
+<div class="swish_this" style="width:640px;height:480px;position:relative;background:transparent;"></div>
 
 <script type="text/javascript">
 
@@ -41,7 +41,7 @@ head.ready(function(){
 	
 	$(function(){
 	
-		var opts={div:$(".swishthis"),host:"spew.wetgenes.com",art:"",cachebreak:"?v1"};
+		var opts={div:$(".swish_this"),host:"spew.wetgenes.com",art:"",cachebreak:"?v1"};
 		var swish=Swish(opts).setup(opts);
 
 	});
