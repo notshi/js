@@ -20,13 +20,6 @@ Swish=function(){
 		
 		opts.div.prepend(self.front);
 		opts.div.prepend(self.back);
-
-		
-		var v=self.testdata.list[10];
-		self.back.css({"backgroundImage":"url("+v.full+")"});
-		
-		var v=self.testdata.list[11];
-		self.front.css({"backgroundImage":"url("+v.full+")"});
 		
 		self.requestAnimationFrame = (function(){
 // sadly requestAnimationFrame is useless if you actually care about real-time
@@ -40,21 +33,78 @@ Swish=function(){
 		self.update=function() {
 			self.requestAnimationFrame(self.update); // we need to always ask to be called again
 
-			var r=self.preload.check();
+			if( self.preload.check() )
+			{
+				if(! self.front.is(':animated') ) // animation must finish
+				{
+					if(self.show_next)
+					{
+						
+						self.back.css("backgroundImage",self.front.css("backgroundImage"));
+//						self.front.css("opacity",0);
+						self.front.hide();
+
+						self.front.css("backgroundImage","url("+self.show_next+")");
+					
+//						self.front.show("slow");
+//						self.front.slideDown("slow");
+						self.front.fadeIn("slow");
+//						self.front.animate({opacity:1}, 4000 );
+
+
+//console.log("animate in");
+	  
+						self.show_next=undefined;
+					}
+				}
+			}
 			
-if(!r){console.log("check "+self.preload.progress_percent);}
+//if(!r){console.log("check "+self.preload.progress_percent);}
+
+			var t=self.time();
+			if( t >= self.next_time )
+			{
+				var v=self.testdata.list[self.index];
+				if(!v) {self.index=0;} // try and wrap
+				v=self.testdata.list[self.index];
+				
+				if(v)
+				{
+					self.show(v.full);
+				}
+				
+				self.index++;
+				self.next_time=t+10; // every 10 secs
+			}		
 
 		};
 		
-		for(i in self.testdata.list)
+/*		for(i in self.testdata.list)
 		{
 			var v=self.testdata.list[i];
 			self.preload.add_image(v.full);
 		}
-		self.update();
+*/
 		
+		self.start_time=self.time();
+		self.next_time=self.start_time;
+		self.index=0;
+		
+		self.update();
+
 		return self;
 	};
+	
+	self.show=function(url){
+//console.log("show "+url);
+		self.show_next=url;
+		self.preload.add_image(url);
+	};
+	
+	self.time=function(){
+		return (new Date).getTime()/1000;
+	};
+	
 	return self;
 };
 

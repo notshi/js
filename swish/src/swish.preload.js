@@ -86,7 +86,7 @@ self.img=function(name){
 			if(item.time+500<(now))  // the browser lies, so wait awhile
 			{
 
-if(!item.said) { item.said=true; console.log("Loaded: "+item.url); }
+//if(!item.said) { item.said=true; console.log("Loaded: "+item.url); }
 
 				item.already=true;
 				return true;
