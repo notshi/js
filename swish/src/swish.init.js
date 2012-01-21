@@ -48,14 +48,13 @@ Swish=function(){
 					if(self.show_next)
 					{
 						// hide front layer
-						self.front.hide(0,function(){ 
+						self.front.hide(250,function(){ 
 							// change front image
 							self.front.css("backgroundImage","url("+self.show_next+")");
 							// fade it in slowly
 							self.front.fadeIn(3000,function(){
 								// copy front image to back layer
 								self.back.css("backgroundImage",self.front.css("backgroundImage"));
-								self.front.hide(100);
 							});
 							if( self.show_text && (self.show_text!="") )
 							{
