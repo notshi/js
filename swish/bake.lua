@@ -14,7 +14,6 @@ tab.cache_files={
 "swish.html",
 "swish.css",
 "swish.min.js",
-"gamecake.min.js",
 
 }
 

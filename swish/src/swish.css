@@ -31,6 +31,7 @@ margin: 0;
 	bottom:-110px;
 	left:0px;
 	background-color:#000;
+	overflow:visible;
 }
 
 .swish_icons{
@@ -38,6 +39,29 @@ margin: 0;
 	position:absolute;
 	height:110px;
 }
+
+.swish_title{
+	position:absolute;
+	bottom:110px;
+	max-width:320px;
+	font-size:24px;
+	padding:8px 16px 8px 16px;
+	font-family: Verdana, Geneva, sans-serif;
+	text-shadow: 1px 1px 1px #000;
+	background-color:rgba(0,0,0,0.25);
+	border-radius: 16px;
+	color: #fff;
+	margin: 8px;
+}
+
+.swish_title A:link , .swish_title A:visited , .swish_title A:active , .swish_title A:hover{
+
+	text-decoration: inherit;
+	color:inherit;
+
+}
+
+
 
 .swish_icon{
 

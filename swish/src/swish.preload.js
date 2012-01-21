@@ -79,19 +79,23 @@ self.img=function(name){
 	item.ready=function(){
 		if(item.already) { return true; } // fast short circuit
 		
-		if( (item.img.width>0) && (item.img.height>0) ) // if we have a size then it loaded ok
+		if(
+				(item.img.complete) &&
+				(typeof item.img.naturalWidth != "undefined") &&
+				(item.img.naturalWidth != 0)
+		  )
 		{
-			var now=(new Date()).getTime();
-			if(item.time==0) { item.time=now; }
-			if(item.time+500<(now))  // the browser lies, so wait awhile
-			{
+//			var now=(new Date()).getTime();
+//			if(item.time==0) { item.time=now; }
+//			if(item.time+500<(now))  // the browser lies, so wait awhile
+//			{
 
 //if(!item.said) { item.said=true; console.log("Loaded: "+item.url); }
 
 				item.already=true;
 				return true;
-			}
-			return false;
+//			}
+//			return false;
 		}
 		return false;
 	}

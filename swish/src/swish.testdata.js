@@ -15,7 +15,8 @@ self["list"]=[
             "height": 958,
             "iwidth": 334,
             "iheight": 200,
-            "title": ""
+            "title": "Test 123",
+            "link": "http://google.com/"
         },
         {
             "full": "https://lh3.googleusercontent.com/-NI_huhkGxXc/TrmeWHy5VJI/AAAAAAAAABQ/CHjYJbVV1MM/s0/Grapevine-web.jpg",
@@ -24,7 +25,8 @@ self["list"]=[
             "height": 336,
             "iwidth": 952,
             "iheight": 200,
-            "title": ""
+            "title": "OK part 2",
+            "link": "http://appspot.com/"
         },
         {
             "full": "https://lh4.googleusercontent.com/-rwJJO5sqH6Y/TrmeZH9apkI/AAAAAAAAABU/j7SD3QM5EGo/s0/Cook%25252C%252520before.jpg",
@@ -33,7 +35,7 @@ self["list"]=[
             "height": 958,
             "iwidth": 334,
             "iheight": 200,
-            "title": ""
+            "title": "this is not a test"
         },
         {
             "full": "https://lh4.googleusercontent.com/-Ispe-FgEYko/TrmebxznUCI/AAAAAAAAABY/VAa26rqTcnU/s0/Cook%25252C%252520after.jpg",
@@ -42,7 +44,7 @@ self["list"]=[
             "height": 958,
             "iwidth": 334,
             "iheight": 200,
-            "title": ""
+            "title": "this is a test"
         },
         {
             "full": "https://lh4.googleusercontent.com/-0_EzWwxeIC4/TrmeeIq2YDI/AAAAAAAAABc/ewDqh9DUphk/s0/IMAG0009.jpg",
@@ -51,7 +53,7 @@ self["list"]=[
             "height": 1600,
             "iwidth": 119,
             "iheight": 200,
-            "title": ""
+            "title": "ignore this test"
         },
         {
             "full": "https://lh5.googleusercontent.com/-wXuOd4as5B0/TrmegnnhCuI/AAAAAAAAABg/CmYNZPGOu3c/s0/IMAG0010.jpg",

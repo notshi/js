@@ -28,22 +28,20 @@ background:#000;
  </head> 
 <body >
 
-<div class="swishthis"></div>
 
 <script type="text/javascript">
 
 head.js(
 "jslib/jquery.js",
 "swish.testdata.js",
-"swish.js");
+"swish.min.js");
 
 
 head.ready(function(){
 	
 	$(function(){
 	
-		var opts={div:$(".swishthis"),host:"spew.wetgenes.com",art:"",cachebreak:"?v1"};
-		var swish=Swish(opts).setup(opts);
+		Swish().setup({div:$("html"),list:modules["swish.testdata"].list});
 
 	});
 

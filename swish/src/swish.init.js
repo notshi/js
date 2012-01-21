@@ -41,28 +41,43 @@ Swish=function(){
 		self.update=function() {
 			self.requestAnimationFrame(self.update); // we need to always ask to be called again
 
-			if( self.preload.check() )
+			if( self.preload.check() ) // make sure preload has worked
 			{
 				if(! self.front.is(':animated') ) // animation must finish
 				{
 					if(self.show_next)
 					{
-						
-						self.back.css("backgroundImage",self.front.css("backgroundImage"));
-						
-						self.front.hide(0,function(){
+						// hide front layer
+						self.front.hide(0,function(){ 
+							// change front image
 							self.front.css("backgroundImage","url("+self.show_next+")");
-							self.front.fadeIn(3000);
-//							self.front.slideDown(3000);
-//							self.front.show(3000);
-//							self.front.animate({opacity:1}, 4000 );
+							// fade it in slowly
+							self.front.fadeIn(3000,function(){
+								// copy front image to back layer
+								self.back.css("backgroundImage",self.front.css("backgroundImage"));
+								
+							});
+							if( self.show_text && (self.show_text!="") )
+							{
+								self.title.fadeOut(1000,function(){
+									if( self.show_link && (self.show_link!="") )
+									{
+										self.title.html("<a href=\""+self.show_link+"\">"+self.show_text+"</a>");
+									}
+									else
+									{
+										self.title.html(self.show_text);
+									}
+									self.title.fadeIn(1000);
+								});
+							}
+							else // just hide
+							{
+								self.title.fadeOut(1000);
+							}
 						});
 
-					
-
-
 //console.log("animate in");
-	  
 						self.show_next=undefined;
 					}
 				}
@@ -149,7 +164,11 @@ Swish=function(){
 		
 		if(idx!=undefined)
 		{
-			self.destx=(self.back.width()/2)-75-((idx)*130);
+			var v=self.list[idx];
+			
+			self.destx=(self.back.width()/2)-75-((idx)*130);			
+			self.show_text=v.title;
+			self.show_link=v.link;
 		}
 	};
 	
@@ -160,9 +179,11 @@ Swish=function(){
 	self.setup_strip=function()
 	{
 		self.over.empty();
+		self.title=$("<div class=\"swish_title\"></div>");
 		self.strip=$("<div class=\"swish_strip\"></div>");
 		self.strip_icons=$("<div class=\"swish_icons\"></div>");
 		self.over.append(self.strip);
+		self.strip.append(self.title);
 		self.strip.append(self.strip_icons);
 		
 		self.icons=[];		
