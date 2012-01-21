@@ -55,7 +55,7 @@ Swish=function(){
 							self.front.fadeIn(3000,function(){
 								// copy front image to back layer
 								self.back.css("backgroundImage",self.front.css("backgroundImage"));
-								
+								self.front.hide(100);
 							});
 							if( self.show_text && (self.show_text!="") )
 							{
