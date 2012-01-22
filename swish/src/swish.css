@@ -15,6 +15,7 @@ margin: 0;
 	background-position: center;
 	background-color:#000;
 	overflow:hidden;
+	background-repeat:no-repeat;
 }
 .swish_back {
 }

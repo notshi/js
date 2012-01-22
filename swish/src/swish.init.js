@@ -47,14 +47,16 @@ Swish=function(){
 				{
 					if(self.show_next)
 					{
+						self.show_now=self.show_next;
 						// hide front layer
-						self.front.hide(250,function(){ 
+						self.front.fadeOut(250,function(){ 
 							// change front image
-							self.front.css("backgroundImage","url("+self.show_next+")");
+							self.front.css("backgroundImage","url("+self.show_now+")");
 							// fade it in slowly
 							self.front.fadeIn(3000,function(){
 								// copy front image to back layer
 								self.back.css("backgroundImage",self.front.css("backgroundImage"));
+								self.front.fadeOut(250);
 							});
 							if( self.show_text && (self.show_text!="") )
 							{
