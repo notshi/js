@@ -37,6 +37,13 @@ head.js(
 "swish.min.js");
 
 
+
+if(navigator.appVersion.indexOf("MSIE") != -1){
+head.js("http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js",
+function(){CFInstall.check({});});
+}
+
+
 head.ready(function(){
 	
 	$(function(){
