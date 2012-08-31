@@ -243,7 +243,9 @@
 			spew.display_note("Congratulations websockets are working and you have connected to "+spew.server_address);
 			spew.display_note("You will need to /LOGIN NAME PASS (no password needed for guest logins).")
 
-			var hash=window.location.href.split("#")[1]; // auto connect to this room
+			var hash=window.location.href.split("#")[1]; // auto connect to this room?
+			if(spew.opts.hash) { hash=spew.opts.hash; } // overide
+			
 			spew.send_msg({cmd:"note",note:"playing",arg1:"wetv",arg2:"",arg3:"",arg4:"",hash:hash});
 			
 			if(spew.opts["S"])

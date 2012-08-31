@@ -35,7 +35,7 @@
 		{
 			spew.ytapi=undefined;
 			spew.ytapi_count=9999;
-			$("#wetspew_wetv").empty();
+			$("#wetspew_wetv").replaceWith("<div class=\"wetspew_wetv\" id=\"wetspew_wetv\" ></div>");
 			
 			return false;
 //			spew.send_msg(spew.cmd_to_msg("/users"));
@@ -474,7 +474,7 @@ spew.div_wetv.append($('<video style="width:100%;height:100%;" '+
 		{
 			spew.ytapi=undefined;
 			spew.ytapi_count=9999;
-			$("#wetspew_wetv").empty();
+			$("#wetspew_wetv").replaceWith("<div class=\"wetspew_wetv\" id=\"wetspew_wetv\" ></div>");
 		}
 		
 		if(spew.sticky_bottom)
