@@ -1,5 +1,5 @@
 
-	var opts_save={"show_icons":true,"show_imgs":true,"small_font":true,"full_size":true,"chat_only":true,"ipod_chat":true};
+	var opts_save={"show_icons":true,"show_imgs":true,"small_font":true,"full_size":true,"chat_only":true,"big_text":true,"video_in_chat":true};
 	spew.opts={};
 	spew.reset_opts=function()
 	{
@@ -10,8 +10,10 @@
 		spew.opts["show_icons"]=true;
 		spew.opts["show_imgs"]=true;
 		spew.opts["small_font"]=false;
+		spew.opts["big_text"]=false;
 		spew.opts["full_size"]=false;
 		spew.opts["chat_only"]=false;
+		spew.opts["video_in_chat"]=false;
 		spew.opts["cmdlog"]=[];
 		spew.opts["tv"]=true;
 	}
@@ -95,20 +97,26 @@
 		{
 			s+=" .wetspew_autoimg { display:none; } ";
 		}
-		if(spew.opts.full_size || spew.opts.ipod_chat)
+		if(spew.opts.full_size)
 		{
 			s+=" .wetspew { width:100%; height:100%; top:0px; left:0px; right:0px; bottom:0px; 	margin:auto; position:fixed; } ";
-			s+=" .wetspew_wetv , #wetspew_wetv { width:67%; height:100%; } ";
+			s+=" .wetspew_wetv { width:67%; height:100%; } ";
 			s+=" .wetspew_spew { width:33%; height:100%; } ";
+			s+=" html,body { overflow:hidden; } ";
 		}
 		spew.opts.tv=true;
-		if(spew.opts.chat_only || spew.opts.ipod_chat)
+		if(spew.opts.chat_only)
 		{
 			spew.opts.tv=false;
-			s+=" .wetspew_wetv , #wetspew_wetv { display:none; } ";
+			s+=" .wetspew_wetv { display:none; } ";
 			s+=" .wetspew_spew { width:100%; height:100%; } ";
 		}
-		if(spew.opts.ipod_chat)
+		if( spew.opts.video_in_chat )
+		{
+			s+=" .wetspew_wetv { display:block; width:50%; height:50%; position:absolute; left:50%; top:10px; } ";
+			s+=" .wetspew_spew { width:100%; height:100%; } ";
+		}
+		if(spew.opts.big_text)
 		{
 			s+=" .wetspew { font-size: 32px; } .wetspew_line { margin-bottom:0px; } ";
 			s+=" .wetspew_icon { width:32px; height:32px; } ";

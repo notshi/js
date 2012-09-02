@@ -240,8 +240,8 @@
 		spew.server_address="ws://"+opts.host+":5223/";
 		spew.div=$(opts.div);
 						
-		spew.div_wetv=$("<div class=\"wetspew_wetv\" id=\"wetspew_wetv\" ></div>");
 		spew.div_spew=$("<div class=\"wetspew_spew\"></div>");
+		spew.div_wetv=$("<div class=\"wetspew_wetv\" id=\"wetspew_wetv\" ></div>");
 
 
 		spew.div_tabs=$("<div class=\"wetspew_tabs\"><a>FIX</a><a>CHAT</a><a>USERS</a><a>ROOMS</a><a>OPTS</a><a>HELP</a><a>NEWS</a></div>");
@@ -269,8 +269,8 @@
 		spew.div_spew.append(spew.div_talk);
 		
 		spew.div.empty();
-		spew.div.append(spew.div_wetv);
 		spew.div.append(spew.div_spew);
+		spew.div.append(spew.div_wetv);
 	
 		var cmdlog_off=spew.opts["cmdlog"].length;
 		var tab_set=-1;

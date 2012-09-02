@@ -1,4 +1,4 @@
-dofile("../bin/lua/wetgenes/bake/pathfix.lua")
+dofile("../../bin/lua/wetgenes/bake/pathfix.lua")
 
 local gamecake=require("wetgenes.bake.gamecake")
 
