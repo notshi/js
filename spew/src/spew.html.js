@@ -152,15 +152,46 @@
 	}
 
 	spew.autoHTMLimg=function(url){
-		var durl=url;
-		var nurl=url;
-		if(durl.substr(0,7)!="http://") // durl will always begin with http://
-		{
-			durl="http://"+durl;
-		}
-		nurl=durl.substr(7); // nurl will always be without the http://
+
+		var urlink='<a href="'+url+'" target="_blank">'+url+'</a>';
 		
-		return '<a href="'+durl+'" target="_blank"><img class="wetspew_autoimg" src="http://wet.appspot.com/thumbcache/256/256/'+nurl+'" /></a>';
+		if( spew.filesizes[ url ] )
+		{
+			if( spew.filesizes[ url ] >= spew.max_image_size)
+			{
+				return urlink;
+			}
+		}
+		else
+		{
+			var xhr = new XMLHttpRequest();
+			xhr.open('HEAD', url, true);
+			xhr.onreadystatechange = function(){
+				var size=0;
+				if ( xhr.readyState == 4 ) {
+					if ( xhr.status == 200 ) {
+						
+						size=Math.floor(xhr.getResponseHeader('Content-Length'));
+						
+						spew.filesizes[ url ] = size ;
+						
+						if( size >= spew.max_image_size) // disable?
+						{
+							$(".wetspew_autoimg").each(function(){ // find big images and disable them
+								if($(this).attr("src")==url)
+								{
+									$(this).replaceWith( urlink );
+								}
+							});
+						}
+					}
+				}
+			};
+			xhr.send(null);			
+		}
+		
+		return '<a href="'+url+'" target="_blank"><img style="max-height:33%;max-width:100%;" class="wetspew_autoimg" src="'+url+'" /></a>';
+
 	}
 	
 	spew.autoHTMLlinks=function(s){
@@ -169,18 +200,10 @@
 			if(url.match(/(jpg|png|gif|jpeg)$/i)) // it is probably an image, embed it via bouncer
 			{
 				return spew.autoHTMLimg(url);
-			}
-			var durl=url;
-			var nurl=url;
-			if(durl.substr(0,7)!="http://") // durl will always begin with http://
-			{
-				durl="http://"+durl;
-			}
-			nurl=durl.substr(7); // nurl will always be without the http://
-			
-			return '<a href="'+durl+'" target="_blank">'+url+'</a>';
+			}			
+			return '<a href="'+url+'" target="_blank">'+url+'</a>';
 		}
-		sn=s.replace(/(http:\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*)/gim, fb);
+		sn=s.replace(/(https?:\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*)/gim, fb);
 /*
 		if(sn==s) // try again if nothing changed
 		{

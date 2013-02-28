@@ -8,6 +8,9 @@ Spew=function(opts){
 	var spew={};
 	var users={};
 
+	spew.max_image_size=1024*1024; // 1 meg seems reasonable? bigger files are not displayed
+	spew.filesizes={}; // map urls to file sizes
+	
 	spew.ytapi=undefined;
 	spew.ytapi_count=9999;
 	
