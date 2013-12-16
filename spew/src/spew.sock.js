@@ -436,13 +436,13 @@
 			var vid=aa[0];
 			var num=parseInt(aa[1]);
 
-			if(spew.ytapi_ready)
-			{
-				spew.ytapi.loadVideoById(vid,num);
-			}
-			else
-			{
-				spew.nextqvid={vid:vid,num:num}
-			}
+//			if(spew.ytapi_ready)
+//			{
+//				spew.ytapi.loadVideoById(vid,num);
+//			}
+//			else
+//			{
+				spew.nextqvid={vid:vid,num:num};
+//			}
 		}
 	}

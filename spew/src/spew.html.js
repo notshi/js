@@ -36,7 +36,6 @@
 			spew.ytapi=undefined;
 			spew.ytapi_count=9999;
 			$("#wetspew_wetv").replaceWith("<div class=\"wetspew_wetv\" id=\"wetspew_wetv\" ></div>");
-			
 			return false;
 //			spew.send_msg(spew.cmd_to_msg("/users"));
 		}
@@ -450,7 +449,6 @@ spew.div_wetv.append($('<video style="width:100%;height:100%;" '+
 
 	spew.update=function(){
 		spew.ytapi_count++;
-//console.log(spew.ytapi_count);
 		if( spew.opts.tv ) // tv must be enabled
 		{
 			if(!spew.ytapi) // reload youtube if it fails
@@ -462,7 +460,7 @@ spew.div_wetv.append($('<video style="width:100%;height:100%;" '+
 					new YT.Player('wetspew_wetv', {
 						width: '640',
 						height: '480',
-						videoId: 'ILN7jTJdn5U',
+						videoId: '9XVcIi-sLlk',
 						events: {
 						'onReady': function(event) {
 								spew.ytapi=event.target;
@@ -480,7 +478,7 @@ spew.div_wetv.append($('<video style="width:100%;height:100%;" '+
 			}
 			else
 			{
-				if(spew.ytapi.setSize && !spew.ytapi_ready )
+				if(spew.ytapi.setSize) // && !spew.ytapi_ready )
 				{
 					spew.ytapi_ready=true;
 	//				spew.ytapi.setSize(640,480);
@@ -488,8 +486,28 @@ spew.div_wetv.append($('<video style="width:100%;height:100%;" '+
 					if(spew.nextqvid)
 					{
 						spew.ytapi.loadVideoById(spew.nextqvid.vid,spew.nextqvid.num);
+						spew.forcetime=spew.nextqvid.num;
+//console.log("forcetime set "+spew.forcetime);
 					}
 					spew.nextqvid=undefined;
+				}
+				
+				if(spew.forcetime)
+				{
+					var d=spew.ytapi.getCurrentTime();
+					if( d && (d!=0) ) // it sits on 0 for a while, wait for it to change
+					{
+						d=d-spew.forcetime;
+//console.log("forcetime diff "+d);
+						if(Math.abs(d)<10)
+						{
+							spew.forcetime=undefined;
+						}
+						else
+						{
+							spew.ytapi.seekTo(spew.forcetime,true);
+						}
+					}
 				}
 			}
 		}
