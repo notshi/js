@@ -152,6 +152,10 @@
 	  var txt=msg.txt; if(!msg.txt){msg.txt="*";}
 	  
 	  txt=spew.escapeHTML(txt); // escape any text input to remove html
+	  if(window.ansi_up) // allow ansi escapes?
+	  {
+		txt= window.ansi_up.ansi_to_html(txt);
+	  }
 	  
 	  var frmlnk="<a target=\"_blank\" href=\"http://like.wetgenes.com/-/profile/"+frm+"\" class=\"wetspew_name\" >"+frm+"</a>"
 	  
@@ -164,7 +168,7 @@
 				}
 				else
 				{
-					s="<img src=\"http://like.wetgenes.com/-/avatar/"+frm+"\" class=\"wetspew_icon\" />"+frmlnk+": "+spew.autoHTMLlinks(txt);
+					s="<img src=\"http://wetgenes.com:1408/genes/avatar/"+frm+"\" class=\"wetspew_icon\" />"+frmlnk+": "+spew.autoHTMLlinks(txt);
 				}
 			break;
 			
@@ -179,7 +183,7 @@
 			case "lnk":
 				if(msg.lnk.match(/(jpg|png|gif|jpeg)$/)) // it is probably an image, embed it via bouncer
 				{
-					s="<img src=\"http://like.wetgenes.com/-/avatar/"+frm+"\" class=\"wetspew_icon\" />"+frmlnk+": "+spew.autoHTMLimg(msg.lnk);
+					s="<img src=\"http://wetgenes.com:1408/genes/avatar/"+frm+"\" class=\"wetspew_icon\" />"+frmlnk+": "+spew.autoHTMLimg(msg.lnk)
 				}
 				else
 				{
@@ -330,7 +334,7 @@
 							var count=parseInt(a[1]);
 							var color="fff";
 
-							l+="<img src=\"http://like.wetgenes.com/-/avatar/"+basename+"\" class=\"wetspew_icon\" />";
+							l+="<img src=\"http://wetgenes.com:1408/genes/avatar/"+basename+"\" class=\"wetspew_icon\" />";
 							l+="<span class=\"wetspew_count\">"+count+"</span>";
 							l+="<a target=\"_blank\" href=\"http://like.wetgenes.com/-/profile/"+basename+"\" class=\"wetspew_name\">"+name+"</a>";
 							l="<div class=\"wetspew_line\" style=\"color:#"+color+"\">"+l+"</div>";
@@ -364,7 +368,7 @@
 							
 							spew.remember_name(name);
 							
-							l+="<img src=\"http://like.wetgenes.com/-/avatar/"+name+"\" class=\"wetspew_icon\" />";
+							l+="<img src=\"http://wetgenes.com:1408/genes/avatar/"+name+"\" class=\"wetspew_icon\" />";
 							l+="<span class=\"wetspew_form\">"+form+"</span>";
 							l+="<a target=\"_blank\" href=\"http://like.wetgenes.com/-/profile/"+name+"\" class=\"wetspew_name\">"+name+"</a>";
 							l+="<a target=\"_blank\" href=\"http://like.wetgenes.com/-/game/"+gameid+"\" class=\"wetspew_gamename\">"+game+"</a>";

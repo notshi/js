@@ -12,6 +12,7 @@ tab.cache_files={
 "jslib/jquery.min.js",
 "jslib/swfobject.js",
 "jslib/web_socket.js",
+"jslib/ansi_up.js",
 
 "art/WebSocketMainInsecure.swf",
 
