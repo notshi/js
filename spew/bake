@@ -8,4 +8,3 @@ node node_modules/browserify/bin/cmd.js -r ./js/spew.js -d -o lib/spew.js
 
 echo "uglify"
 node node_modules/uglify-js/bin/uglifyjs lib/spew.js -o lib/spew.min.js
-
