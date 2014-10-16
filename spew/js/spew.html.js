@@ -1,5 +1,5 @@
 
-
+exports.setup=function(spew){
 
 	spew.click_login=function()
 	{
@@ -254,7 +254,7 @@
 		return r.toString(16)+g.toString(16)+b.toString(16);
 	}
 
-	spew.setup=function(opts)
+	spew.html_setup=function(opts)
 	{
 		for(i in opts) { spew.opts[i]=opts[i]; } // overide opts
 		spew.load_opts();
@@ -335,7 +335,7 @@
 					if( tab_ed )
 					{
 						var num=0;
-						for( n in users )
+						for( n in spew.users )
 						{
 							if( n.substr(0,tab_ed.length).toLowerCase()==tab_ed )
 							{
@@ -413,11 +413,12 @@ spew.div_wetv.append($('<video style="width:100%;height:100%;" '+
 		spew.sock_setup();
 		
 //		var last_hover;
-		$('.wetspew_name').live("mouseenter",function(){
+
+		$(document).on("mouseenter",".wetspew_name",function(){
 				var name=$(this).data("name");
 				if(!name){ name=$(this).html(); } // this should be the name
 				
-				var u=users[name];
+				var u=spew.users[name];
 //				if(u && (this!=last_hover))
 				if(u)
 				{
@@ -430,10 +431,10 @@ spew.div_wetv.append($('<video style="width:100%;height:100%;" '+
 				}
 			});
 /*			
-		$('.wetspew_name').live("mouseleave",function(){
+		$(document).on("mouseleave",".wetspew_name",function(){
 				var name=$(this).data("name");
 				if(!name){ name=$(this).html(); } // this should be the name
-				var u=users[name];
+				var u=spew.users[name];
 				if(u)
 				{
 					u.namespan=undefined; // do not update
@@ -552,3 +553,4 @@ spew.div_wetv.append($('<video style="width:100%;height:100%;" '+
 
 	};
 
+};

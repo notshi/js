@@ -1,0 +1,16 @@
+{
+  "name": "spew.wetgenes.com",
+  "description": "spew.wetgenes.com",
+  "version": "0.0.1",
+  "repository": {
+    "type": "hg",
+    "url": "https://github.com/devinit/D-Portal.git"
+  },
+  "dependencies": {
+    "watchify": "0.6.1",
+    "uglify-js": "2.4.12",
+    "browserify": "3.32.1",
+    "express": "3.4.8",
+    "yargs": "1.1.3"
+  }
+}

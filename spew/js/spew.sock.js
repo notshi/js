@@ -1,4 +1,6 @@
 
+exports.setup=function(spew){
+
 	var msg={}; // our base of comunications, new msgs are deltas on this object
 
 
@@ -11,8 +13,8 @@
 		{
 			try
 			{
-				s2=unescape( encodeURIComponent( s ) ); // force into utf8 ??
-				s2=s2.split("%").join("%25").split("=").join("%3d").split("&").join("%26");
+//				s2=unescape( encodeURIComponent( s ) ); // force into utf8 ??
+				s2=s.split("%").join("%25").split("=").join("%3d").split("&").join("%26");
 //console.log("enc "+s+" : "+s2);
 				return s2;
 			}
@@ -65,7 +67,7 @@
 			try
 			{
 				s2=s.split("%26").join("&").split("%3d").join("=").split("%25").join("%");
-				s2=dec_utf8( s2 ); // convert from utf8 ???
+				s2=/*dec_utf8*/( s2 ); // convert from utf8 ???
 //console.log("dec "+s+" : "+s2);
 				return s2;
 			}
@@ -290,9 +292,9 @@
 	};
 
 	 spew.remember_name=function(name){
-			if(!users[name])
+			if(!spew.users[name])
 			{
-				users[name]={name:name};
+				spew.users[name]={name:name};
 			}
 	};
 
@@ -317,7 +319,7 @@
 							spew.remember_name(msg.arg1);
 							if( (msg.arg2) && (msg.arg1!="*") )
 							{
-								users[msg.arg1].room=msg.arg2;
+								spew.users[msg.arg1].room=msg.arg2;
 							}
 						}
 					break;
@@ -391,7 +393,7 @@
 						if(msg.info=="user")
 						{
 							var name=msg.name; // this should be the name
-							var u=users[name];
+							var u=spew.users[name];
 							if(u)
 							{
 								var it=u.namespan; // this is the one we want to update
@@ -450,3 +452,5 @@
 //			}
 		}
 	}
+
+};

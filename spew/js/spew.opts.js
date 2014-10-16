@@ -1,4 +1,10 @@
 
+exports.setup=function(spew){
+
+
+var opts=exports;
+
+
 	var opts_save={"show_icons":true,"show_imgs":true,"small_font":true,"full_size":true,"chat_only":true,"big_text":true,"video_in_chat":true};
 	spew.opts={};
 	spew.reset_opts=function()
@@ -23,8 +29,8 @@
 	
 	spew.save_opts=function()
 	{
-		if(!storage_available) { return; }
-		if(!json_available) { return; }
+		if(!spew.storage_available) { return; }
+		if(!spew.json_available) { return; }
 		
 		var opts={};
 		
@@ -57,8 +63,8 @@
 			spew.opts.S=gets["S"];
 			save=true;
 		}
-		if(!storage_available) { return; }
-		if(!json_available) { return; }
+		if(!spew.storage_available) { return; }
+		if(!spew.json_available) { return; }
 		
 		var s=window.localStorage["wetspew_opts"];
 		if(typeof(s)=="string")
@@ -169,3 +175,4 @@
 	}
 
 
+};

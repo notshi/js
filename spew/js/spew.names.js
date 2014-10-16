@@ -1,8 +1,9 @@
 
-// random names
+exports.setup=function(spew){
 
+// random names
 	
-	spew.random_name=function(){
+spew.random_name=function(){
 var txt_adjectives=[
 	"ravishing",
 	"mimic",
@@ -1928,3 +1929,5 @@ var txt_nouns=[
 		var	ds=txt_adjectives[da]+"_"+txt_nouns[dn];
 		return ds;
 	}
+
+};
