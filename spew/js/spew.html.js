@@ -13,6 +13,7 @@ exports.setup=function(spew){
 		{
 //			spew.show_tab("chat");
 			window.location=("http://lua.wetgenes.com/dumid.lua?continue="+window.location);
+//			window.location=("http://api.wetgenes.com:1408/genes/dumid?continue="+window.location);
 		}
 //console.log("txt "+txt);
 		return false;
@@ -282,7 +283,7 @@ exports.setup=function(spew){
 		spew.div_talk.append(spew.div_talk_form);
 		spew.div_talk_form.append(spew.div_talk_form_input);
 
-		spew.div_help.html("<iframe style=\"width:100%;height:100%\" src=\"http://help.wetgenes.com/\"></iframe>");
+		spew.div_help.html("<iframe style=\"width:100%;height:100%\" src=\"http://api.wetgenes.com:1408/genes/help\"></iframe>");
 		spew.div_news.html("<iframe style=\"width:100%;height:100%\" src=\"http://wet.appspot.com/news.frame\"></iframe>");
 
 		spew.div_spew.append(spew.div_css);
