@@ -1,10 +1,10 @@
 <html> 
  <head> 
  
-<title>Spew</title> 
+<title>Join</title> 
  
 <script src="head.min.js" ></script>
-<link  href="spew.css" rel="stylesheet" type="text/css" >
+<link  href="join.css" rel="stylesheet" type="text/css" >
 
 <style>
 * {
@@ -23,39 +23,25 @@ background:#000;
  </head> 
 <body >
 
-<div class="wetspew"></div>
+<div class="wetjoin"></div>
 
-<script type="text/javascript">
+<script>
 
 head.js(
-"http://www.youtube.com/player_api",
 "jquery.min.js",
-"spew.js",
+"join.js",
 function(){
 	
-	var setup=function(){	$(function(){
+	$(function(){
 	
-		var opts={div:$(".wetspew"),host:"spew.wetgenes.com",art:"",cachebreak:"?v1"};
-		var spew=require("./js/spew.js").setup(opts);
+		var opts={div:$(".wetjoin"),host:"api.wetgenes.com",art:"",cachebreak:"?v1"};
+		var join=require("./js/join.js").setup(opts);
 
-	});};
+	});
 
-	if(typeof window.WebSocket!=='undefined')
-	{
-		setup();
-	}
-	else // load flash sockets
-	{
-		window.WEB_SOCKET_SWF_LOCATION = "WebSocketMainInsecure.swf"; // flash fallback socks
-		head.js("web_socket.js","swfobject.js",function(){
-			setup();
-		});
-	}
 });
 
 </script>
-
-
 
 </body>
 </html>

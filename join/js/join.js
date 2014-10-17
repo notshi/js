@@ -1,11 +1,11 @@
 
 var ls=function(a) { console.log(util.inspect(a,{depth:null})); }
 
-exports.bake=function(opts){
+exports.setup=function(opts){
 
 	var join={opts:opts};
 
-	require('./join.html.js').bake(join);			
+//	require('./join.html.js').setup(join);			
 
 	return join;
 
