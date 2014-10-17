@@ -1,0 +1,10 @@
+cd `dirname $0`
+
+#echo "bake"
+#node src/bake.js
+
+echo "browserify"
+node node_modules/browserify/bin/cmd.js -r ./js/join.js -d -o lib/join.js
+
+echo "uglify"
+node node_modules/uglify-js/bin/uglifyjs lib/join.js -o lib/join.min.js

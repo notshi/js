@@ -1,6 +1,6 @@
 {
-  "name": "spew.wetgenes.com",
-  "description": "spew.wetgenes.com",
+  "name": "join.wetgenes.com",
+  "description": "join.wetgenes.com",
   "version": "0.0.1",
   "dependencies": {
     "watchify": "0.6.1",
