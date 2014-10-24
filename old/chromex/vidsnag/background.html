@@ -1,0 +1,19 @@
+<html>
+<head>
+<script>
+
+chrome.experimental.devtools.resources.onFinished.addListener(function(resource) {
+//  if (resource.response.bodySize > 40*1024)
+    console.log("any: " + resource.request.url);
+});
+
+    console.log("testing 123");
+
+
+  // Called when the user clicks on the browser action icon.
+  chrome.browserAction.onClicked.addListener(function(tab) {
+    console.log("testing 456");
+  });
+</script>
+</head>
+</html>

@@ -1,0 +1,83 @@
+.swish_this * {
+border: 0 none;
+outline: 0;
+padding: 0;
+margin: 0;
+}
+
+.swish_front , .swish_back , .swish_over {
+	position:fixed;
+	top:0px;
+	left:0px;
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	background-color:#000;
+	overflow:hidden;
+	background-repeat:no-repeat;
+}
+.swish_back {
+}
+.swish_front {
+}
+.swish_over {
+	background-color:transparent;
+}
+
+.swish_strip {
+	position:absolute;
+	height:110px;
+	width:100%;
+	bottom:-110px;
+	left:0px;
+	background-color:#000;
+	overflow:visible;
+}
+
+.swish_icons{
+
+	position:absolute;
+	height:110px;
+}
+
+.swish_title{
+	position:absolute;
+	bottom:110px;
+	max-width:320px;
+	font-size:24px;
+	padding:8px 16px 8px 16px;
+	font-family: Verdana, Geneva, sans-serif;
+	text-shadow: 1px 1px 1px #000;
+	background-color:rgba(0,0,0,0.25);
+	border-radius: 16px;
+	color: #fff;
+	margin: 8px;
+}
+
+.swish_title A:link , .swish_title A:visited , .swish_title A:active , .swish_title A:hover{
+
+	text-decoration: inherit;
+	color:inherit;
+
+}
+
+
+
+.swish_icon{
+
+	position:absolute;
+	height:90px;
+	width:120px;
+	top:10px;
+
+	background-size: cover;
+	background-position: center;
+	cursor:pointer;
+	
+	opacity:0.7;
+}
+
+.swish_icon:hover{
+	opacity:1;
+}
