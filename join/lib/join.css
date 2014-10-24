@@ -10,8 +10,8 @@ b				{font-weight:bold;}
 .cake_top100 	{width:100%; height:100%; }
 
 .wetjoin 		{width:50%; height:100%; position:relative; margin:0 auto; background-color:#009EFF; color:#fff; z-index:1;}
-.wetjoin.join	{background-color:#FF9F00;}
-.wetjoin.forgot	{background-color:#C62DFF;}
+.wetjoin_page_join		{background-color:#FF9F00;}
+.wetjoin_page_forgot	{background-color:#C62DFF;}
 .wetjoin_main	{position:relative; height:100%; min-height:600px; padding:40px; padding-top:0; text-align:center; background-color:#009EFF;}
 .wetjoin_header	{margin-bottom:20px;}
 
@@ -31,8 +31,6 @@ a.wetjoin_submit_login				{padding:20px 30px;}
 .dia:after		{top:150px; left:-75px;}
 .dia.r:after	{top:150px; right:75px; border-top: 150px solid #36FFDA;}
 
-.wetjoin_page_login, .wetjoin_page_login2, .wetjoin_page_join, .wetjoin_page_join2, .wetjoin_page_forgot, .wetjoin_page_forgot2, .wetjoin_page_token,
-.wetjoin_page_token_create, .wetjoin_page_token_update	{margin-top:20px;}
 .wetjoin_toptext{padding:20px 0; width:400px; margin:0 auto; line-height:1.45em;}
 
 input			{width:400px; padding:10px 20px; margin-bottom:20px; font-size:1.2em;}
