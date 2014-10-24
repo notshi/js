@@ -41,7 +41,7 @@ exports.setup=function(opts){
 
 	join.page=function(pagename){
 		
-		$(".wetjoin_main").removeClass().addClass("wetjoin_main wetjoin_page_"+pagename);
+		$(".wetjoin").removeClass().addClass("wetjoin wetjoin_page_"+pagename);
 		
 		join.vars.token= $(".wetjoin_main .wetjoin_token").val() || join.vars.token;
 		join.vars.name=  $(".wetjoin_main .wetjoin_name" ).val() || join.vars.name;
