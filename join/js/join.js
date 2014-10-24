@@ -40,6 +40,9 @@ exports.setup=function(opts){
 	};
 
 	join.page=function(pagename){
+		
+		$(".wetjoin_main").removeClass().addClass("wetjoin_main wetjoin_page_"+pagename);
+		
 		join.vars.token= $(".wetjoin_main .wetjoin_token").val() || join.vars.token;
 		join.vars.name=  $(".wetjoin_main .wetjoin_name" ).val() || join.vars.name;
 		join.vars.email= $(".wetjoin_main .wetjoin_email").val() || join.vars.email;
