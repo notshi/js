@@ -30,7 +30,7 @@ exports.setup=function(opts){
 		{
 			join.vars.token=join.qs.token;
 			join.page("token");
-			$(".wetjoin_main .wetjoin_submit").focus().click();
+			$(".wetjoin_main .wetjoin_submit").click();
 		}
 		else
 		{
@@ -152,7 +152,7 @@ exports.setup=function(opts){
 			if(e.which == 13)
 			{
 				$(this).blur();
-				$(".wetjoin_main .wetjoin_submit").focus().click();
+				$(".wetjoin_main .wetjoin_submit").click();
 				return false;
 			}
 		});
