@@ -17,7 +17,7 @@ b					{font-weight:bold;}
 .wetjoin a, .wetjoin a:link, .wetjoin a:visited, .wetjoin a:hover, .wetjoin a:focus	{text-decoration:none;}
 .wetjoin a:hover, .wetjoin a:focus	{color:#1D5768;}
 
-.wetjoin_art		{width:220px; height:220px; border-radius:500px; background-color:#00FFCF; margin:auto;}
+.wetjoin_art		{width:210px; height:210px; border-radius:500px; background-color:#00FFCF; margin:auto; border:10px solid #1A1A1A;}
 .wetjoin_page_login, .wetjoin_page_login2, .wetjoin_page_join, .wetjoin_page_join2, .wetjoin_page_forgot, .wetjoin_page_forgot2, .wetjoin_page_token,
 .wetjoin_page_token_create, .wetjoin_page_token_update	{margin-top:20px;}
 .wetjoin_toptext	{padding:20px 0; width:400px; margin:0 auto; line-height:1.45em;}
