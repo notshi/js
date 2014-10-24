@@ -4,6 +4,15 @@ var ls=function(a) { console.log(util.inspect(a,{depth:null})); }
 exports.setup=function(opts){
 
 	var join={opts:opts};
+
+// parse query string
+	join.qs={};
+	var qs=window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+	for(var i = 0; i < qs.length; i++)
+	{
+		var q=qs[i].split("=");
+		join.qs[ q[0] ]=q[1];
+	}
 	
 	join.vars={}
 
@@ -15,21 +24,36 @@ exports.setup=function(opts){
 		
 	join.fill=function(){
 		opts.div.empty().append( join.template.find(".wetjoin_main").clone() );
-		join.page("login")
+
+		console.log(join.qs);
+		if(join.qs.token)
+		{
+			join.vars.token=join.qs.token;
+			join.page("token");
+			$(".wetjoin_main .wetjoin_submit").focus().click();
+		}
+		else
+		{
+			join.page("login");
+		}
+
 	};
 
 	join.page=function(pagename){
-		join.vars.name= $(".wetjoin_main .wetjoin_name" ).val() || join.vars.name;
-		join.vars.email=$(".wetjoin_main .wetjoin_email").val() || join.vars.email;
-		join.vars.pass= $(".wetjoin_main .wetjoin_pass" ).val() || join.vars.pass;
+		join.vars.token= $(".wetjoin_main .wetjoin_token").val() || join.vars.token;
+		join.vars.name=  $(".wetjoin_main .wetjoin_name" ).val() || join.vars.name;
+		join.vars.email= $(".wetjoin_main .wetjoin_email").val() || join.vars.email;
+		join.vars.pass=  $(".wetjoin_main .wetjoin_pass" ).val() || join.vars.pass;
 
 		$(".wetjoin_main .wetjoin_page").empty().append( join.template.find(".wetjoin_page_"+pagename).clone() );
 
+		$(".wetjoin_main .wetjoin_token").val(join.vars.token);
 		$(".wetjoin_main .wetjoin_name" ).val(join.vars.name);
 		$(".wetjoin_main .wetjoin_email").val(join.vars.email);
 		$(".wetjoin_main .wetjoin_pass" ).val(join.vars.pass);
 
 		join.bind();
+		return false;
 	};
 
 	join.callback=function(cmd,dat){
@@ -61,6 +85,7 @@ exports.setup=function(opts){
 
 		$(".wetjoin_main .wetjoin_error").text("");
 
+		var token=$(".wetjoin_main .wetjoin_token").val();
 		var name= $(".wetjoin_main .wetjoin_name" ).val();
 		var email=$(".wetjoin_main .wetjoin_email").val();
 		var pass= $(".wetjoin_main .wetjoin_pass" ).val();
@@ -69,29 +94,40 @@ exports.setup=function(opts){
 			$.post( join.userapi+"create",{
 				"name":name,"email":email,"pass":pass
 			},function(a,b,c){return join.callback("join",a,b,c);},"json");
+			return false;
 		}
 		else
 		if(cmd=="login"){
 			$.post( join.userapi+"login",{
 				"name":name,"email":email,"pass":pass
 			},function(a,b,c){return join.callback("login",a,b,c);},"json");
+			return false;
 		}
 		else
 		if(cmd=="forgot"){
 			$.post( join.userapi+"update",{
 				"name":name,"email":email,"pass":pass
 			},function(a,b,c){return join.callback("forgot",a,b,c);},"json");
+			return false;
+		}
+		else
+		if(cmd=="token"){
+			$.post( join.userapi+"token",{
+				"token":token
+			},function(a,b,c){return join.callback("token",a,b,c);},"json");
+			return false;
 		}
 	};
 
 	join.bind=function(){
-		$(".wetjoin_main .wetjoin_header_join"  ).off("click").on("click",function(){join.page("join");});
-		$(".wetjoin_main .wetjoin_header_login" ).off("click").on("click",function(){join.page("login");});
-		$(".wetjoin_main .wetjoin_header_forgot").off("click").on("click",function(){join.page("forgot");});
+		$(".wetjoin_main .wetjoin_header_join"  ).off("click").on("click",function(){return join.page("join");});
+		$(".wetjoin_main .wetjoin_header_login" ).off("click").on("click",function(){return join.page("login");});
+		$(".wetjoin_main .wetjoin_header_forgot").off("click").on("click",function(){return join.page("forgot");});
 
-		$(".wetjoin_main .wetjoin_submit_login" ).off("click").on("click",function(){join.submit("login");});
-		$(".wetjoin_main .wetjoin_submit_join"  ).off("click").on("click",function(){join.submit("join");});
-		$(".wetjoin_main .wetjoin_submit_forgot").off("click").on("click",function(){join.submit("forgot");});
+		$(".wetjoin_main .wetjoin_submit_login" ).off("click").on("click",function(){return join.submit("login");});
+		$(".wetjoin_main .wetjoin_submit_join"  ).off("click").on("click",function(){return join.submit("join");});
+		$(".wetjoin_main .wetjoin_submit_forgot").off("click").on("click",function(){return join.submit("forgot");});
+		$(".wetjoin_main .wetjoin_submit_token" ).off("click").on("click",function(){return join.submit("token");});
 
 		// enter in inputs will auto force a submit
 		$(".wetjoin_main input").off("keypress").on("keypress",function(e){
@@ -106,7 +142,7 @@ exports.setup=function(opts){
 	
 
 	join.template.load("template.html",join.fill);
-
+	
 	return join;
 
 };
