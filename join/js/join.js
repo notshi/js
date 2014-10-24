@@ -51,6 +51,10 @@ exports.setup=function(opts){
 		$(".wetjoin_main .wetjoin_name" ).val(join.vars.name);
 		$(".wetjoin_main .wetjoin_email").val(join.vars.email);
 		$(".wetjoin_main .wetjoin_pass" ).val(join.vars.pass);
+		
+		$(".wetjoin_main .span_token").text(join.vars.token);
+		$(".wetjoin_main .span_name" ).text(join.vars.name);
+		$(".wetjoin_main .span_email").text(join.vars.email);
 
 		join.bind();
 		return false;
@@ -72,6 +76,17 @@ exports.setup=function(opts){
 		else
 		if(cmd=="login"){
 			join.page("login2");
+			
+			var q="&S="+dat.session;
+			
+			if(join.qs["continue"])
+			{
+				window.location.href=join.qs["continue"]+q;
+			}
+			else
+			{
+				window.location.href="http://forum.wetgenes.com/?"+q;
+			}
 		}
 		else
 		if(cmd=="forgot"){
