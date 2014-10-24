@@ -1,0 +1,30 @@
+<html> 
+<head>
+<title>One of us, one of us.</title> 
+<script src="head.min.js" ></script>
+<link  href="join.css" rel="stylesheet" type="text/css" >
+</head> 
+<body >
+
+<div class="wetjoin"></div>
+
+<script>
+
+head.js(
+"jquery.min.js",
+"join.js",
+function(){
+	
+	$(function(){
+	
+		var opts={div:$(".wetjoin"),host:"api.wetgenes.com",art:"",cachebreak:"?v1"};
+		var join=require("./js/join.js").setup(opts);
+
+	});
+
+});
+
+</script>
+
+</body>
+</html>

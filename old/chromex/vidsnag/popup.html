@@ -1,0 +1,8 @@
+<html>
+<script>
+chrome.experimental.devtools.resources.onFinished.addListener(function(resource) {
+//  if (resource.response.bodySize > 40*1024)
+    console.log("any: " + resource.request.url);
+});</script>
+<body></body>
+</html>

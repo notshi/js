@@ -1,0 +1,4 @@
+cd `dirname $0`
+
+echo "bake"
+node js/serv.js
