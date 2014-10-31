@@ -15,7 +15,7 @@ exports.setup=function(opts){
 	}
 	
 	join.vars={};
-	join.vars.session=q.session || $.cookie("wet_session");
+	join.vars.session=q.session || $.cookie("fud_session");
 	join.vars.token=q.token;
 
 //	require('./join.html.js').setup(join);
@@ -133,7 +133,7 @@ then we redirect back to the external site
 		if(cmd=="login"){
 			join.vars.session=dat.session;
 			join.page("login2");
-			$.cookie("wet_session",join.vars.session,{ expires: 7*7, path: '/' });
+			$.cookie("fud_session",join.vars.session,{ expires: 7*7, path: '/' });
 			cont({S:join.vars.session});
 		}
 		else
