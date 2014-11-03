@@ -28,8 +28,26 @@ var myCalendar =
 		
 		for(var i=0;i<calacts.slots.length;i++)
 		{
+			var days=0;
+			
 			var v=calacts.slots[i];
 			var l=calacts.template.find(".calacts_slot").clone();
+
+
+			switch(v.day)
+			{
+				case "monday": days=0; break;
+				case "tuesday": days=1; break;
+				case "wednesday": days=2; break;
+				case "thursday": days=3; break;
+				case "friday": days=4; break;
+				case "saturday": days=5; break;
+				case "sunday": days=6; break;
+			}
+			
+			var a=v.time.split("-");
+			var a0=a[0].split(":");
+			var a1=a[1].split(":");
 			
 			l.find(".act").text(v.act);
 			l.find(".day").text(v.day);
@@ -37,23 +55,21 @@ var myCalendar =
 			l.find(".place").text(v.place);
 			l.find(".cal").append(ouical.createCalendar({
   options: {
-    class: 'calclass',
+    class: 'calclass'+i,
   },
   data: {
     // Event title
     title: v.act+' at '+v.place,
 
     // Event start date
-    start: new Date(calacts.monday),
-
-    // Event duration (IN MINUTES)
-    duration: 120,  
+    start: new Date(calacts.monday.getTime() + (days*24*60*60*1000) + (a0[0]*60*60*1000) + (a0[1]*60*1000) ),
+    end:   new Date(calacts.monday.getTime() + (days*24*60*60*1000) + (a1[0]*60*60*1000) + (a1[1]*60*1000) ),
 
     // Event Address
-    address: [],
+    address: calacts.places[v.place].address,
 
     // Event Description
-    description: 'Test cal.'
+    description: v.act+' at '+v.place
   }
 }));
 			
