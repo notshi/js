@@ -12,24 +12,28 @@ exports.setup=function(opts){
 		
 	calacts.fill=function(){
 		opts.div.empty().append( calacts.template.find(".calacts").clone() );
+
+
+	var now = new Date();
+	calacts.monday = new Date(now.getFullYear(), now.getMonth(), now.getDate()+(8 - now.getDay()));
+	console.log(calacts.monday);
+
+
+
 		
 var myCalendar = ouical.createCalendar({
   options: {
-    class: 'my-class',
+    class: 'calclass',
   },
   data: {
     // Event title
-    title: 'Get on the front page of HN',
+    title: 'test',
 
     // Event start date
     start: new Date('June 15, 2013 19:00'),
 
     // Event duration (IN MINUTES)
-    duration: 120,
-
-    // You can also choose to set an end time
-    // If an end time is set, this will take precedence over duration
-    end: new Date('June 15, 2013 23:00'),     
+    duration: 120,  
 
     // Event Address
     address: 'The internet',
