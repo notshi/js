@@ -58,9 +58,9 @@ var opts=exports;
 		}
 
 // set here in case we do not have localstorage
-		if(gets["S"])
+		if(gets["confirm"])
 		{
-			spew.opts.S=gets["S"];
+			spew.opts.S=gets["confirm"];
 			save=true;
 		}
 		if(!spew.storage_available) { return; }
@@ -78,9 +78,9 @@ var opts=exports;
 			}
 		}
 // make sure that the url overrides
-		if(gets["S"])
+		if(gets["confirm"])
 		{
-			spew.opts.S=gets["S"];
+			spew.opts.S=gets["confirm"];
 			save=true;
 		}
 			

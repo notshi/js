@@ -12,8 +12,8 @@ exports.setup=function(spew){
 		else
 		{
 //			spew.show_tab("chat");
-			window.location=("http://lua.wetgenes.com/dumid.lua?continue="+window.location);
-//			window.location=("http://api.wetgenes.com:1408/genes/dumid?continue="+window.location);
+//			window.location=("http://lua.wetgenes.com/dumid.lua?continue="+window.location);
+			window.location=("http://api.wetgenes.com:1408/js/genes/join/join.html?dumid="+window.location);
 		}
 //console.log("txt "+txt);
 		return false;
