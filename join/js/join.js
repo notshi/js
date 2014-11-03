@@ -105,6 +105,7 @@ then we redirect back to the external site
 		var cont=function(vars){
 			
 			var q=""
+			
 			for(n in vars)
 			{
 				q=q+"&"+n+"="+vars[n];
@@ -117,6 +118,7 @@ then we redirect back to the external site
 			else
 			if(join.qs["continue"])
 			{
+				if(join.qs["continue"].indexOf('?') === -1) { q="?"+q; }
 				window.location.href=join.qs["continue"]+q;
 			}
 //			else
@@ -146,6 +148,22 @@ then we redirect back to the external site
 			join.page("login2");
 			cont({S:join.vars.session});
 		}
+		else
+		if(cmd=="token"){
+			if(dat.command=="update")
+			{
+				join.vars.name=dat.name || join.vars.name; // remember name
+				join.vars.email=dat.email || join.vars.email; // remember name
+				join.page("login");
+			}
+			else
+			if(dat.command=="create")
+			{
+				join.vars.name=dat.name || join.vars.name; // remember name
+				join.vars.email=dat.email || join.vars.email; // remember name
+				join.page("login");
+			}
+		}
 	};
 
 	join.submit=function(cmd){
@@ -168,14 +186,14 @@ then we redirect back to the external site
 		if(cmd=="login"){
 			$('#form').submit();
 			$.post( join.userapi+"login",{
-				"name":name,"email":email,"pass":pass
+				"name":name,"pass":pass
 			},function(a,b,c){return join.callback("login",a,b,c);},"json");
 			return true;
 		}
 		else
 		if(cmd=="forgot"){
 			$.post( join.userapi+"update",{
-				"name":name,"email":email,"pass":pass
+				"email":email,"pass":pass
 			},function(a,b,c){return join.callback("forgot",a,b,c);},"json");
 			return false;
 		}
@@ -201,7 +219,14 @@ then we redirect back to the external site
 		{
 			if(confirm)
 			{
-				window.location.href=join.qs["dumid"]+"&confirm="+join.vars.session;
+				if(join.qs["dumid"].indexOf('?') === -1)
+				{
+					window.location.href=join.qs["dumid"]+"?confirm="+join.vars.session;
+				}
+				else
+				{
+					window.location.href=join.qs["dumid"]+"&confirm="+join.vars.session;
+				}
 			}
 			else
 			{
