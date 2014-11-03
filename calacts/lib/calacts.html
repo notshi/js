@@ -1,0 +1,31 @@
+<html> 
+<head>
+<title>Leeds Lets Get Active calendar reminders.</title> 
+<script src="head.min.js" ></script>
+<link  href="calacts.css" rel="stylesheet" type="text/css" >
+</head> 
+<body >
+
+<div class="calacts"></div>
+
+<script>
+
+head.js(
+"jquery.min.js",
+"chosen.jquery.min.js",
+"calacts.js",
+function(){
+	
+	$(function(){
+	
+		var opts={div:$(".calacts")};
+		var join=require("./js/calacts.js").setup(opts);
+
+	});
+
+});
+
+</script>
+
+</body>
+</html>
