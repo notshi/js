@@ -4,15 +4,104 @@ var ls=function(a) { console.log(util.inspect(a,{depth:null})); }
 exports.setup=function(opts){
 
 	var calacts={opts:opts};
+	
+	var ouical=require('./ouical.js');
 
 
 	calacts.template=$("<div></div>");
 		
 	calacts.fill=function(){
-		opts.div.empty().append( calacts.template.find(".calacts_main").clone() );
+		opts.div.empty().append( calacts.template.find(".calacts").clone() );
+		
+var myCalendar = ouical.createCalendar({
+  options: {
+    class: 'my-class',
+  },
+  data: {
+    // Event title
+    title: 'Get on the front page of HN',
+
+    // Event start date
+    start: new Date('June 15, 2013 19:00'),
+
+    // Event duration (IN MINUTES)
+    duration: 120,
+
+    // You can also choose to set an end time
+    // If an end time is set, this will take precedence over duration
+    end: new Date('June 15, 2013 23:00'),     
+
+    // Event Address
+    address: 'The internet',
+
+    // Event Description
+    description: 'Test cal.'
+  }
+});
+
+		$(".calacts .test").empty().append( myCalendar );
 	};
 
-	calacts.template.load("template.html",calacts.fill);
+// load and parse raw CSV
+	$(function() {
+		$.ajax({
+			type: "GET",
+			url: "calacts.csv",
+			dataType: "text",
+			success: function(data) {
+				calacts.csv=$.csv.toArrays(data);
+				calacts.ParseCSV()
+				calacts.template.load("template.html",calacts.fill);
+//				console.log(calacts.csv);
+			}
+		 });
+	});
+
+	calacts.ParseCSV=function()
+	{
+		calacts.objs=[];
+		for(var j=1;j<calacts.csv.length;j++) // first line is header
+		{
+			var t={};
+			for(var i=0;i<calacts.csv[0].length;i++)
+			{
+				t[ calacts.csv[0][i] ]=calacts.csv[j][i];
+			}
+			calacts.objs[calacts.objs.length]=t;
+		}
+		calacts.places={};
+		calacts.slots=[];
+		for(var i=0;i<calacts.objs.length;i++)
+		{
+			var t={};
+			t.name=calacts.objs[i]["LeisureCentreName"];
+			t.address=calacts.objs[i]["Address"];
+			t.phone=calacts.objs[i]["Telephone"];
+			t.comments=calacts.objs[i]["Comments"];
+			calacts.places[t.name]=t;
+			
+			for(var n in calacts.objs[i])
+			{
+				var dur=calacts.objs[i][n];
+				if( dur != "" )
+				{
+					var ns=n.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
+					var na=ns.split(" ");
+					if( (na[1]=="monday") || (na[1]=="tuesday") || (na[1]=="wednesday") || (na[1]=="thursday") || (na[1]=="friday") || (na[1]=="saturday") || (na[1]=="sunday"))
+					{
+						var p={};
+						p.day=na[1];
+						p.act=na[0];
+						p.place=t.name;
+						p.time=dur;
+						calacts.slots[calacts.slots.length]=p;
+					}
+				}
+			}
+		}
+//		console.log(calacts.places);
+//		console.log(calacts.slots);
+	};
 	
 	return calacts;
 
