@@ -45,6 +45,7 @@ var myCalendar =
 				case "sunday": days=6; break;
 			}
 			
+//			console.log(v.time);
 			var a=v.time.split("-");
 			var a0=a[0].split(":");
 			var a1=a[1].split(":");
@@ -130,7 +131,7 @@ var myCalendar =
 						p.day=na[1];
 						p.act=na[0];
 						p.place=t.name;
-						p.time=dur;
+						p.time=dur.split(" ");p.time=p.time[p.time.length-1]; // last bit
 						calacts.slots[calacts.slots.length]=p;
 					}
 				}
