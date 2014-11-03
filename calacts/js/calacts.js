@@ -39,7 +39,7 @@ var myCalendar = ouical.createCalendar({
   }
 });
 
-		$(".calacts .test").empty().append( myCalendar );
+		$(".calacts .tab").empty().append( myCalendar );
 	};
 
 // load and parse raw CSV
