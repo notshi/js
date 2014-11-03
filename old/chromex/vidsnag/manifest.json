@@ -1,0 +1,16 @@
+{
+  "name": "vidsnag",
+  "description": "This extension finds large downloaded files and lists their urls, very useful for downloading flash videos.",
+  "version": "0.2.3",
+  "background_page": "background.html",
+  "icons": { "128": "snag_128x128.png" },
+  "permissions": [
+    "experimental",
+    "tabs", "http://*/*", "https://*/*"
+  ],
+  "browser_action": {
+"default_popup": "popup.html",
+    "default_title": "Snag this page",
+    "default_icon": "snag_16x16.png"
+  }
+}
