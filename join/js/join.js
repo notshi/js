@@ -4,6 +4,8 @@ var ls=function(a) { console.log(util.inspect(a,{depth:null})); }
 exports.setup=function(opts){
 
 	var join={opts:opts};
+	
+	require("./jquery.cookie.js");
 
 // parse query string
 	join.qs={};
