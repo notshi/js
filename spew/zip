@@ -3,4 +3,4 @@ cd `dirname $0`
 rm -rf out
 mkdir out
 cd  lib
-zip -r ../out/spew.zip .
+zip -r ../out/spew.zip . -x *.map.json

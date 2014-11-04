@@ -1,5 +1,8 @@
 
 exports.setup=function(spew){
+	
+	var ansi_up=require("./ansi_up.js");
+//console.log(ansi_up);
 
 	var msg={}; // our base of comunications, new msgs are deltas on this object
 
@@ -154,9 +157,9 @@ exports.setup=function(spew){
 	  var txt=msg.txt; if(!msg.txt){msg.txt="*";}
 	  
 	  txt=spew.escapeHTML(txt); // escape any text input to remove html
-	  if(window.ansi_up) // allow ansi escapes?
+	  if(ansi_up) // allow ansi escapes?
 	  {
-		txt= window.ansi_up.ansi_to_html(txt);
+		txt=ansi_up.ansi_to_html(txt);
 	  }
 	  
 	  var frmlnk="<a target=\"_blank\" href=\"http://api.wetgenes.com:1408/genes/profile/"+frm+"\" class=\"wetspew_name\" >"+frm+"</a>"

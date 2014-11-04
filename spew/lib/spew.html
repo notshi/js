@@ -3,7 +3,7 @@
  
 <title>Spew</title> 
  
-<script src="head.min.js" ></script>
+<script src="head.js" ></script>
 <link  href="spew.css" rel="stylesheet" type="text/css" >
 
 <style>
@@ -29,16 +29,15 @@ background:#000;
 
 head.js(
 "http://www.youtube.com/player_api",
-"jquery.min.js",
-"spew.js",
+"spew.min.js",
 function(){
 	
-	var setup=function(){	$(function(){
+	var setup=function(){	
 	
-		var opts={div:$(".wetspew"),host:"spew.wetgenes.com",art:"",cachebreak:"?v1"};
-		var spew=require("./js/spew.js").setup(opts);
+		var opts={div:".wetspew",host:"spew.wetgenes.com",art:"",cachebreak:"?v1"};
+		var spew=require("spew").setup(opts);
 
-	});};
+	};
 
 	if(typeof window.WebSocket!=='undefined')
 	{

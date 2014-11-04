@@ -1,6 +1,6 @@
 {
-  "name": "join.wetgenes.com",
-  "description": "join.wetgenes.com",
+  "name": "build",
+  "description": "build",
   "version": "0.0.1",
   "private": true,
   "dependencies": {

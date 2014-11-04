@@ -1,6 +1,7 @@
 
 exports.setup=function(spew){
 
+	var $=require("jquery");
 
 var opts=exports;
 
