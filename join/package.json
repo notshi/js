@@ -2,6 +2,7 @@
   "name": "join.wetgenes.com",
   "description": "join.wetgenes.com",
   "version": "0.0.1",
+  "private": true,
   "dependencies": {
     "browserify": "3.32.1",
     "minifyify": "4.4.0",
