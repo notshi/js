@@ -5,7 +5,7 @@ exports.setup=function(opts){
 
 	var join={opts:opts};
 	
-//	var $=require("./jquery.js"); require("./jquery.cookie.js");
+	var $=require("./jquery.js"); require("./jquery.cookie.js");
 
 // parse query string
 	join.qs={};
