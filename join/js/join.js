@@ -268,7 +268,7 @@ then we redirect back to the external site
 	};
 	
 
-	join.template.load("template.html",join.fill);
+	join.template.load("join.template.html",join.fill);
 	
 	return join;
 
