@@ -3,4 +3,4 @@ cd `dirname $0`
 rm -rf out
 mkdir out
 cd  lib
-zip -r ../out/join.zip .
+zip -r ../out/join.zip . -x *.map.json
