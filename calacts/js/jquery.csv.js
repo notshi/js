@@ -37,11 +37,11 @@ RegExp.escape= function(s) {
   var $;
 
   // to keep backwards compatibility
-  if (typeof jQuery !== 'undefined' && jQuery) {
-    $ = jQuery;
-  } else {
-    $ = {};
-  }
+//  if (typeof jQuery !== 'undefined' && jQuery) {
+ //   $ = jQuery;
+//  } else {
+    $ = require('jquery');
+ // }
 
 
   /**
