@@ -3,7 +3,7 @@ cd `dirname $0`
 NODE_PATH=$NODE_PATH:./js
 
 echo "browserify"
-node node_modules/browserify/bin/cmd.js -r ./js/join.js:join -d -o lib/join.js
+node node_modules/browserify/bin/cmd.js -r ./js/join.js:join -d -p [minifyify --map join.map.json --output lib/join.map.json] -o lib/join.min.js
 
-echo "uglify"
-node node_modules/uglify-js/bin/uglifyjs lib/join.js -o lib/join.min.js
+#echo "uglify"
+#node node_modules/uglify-js/bin/uglifyjs lib/join.js -o lib/join.min.js
