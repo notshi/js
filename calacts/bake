@@ -1,10 +1,6 @@
 cd `dirname $0`
 
-#echo "bake"
-#node src/bake.js
+NODE_PATH=$NODE_PATH:./js
 
 echo "browserify"
-node node_modules/browserify/bin/cmd.js -r ./js/calacts.js -d -o lib/calacts.js
-
-echo "uglify"
-node node_modules/uglify-js/bin/uglifyjs lib/calacts.js -o lib/calacts.min.js
+node node_modules/browserify/bin/cmd.js -r ./js/calacts.js:calacts -d -p [minifyify --map calacts.map.json --output lib/calacts.map.json] -o lib/calacts.min.js
