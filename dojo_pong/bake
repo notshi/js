@@ -1,0 +1,6 @@
+cd `dirname $0`
+
+NODE_PATH=$NODE_PATH:./js
+
+echo "browserify"
+node node_modules/browserify/bin/cmd.js -r ./js/pong.js:pong -d -p [minifyify --map pong.map.json --output lib/pong.map.json] -o lib/pong.min.js
