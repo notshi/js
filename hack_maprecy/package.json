@@ -7,6 +7,8 @@
     "browserify": "3.32.1",
     "minifyify": "4.4.0",
     "express": "3.4.8",
+    "csv": "0.3.x",
+    "wait.for": "0.6.x",
     "yargs": "1.1.3"
   }
 }
