@@ -11,33 +11,21 @@ exports.setup=function(opts){
 		
 	maprecy.fill=function(){
 		$(opts.div).empty().append( maprecy.template.find(".maprecy_main").clone() );
-		$(".maprecy .tab").append( l );
+//		$(".maprecy .tab").append( l );
 	};
 
-// load and parse raw CSV
-/*
+// load huge json data chunk of all the data we need
 	$(function() {
 		$.ajax({
 			type: "GET",
-			url: "maprecy.csv",
-			dataType: "text",
+			url: "maprecy.json",
+			dataType: "json",
 			success: function(data) {
-				maprecy.csv=$.csv.toArrays(data);
-				maprecy.ParseCSV()
+				console.log(data);
 				maprecy.template.load("maprecy.template.html",maprecy.fill);
-//				console.log(maprecy.csv);
 			}
 		 });
 	});
-
-	maprecy.ParseCSV=function()
-	{
-		maprecy.objs=[];
-	};
-*/
-	
-	
-	maprecy.template.load("maprecy.template.html",maprecy.fill);
 	
 	return maprecy;
 
