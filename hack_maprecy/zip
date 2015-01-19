@@ -1,0 +1,6 @@
+cd `dirname $0`
+
+rm -rf out
+mkdir out
+cd  lib
+zip -r ../out/maprecy.zip . -x *.map.json
