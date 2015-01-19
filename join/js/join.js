@@ -4,6 +4,8 @@ var ls=function(a) { console.log(util.inspect(a,{depth:null})); }
 exports.setup=function(opts){
 
 	var join={opts:opts};
+	
+	var $=require("./jquery.js"); require("./jquery.cookie.js");
 
 // parse query string
 	join.qs={};
@@ -34,7 +36,7 @@ then we redirect back to the external site
 	join.template=$("<div></div>");
 		
 	join.fill=function(){
-		opts.div.empty().append( join.template.find(".wetjoin_main").clone() );
+		$(opts.div).empty().append( join.template.find(".wetjoin_main").clone() );
 
 //		console.log(join.qs);
 		if(join.qs.token)
@@ -266,7 +268,7 @@ then we redirect back to the external site
 	};
 	
 
-	join.template.load("template.html",join.fill);
+	join.template.load("join.template.html",join.fill);
 	
 	return join;
 

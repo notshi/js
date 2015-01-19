@@ -1,0 +1,6 @@
+cd `dirname $0`
+
+NODE_PATH=$NODE_PATH:./js
+
+echo "browserify"
+node node_modules/browserify/bin/cmd.js -r ./js/maprecy.js:maprecy -d -p [minifyify --map maprecy.map.json --output lib/maprecy.map.json] -o lib/maprecy.min.js

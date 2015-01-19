@@ -1,3 +1,8 @@
-.*/out
-.*/node_modules
+syntax: glob
+
+*/out
+*/node_modules
+*/lib/*.min.js
+*/lib/*.map.json
+*/testdata
 

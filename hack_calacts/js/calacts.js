@@ -3,6 +3,8 @@ var ls=function(a) { console.log(util.inspect(a,{depth:null})); }
 
 exports.setup=function(opts){
 
+	var $=require("./jquery.js"); require("./jquery.csv.js");
+
 	var calacts={opts:opts};
 	
 	var ouical=require('./ouical.js');
@@ -11,7 +13,7 @@ exports.setup=function(opts){
 	calacts.template=$("<div></div>");
 		
 	calacts.fill=function(){
-		opts.div.empty().append( calacts.template.find(".calacts_main").clone() );
+		$(opts.div).empty().append( calacts.template.find(".calacts_main").clone() );
 
 
 	var now = new Date();
@@ -89,7 +91,7 @@ var myCalendar =
 			success: function(data) {
 				calacts.csv=$.csv.toArrays(data);
 				calacts.ParseCSV()
-				calacts.template.load("template.html",calacts.fill);
+				calacts.template.load("calacts.template.html",calacts.fill);
 //				console.log(calacts.csv);
 			}
 		 });
