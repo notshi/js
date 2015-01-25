@@ -4,15 +4,19 @@ Out of all the issues we spoke about when we broke into our groups, which was pl
 ######A visual tool,  a snapshot, something to indicate simply all that data found in the spreadsheets; of which are many.
 
 
-Before I delve further into this “tool”, the issues we spoke about included improving the quality of items being recycled as contaminated waste was a big problem which contributed to money and labour loss. Our suggested solution was a simple “**20 Questions**” game that was presented as an app to help those that are unsure of the items they were wanting to recycle. Simple load the app, answer a series of “Yes” or “No” questions about the item; eg. “Is it glass?” and by the end or before the end of 20 questions, the item would have been uniquely identified and shown the appropriate method of recycling. *Mathematically speaking, 20 questions is enough to uniquely identify 1 million items.*
+Before I delve further into this “tool”, let’s touch on a couple of the issues we spoke about.
 
-The other issue was to evoke a sense of civic pride, community and competition. Motivation to recycle is tricky. Short of celebrity endorsement by asking Taylor Swift, One Direction or Justin Bieber to promote recycling, we thought of a scheme based on data and gamification. “**My Street Is Greener Than Yours**” is a simple game of statistics. With the data collected, we should be able to break it down to a granular level and so build statistics per street. With striking illustrations on a web site, users can log on and track their “progress” whilst comparing it to their neighbours. Badges and achievements increase participation and the best street of the month or year gets a banner they can put on their bins etc.
+######Improving the quality of items being recycled as contaminated waste was a big problem which contributed to money and labour loss.
+Our suggested solution was a simple “**20 Questions**” game that was presented as an app to help those that are unsure of the items they were wanting to recycle. Simple load the app, answer a series of “Yes” or “No” questions about the item; eg. “Is it glass?” and by the end or before the end of 20 questions, the item would have been uniquely identified and shown the appropriate method of recycling. *Mathematically speaking, 20 questions is enough to uniquely identify 1 million items.*
+
+######The other issue was to evoke a sense of civic pride, community and competition. Motivation to recycle is tricky.
+Short of celebrity endorsement by asking Taylor Swift, One Direction or Justin Bieber to promote recycling, we thought of a scheme based on data and gamification. “**My Street Is Greener Than Yours**” is a simple game of statistics. With the data collected, we should be able to break it down to a granular level and so build statistics per street. With striking illustrations on a web site, users can log on and track their “progress” whilst comparing it to their neighbours. Badges and achievements increase participation and the best street of the month or year gets a banner they can put on their bins etc.
 
 Anyway, we decided to work with the data provided and come up with a solution that was viable to develop in the 3 hours we were given.
 
 ===================
 
-
+#### What did we make?
 **Leeds Waste Side Stories** visualises the data by displaying recycling activities on a map with highlighted and relatable data points. With a glance, you are able to digest a large table of data in visual form.
 
 #### Which data was used? 
