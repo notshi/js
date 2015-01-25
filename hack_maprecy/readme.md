@@ -17,7 +17,7 @@ Anyway, we decided to work with the data provided and come up with a solution th
 ===================
 
 #### What did we make?
-**Leeds Waste Side Stories** visualises the data by displaying recycling activities on a map with highlighted and relatable data points. With a glance, you are able to digest a large table of data in visual form.
+**Leeds Waste Side Stories** visualises the data by displaying recycling activities on a map with highlighted and relatable data points. With a glance, you are able to digest a large table of data in visual form. Cycle through different views by clicking on the different waste links (Black Bin, Green Bin and Food).
 
 #### Which data was used? 
 1. RefuseCollectionTonnageData.csv
