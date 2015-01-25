@@ -1,61 +1,63 @@
 <html> 
 <head>
-<title>Waste Side Stories</title> 
+<title>Leeds Waste Side Stories</title> 
 <script src="head.js" ></script>
 <link  href="maprecy.css" rel="stylesheet" type="text/css" >
 </head> 
 <body >
 
-<div class="maprecy" style="width:100%; padding:10px 0; background-color:#3E90F4; color:#fff; font-size:1.3em;">
-	<div style="width:960px; text-align:center; margin:0 auto;"><b>Leeds Waste Side Stories</b> (2013-2014)</div>
+<div class="maprecy">
+	<div class="default"><b>Leeds Waste Side Stories</b> (2013-2014)</div>
 </div>
-<div style="width:100%; height:480px; margin:0 auto; position:relative;">
-	<div id="map" style="width:100%; height:480px; margin:0 auto;"></div>
-	<div style="position:absolute; bottom:0px; right:0px; padding:20px; background-color:#fff;">
-		<div style="padding-bottom:5px; border-bottom:1px solid #ccc; color:#666; font-size:0.8em; font-weight:bold;">HEAT MAP LEGEND</div>
-		<div style="padding:10px 0;  vertical-align:bottom; color:#666;"><span style="background-color:#FF0000; width:20px; height:20px; display:inline-block; vertical-align:bottom;"></span> Concentrated levels of recyling</div>
-		<div style=" vertical-align:bottom; color:#666;"><span style="background-color:#00FF0E; width:20px; height:20px; display:inline-block; vertical-align:bottom;"></span> Normal levels of recyling</div>
-		<div style="margin-top: 20px;">
-			<a href="#" onclick="maprecy.mode='black';display_heatmap();" style="text-decoration:none;font-size: 0.7em;background-color: #000;padding: 5px 10px;border-radius: 4px;color: #fff;">BLACK BIN</a>
-			<a href="#" onclick="maprecy.mode='green';display_heatmap();" style="text-decoration:none; font-size: 0.7em; background-color: #0E4200; padding: 5px 10px; border-radius: 4px; color: #fff; };">GREEN BIN</a>
-			<a href="#" onclick="maprecy.mode='food' ;display_heatmap();" style="text-decoration: none; font-size: 0.7em; background-color: #012567; padding: 5px 10px; border-radius: 4px; color: #fff; };">FOOD</a>
+<div class="max">
+	<div id="map"></div>
+	<div id="legend">
+		<div class="legend_head">HEAT MAP LEGEND</div>
+		<div class="legend_txt"><span class="icon red"></span> Concentrated levels of recyling</div>
+		<div class="legend_txt"><span class="icon green"></span> Normal levels of recyling</div>
+		<div class="legend_links">
+			<a href="#" onclick="maprecy.mode='black';display_heatmap();" class="">BLACK BIN</a>
+			<a href="#" onclick="maprecy.mode='green';display_heatmap();" class="green">GREEN BIN</a>
+			<a href="#" onclick="maprecy.mode='food' ;display_heatmap();" class="food">FOOD</a>
 		</div>
 	</div>
 </div>
-<div style="width:33.3%; display:inline-block; vertical-align:top; background-color:#055BC6;">
-	<div style="padding:20px 40px;">
-		<div style="color:#fff; font-size:1.4em; padding-bottom:10px;">Average weight per ward/month</div>
-		<div style="color:#fff; font-weight:bold; font-size:4em; padding:20px 0 0 0;">573 tonnes</div>
-		<div style="padding:20px 0 0 0; color:#fff; font-weight:bold; font-size:1.4em; vertical-align:bottom;">Or the weight of 82 x <img src="ele.png" height="30px"></div><!-- icon by Nicolas Ramallo from http://thenounproject.com/term/elephant/7185/ -->
+<table>
+	<tr>
+		<td class="snaps blue">
+			<div class="snaps_wrap">
+				<div class="snaps_head">Average weight per ward/month</div>
+				<div class="snaps_large">573 tonnes</div>
+				<div class="snaps_medium">Or the weight of 82 x <img src="ele.png" height="30px"></div><!-- icon by Nicolas Ramallo from http://thenounproject.com/term/elephant/7185/ -->
+			</div>
+		</td>
+		<td class="snaps orange">
+			<div class="snaps_wrap">
+				<div class="snaps_head">Most waste</div>
+				<div class="snaps_txt">
+					<div>Landfill General <span class="snaps_num">(17147)</span></div>
+					<div>Inerts <span class="snaps_num">(14554)</span></div>
+					<div>Timber <span class="snaps_num">(10543)</span></div>
+			</div>
 	</div>
-	<div style="color:#fff; font-size:0.9em; padding:20px 40px 19px 40px; background-color:#124C94;">
-		<div>There are 9 wards for recycling in the City of Leeds.</div>
-	</div>
-</div><div style="width:33.3%; display:inline-block; vertical-align:top; background-color:#FF5C00;">
-	<div style="padding:20px 40px;">
-		<div style="color:#fff; font-size:1.4em; padding-bottom:10px;">Most waste</div>
-		<div style="color:#fff; font-weight:bold; font-size:2em; line-height:1.42em;">
-			<div>Landfill General <span style="font-size:0.6em;">(17147)</span></div>
-			<div>Inerts <span style="font-size:0.6em;">(14554)</span></div>
-			<div>Timber <span style="font-size:0.6em;">(10543)</span></div>
-		</div>
-	</div>
-	<div style="color:#fff; font-size:0.9em; padding:20px 40px; background-color:#B1470B;">
-		<div>Weight is measured in tonnes.</div>
-	</div>
-</div><div style="width:33.3%; display:inline-block; vertical-align:top; background-color:#0DB800;">
-	<div style="padding:20px 40px;">
-		<div style="color:#fff; font-size:1.4em; padding-bottom:10px;">Least waste</div>
-		<div style="color:#fff; font-weight:bold; font-size:2em; line-height:1.42em;">
-			<div style="vertical-align:bottom;">Ink Cartridges <span style="font-size:0.6em;">(1) or 882 <img src="ink.png" height="20px" style="vertical-align:baseline;"></span></div><!-- icon by Dan Hetteix from http://thenounproject.com/term/ink-cartridge/20277/ -->
-			<div style="vertical-align:bottom;">Cans <span style="font-size:0.6em;">(3) or 185,220 <img src="can.png" height="20px" style="vertical-align:baseline;"></span></div><!-- icon by Lloyd Humphreys from http://thenounproject.com/term/can/96451/-->
-			<div style="vertical-align:bottom;">Tetrapak <span style="font-size:0.6em;">(7) or 7 million <img src="milk.png" height="30px" style="vertical-align:baseline;"></span></div><!-- icon by Jannis Schäfer from http://thenounproject.com/term/carton/88557/ -->
-		</div>
-	</div>
-	<div style="color:#fff; font-size:0.9em; padding:20px 40px; background-color:#098200;">
-		<div>Weight is measured in tonnes.</div>
-	</div>
-</div>
+		</td>
+		<td class="snaps green">
+			<div class="snaps_wrap">
+				<div class="snaps_head">Least waste</div>
+				<div class="snaps_txt">
+					<div class="vert_bottom">Ink Cartridges <span class="snaps_num">(1) or 882 <img src="ink.png" height="20px" class="vert_baseline"></span></div><!-- icon by Dan Hetteix from http://thenounproject.com/term/ink-cartridge/20277/ -->
+					<div class="vert_bottom">Cans <span class="snaps_num">(3) or 185,220 <img src="can.png" height="20px" class="vert_baseline"></span></div><!-- icon by Lloyd Humphreys from http://thenounproject.com/term/can/96451/-->
+					<div class="vert_bottom">Tetrapak <span class="snaps_num">(7) or 7 million <img src="milk.png" height="30px" class="vert_baseline"></span></div><!-- icon by Jannis Schäfer from http://thenounproject.com/term/carton/88557/ -->
+				</div>
+			</div>
+		</td>	
+	</tr>
+	<tr>
+		<td class="snaps_info blue">There are 9 wards for recycling in the City of Leeds.</td>
+		<td class="snaps_info orange">Weight is measured in tonnes.</td>
+		<td class="snaps_info green">Weight is measured in tonnes.</td>
+	</td>
+</table>
 
 <script>
 
