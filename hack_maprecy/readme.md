@@ -32,3 +32,12 @@ For the **Snapshots** (*Data 3*): Manual calculations using mathematical functio
 
 #### Problems? 
 The data sets provided were incomplete so we were only able to display a subset of the data. The values we could show on the map are only an approximation as we cannot be sure of the exact amount of waste picked up from each location. All of these can be improved with better data collection; complete data sets with higher quality data and of course more development time. 
+
+
+===================
+
+###### Attributions (Thank you!)
+1. Elephant icon by Nicolas Ramallo from http://thenounproject.com/term/elephant/7185/
+2. Ink Cartridge icon by Dan Hetteix from http://thenounproject.com/term/ink-cartridge/20277/
+3. Soda Can icon by Lloyd Humphreys from http://thenounproject.com/term/can/96451/
+4. Tetrapak icon by Jannis Schäfer from http://thenounproject.com/term/carton/88557/
